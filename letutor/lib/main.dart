@@ -1,27 +1,83 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(context) {
     return MaterialApp(
       home: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SignInScreen(),
+          appBar: AppBar(
+            title: const Text('Image in Table'),
           ),
-        ),
-      ),
+          body: Center(
+            child: SingleChildScrollView(
+              child: Table(
+                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                columnWidths: const {
+                  0: FractionColumnWidth(0.4),
+                  1: FractionColumnWidth(0.6),
+                },
+                children: [
+                  TableRow(
+                    children: [
+                      // Login Column,
+                      Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              child: Center(
+                                child: Card(
+                                    elevation: 100,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                      ),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(12)),
+                                    ),
+                                    child: Container(
+                                      padding: const EdgeInsets.all(50.0),
+                                      child: const SignInScreen(),
+                                    )),
+                              ),
+                            ),
+                          ]),
+
+                      // Picture ,Column
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        alignment: Alignment.center,
+                        child: Image.asset(
+                          "assets/login.png",
+                          fit: BoxFit.fill,
+                          height: 700,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          )),
     );
   }
 }
 
 class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _SignInScreenState createState() => _SignInScreenState();
 }
 
@@ -34,34 +90,34 @@ class _SignInScreenState extends State<SignInScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           'Hello to your English tutors!',
           style: TextStyle(fontSize: 24),
         ),
-        SizedBox(height: 32),
+        const SizedBox(height: 32),
         TextField(
           controller: _emailController,
-          decoration: InputDecoration(labelText: 'Email'),
+          decoration: const InputDecoration(labelText: 'Email'),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextField(
           controller: _passwordController,
-          decoration: InputDecoration(labelText: 'Password'),
+          decoration: const InputDecoration(labelText: 'Password'),
           obscureText: true,
         ),
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         ElevatedButton(
           onPressed: () {
             // Add your sign in logic here
           },
-          child: Text('LOG IN'),
+          child: const Text('LOG IN'),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         TextButton(
           onPressed: () {
             // Navigate to sign up screen
           },
-          child: Text('Or continue with Forgot Password?'),
+          child: const Text('Or continue with Forgot Password?'),
         ),
       ],
     );
