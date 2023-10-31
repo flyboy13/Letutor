@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/tutor/card_info.dart';
+import 'package:letutor/model/three_column.dart';
 
-class TeacherPage extends StatefulWidget {
-  const TeacherPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _TeacherPage createState() => _TeacherPage();
 }
 
-class _TeacherPage extends State<TeacherPage> {
+class _TeacherPage extends State<HomePage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final List<String> items = [
@@ -38,6 +39,18 @@ class _TeacherPage extends State<TeacherPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    bool checkSize = false;
+    if (screenWidth > 1720) {
+      checkSize = true;
+    } else {
+      checkSize = false;
+    }
+    List<Widget> cards = [];
+    for (int i = 0; i < 10; i++) {
+      cards.add(Card(
+        child: Text('Card $i'),
+      ));
+    }
 
     List<String> listChip = [
       'All',
@@ -158,149 +171,157 @@ class _TeacherPage extends State<TeacherPage> {
                   ],
                 )),
             Container(
-                padding: EdgeInsets.all(screenWidth * 0.03),
-                child: Column(children: [
-                  Text(
-                    "Find a tutor",
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontSize: screenWidth * 0.025,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.02,
-                  ),
-                  Row(children: [
-                    ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: screenWidth * 0.3),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Enter tutor name...',
-                          fillColor: Colors.white,
+              padding: EdgeInsets.all(screenWidth * 0.03),
+              child: Column(children: [
+                Text(
+                  "Find a tutor",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                      fontSize: screenWidth * 0.025,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+                Row(children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: screenWidth * 0.3),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter tutor name...',
+                        fillColor: Colors.white,
 
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30),
-                            borderSide: const BorderSide(),
-                          ),
-                          //fillColor: Colors.green
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: const BorderSide(),
                         ),
-                        validator: (val) {
-                          if (val!.isEmpty) {
-                            return "Email cannot be empty";
-                          } else {
-                            return null;
-                          }
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        style: const TextStyle(
-                          fontFamily: "Poppins",
-                        ),
+                        //fillColor: Colors.green
+                      ),
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return "Email cannot be empty";
+                        } else {
+                          return null;
+                        }
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      style: const TextStyle(
+                        fontFamily: "Poppins",
                       ),
                     ),
-                    SizedBox(width: 30),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(maxWidth: screenWidth * 0.4),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton2<String>(
-                          isExpanded: true,
-                          hint: Text(
-                            'Select Item',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Theme.of(context).hintColor,
-                            ),
+                  ),
+                  SizedBox(width: 30),
+                  ConstrainedBox(
+                    constraints: BoxConstraints(maxWidth: screenWidth * 0.4),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton2<String>(
+                        isExpanded: true,
+                        hint: Text(
+                          'Select Item',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Theme.of(context).hintColor,
                           ),
-                          items: items
-                              .map((item) => DropdownMenuItem(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                      ),
+                        ),
+                        items: items
+                            .map((item) => DropdownMenuItem(
+                                  value: item,
+                                  child: Text(
+                                    item,
+                                    style: const TextStyle(
+                                      fontSize: 14,
                                     ),
-                                  ))
-                              .toList(),
-                          value: selectedValue,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedValue = value;
-                            });
-                          },
-                          buttonStyleData: const ButtonStyleData(
-                            padding: EdgeInsets.symmetric(horizontal: 16),
-                            height: 40,
-                            width: 200,
-                          ),
-                          dropdownStyleData: const DropdownStyleData(
-                            maxHeight: 200,
-                          ),
-                          menuItemStyleData: const MenuItemStyleData(
-                            height: 40,
-                          ),
-                          dropdownSearchData: DropdownSearchData(
-                            searchController: textEditingController,
-                            searchInnerWidgetHeight: 50,
-                            searchInnerWidget: Container(
-                              height: 50,
-                              padding: const EdgeInsets.only(
-                                top: 8,
-                                bottom: 4,
-                                right: 8,
-                                left: 8,
-                              ),
-                              child: TextFormField(
-                                expands: true,
-                                maxLines: null,
-                                controller: textEditingController,
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 8,
                                   ),
-                                  hintText: 'Search for an item...',
-                                  hintStyle: const TextStyle(fontSize: 12),
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                ))
+                            .toList(),
+                        value: selectedValue,
+                        onChanged: (value) {
+                          setState(() {
+                            selectedValue = value;
+                          });
+                        },
+                        buttonStyleData: const ButtonStyleData(
+                          padding: EdgeInsets.symmetric(horizontal: 16),
+                          height: 40,
+                          width: 200,
+                        ),
+                        dropdownStyleData: const DropdownStyleData(
+                          maxHeight: 200,
+                        ),
+                        menuItemStyleData: const MenuItemStyleData(
+                          height: 40,
+                        ),
+                        dropdownSearchData: DropdownSearchData(
+                          searchController: textEditingController,
+                          searchInnerWidgetHeight: 50,
+                          searchInnerWidget: Container(
+                            height: 50,
+                            padding: const EdgeInsets.only(
+                              top: 8,
+                              bottom: 4,
+                              right: 8,
+                              left: 8,
+                            ),
+                            child: TextFormField(
+                              expands: true,
+                              maxLines: null,
+                              controller: textEditingController,
+                              decoration: InputDecoration(
+                                isDense: true,
+                                contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 8,
+                                ),
+                                hintText: 'Search for an item...',
+                                hintStyle: const TextStyle(fontSize: 12),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
                               ),
                             ),
-                            searchMatchFn: (item, searchValue) {
-                              return item.value
-                                  .toString()
-                                  .contains(searchValue);
-                            },
                           ),
-                          //This to clear the search value when you close the menu
-                          onMenuStateChange: (isOpen) {
-                            if (!isOpen) {
-                              textEditingController.clear();
-                            }
+                          searchMatchFn: (item, searchValue) {
+                            return item.value.toString().contains(searchValue);
                           },
                         ),
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            textEditingController.clear();
+                          }
+                        },
                       ),
                     ),
-                  ]),
-                  SizedBox(
-                    height: screenHeight * 0.03,
                   ),
-                  listSpecialities,
-                  SizedBox(
-                    height: screenHeight * 0.03,
-                  ),
-                  Text(
-                    'Select available tutoring time:',
-                    style: TextStyle(fontSize: screenHeight * 0.03),
-                  ),
-                  SizedBox(
-                    height: screenHeight * 0.03,
-                  ),
-                  Column(
-                    children: List.generate(5, (index) => const InfoCard()),
-                  )
-                ]))
+                ]),
+                SizedBox(
+                  height: screenHeight * 0.03,
+                ),
+                listSpecialities,
+                SizedBox(
+                  height: screenHeight * 0.03,
+                ),
+                Text(
+                  'Select available tutoring time:',
+                  style: TextStyle(fontSize: screenHeight * 0.03),
+                ),
+                SizedBox(
+                  height: screenHeight * 0.03,
+                ),
+                Column(
+                  children: [
+                    // First column
+                    Column(
+                      children: List.generate(2, (index) => const InfoCard()),
+                    ),
+                    // Second column
+                    Column(
+                      children: List.generate(2, (index) => const InfoCard()),
+                    ),
+                  ],
+                )
+              ]),
+            ),
           ],
         ),
       ),
