@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:letutor/model/list_chip.dart';
+import 'package:letutor/tutor/card_info.dart';
 
 class TeacherPage extends StatefulWidget {
   const TeacherPage({Key? key}) : super(key: key);
@@ -36,6 +38,22 @@ class _TeacherPage extends State<TeacherPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    List<String> listChip = [
+      'All',
+      'English for kids',
+      'English for Business',
+      'Conversational',
+      'STARTERS',
+      'MOVERS',
+      'FLYERS',
+      'PET',
+      'KET',
+      'IELTS',
+      'TOEFL',
+      'TOEIC'
+    ];
+    Widget listSpecialities = createListChip(listChip);
 
     return Scaffold(
       appBar: AppBar(
@@ -263,8 +281,25 @@ class _TeacherPage extends State<TeacherPage> {
                           },
                         ),
                       ),
-                    )
-                  ])
+                    ),
+                  ]),
+                  SizedBox(
+                    height: screenHeight * 0.03,
+                  ),
+                  listSpecialities,
+                  SizedBox(
+                    height: screenHeight * 0.03,
+                  ),
+                  Text(
+                    'Select available tutoring time:',
+                    style: TextStyle(fontSize: screenHeight * 0.03),
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.03,
+                  ),
+                  Column(
+                    children: List.generate(5, (index) => const InfoCard()),
+                  )
                 ]))
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:letutor/login_screen.dart';
-import 'package:letutor/teacher_screen.dart';
+import 'package:letutor/login%20screen/login_screen.dart';
+import 'package:letutor/home screen/home_screen.dart';
 import 'package:letutor/test.dart';
 
 void main() {
