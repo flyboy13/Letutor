@@ -66,7 +66,7 @@ class _TeacherPage extends State<HomePage> {
       'TOEFL',
       'TOEIC'
     ];
-    Widget listSpecialities = createListChip(listChip);
+    Widget listSpecialities = createListChip(screenWidth, listChip);
 
     return Scaffold(
       appBar: AppBar(
@@ -311,13 +311,11 @@ class _TeacherPage extends State<HomePage> {
                 Column(
                   children: [
                     // First column
-                    Column(
-                      children: List.generate(2, (index) => const InfoCard()),
+                    Wrap(
+                      spacing: screenWidth * 0.02,
+                      children: List.generate(6, (index) => const InforCard()),
                     ),
                     // Second column
-                    Column(
-                      children: List.generate(2, (index) => const InfoCard()),
-                    ),
                   ],
                 )
               ]),

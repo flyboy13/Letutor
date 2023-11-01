@@ -1,61 +1,96 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/rating_start.dart';
+import 'package:letutor/model/love_button.dart';
 
-class InfoCard extends StatelessWidget {
-  const InfoCard({Key? key}) : super(key: key);
+class InforCard extends StatefulWidget {
+  const InforCard({Key? key}) : super(key: key);
+
+  @override
+  InforCardState createState() => InforCardState();
+}
+
+class InforCardState extends State<InforCard> {
+  bool isLoved = false;
+
+  void onLoveButtonPressed() {
+    setState(() {
+      isLoved = !isLoved;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    List<String> listChip = [
+      'IELTS',
+      'TOEFL',
+      'TOEIC',
+    
+    ];
+    Widget listSpecialities = createListChip(screenHeight, listChip);
+
+    double space1 = screenWidth * 0.25;
     return Card(
-      margin: const EdgeInsets.only(bottom: 20),
+      // margin: const EdgeInsets.only(bottom: 20),
       elevation: 5,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Stack(
-          alignment: Alignment.topRight,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: Theme.of(context).colorScheme.outline,
+        ),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
+      ),
+      child: Container(
+        width: space1,
+        // constraints: BoxConstraints(
+        //   maxWidth: screenWidth * 0.2,
+        // ),
+        padding: EdgeInsets.all(screenWidth * 0.01),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
+            Row(
               children: [
-                Row(
+                CircleAvatar(backgroundImage: AssetImage("flogo.png")),
+                SizedBox(
+                  width: screenWidth * 0.01,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CircleAvatar(
-                      backgroundImage: AssetImage('assets/Let_logo.png'),
-                      radius: 30,
+                    Text(
+                      "Nguyen Duc Tai",
+                      style: TextStyle(
+                          fontSize: screenHeight * 0.02,
+                          fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(
-                      height: screenHeight * 0.03,
+                    Text(
+                      "Location",
+                      style: TextStyle(
+                          fontSize: screenHeight * 0.02,
+                          fontWeight: FontWeight.bold),
                     ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Techer 1',
-                            style: TextStyle(fontSize: 17),
-                          ),
-                          const RatingStart(),
-                          createListChip(['English'])
-                        ],
-                      ),
-                    ),
+                    RatingStart(),
                   ],
                 ),
-                const Text(
-                  "I have been teaching English as a second language for kids, teenagers and adults for 5 years. I can help you gain a stronger foundation in English before furthering your studies. I'm patient, will speak slowly and clearly so don't hesitate to ask for good understanding.",
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
-                )
+                SizedBox(
+                  width: screenWidth * 0.104,
+                ),
+                LoveButton(
+                  isLoved: isLoved,
+                  onPressed: onLoveButtonPressed,
+                ),
               ],
             ),
-            const Icon(
-              Icons.favorite_outline,
-              color: Colors.blue,
-              size: 35,
+            SizedBox(
+              height: screenHeight * 0.01,
             ),
+            Wrap(children: [listSpecialities]),
           ],
         ),
       ),
