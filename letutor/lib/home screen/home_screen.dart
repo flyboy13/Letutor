@@ -4,6 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/tutor/card_info.dart';
 import 'package:letutor/model/three_column.dart';
+import 'package:letutor/bottom%20bar/footer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -320,6 +321,7 @@ class _TeacherPage extends State<HomePage> {
                 )
               ]),
             ),
+            Footer()
           ],
         ),
       ),

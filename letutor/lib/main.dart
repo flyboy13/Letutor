@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:letutor/login%20screen/signin_screen.dart';
 import 'package:letutor/home screen/home_screen.dart';
-import 'package:letutor/test.dart';
+import 'package:letutor/bottom%20bar/footer.dart';
 import 'package:letutor/tutor/card_info.dart';
 
 void main() {
