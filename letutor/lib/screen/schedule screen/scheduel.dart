@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letutor/test.dart';
 
 class ScheduelScreen extends StatefulWidget {
   const ScheduelScreen({Key? key}) : super(key: key);
@@ -65,8 +66,64 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                 ],
               ),
               Row(
-                children: [Text("List book")],
+                children: [
+                  Text("Latest book",
+                      style: TextStyle(fontSize: screenWidth * 0.02)),
+                ],
               ),
+              DataTable(
+                columns: [
+                  DataColumn(
+                    label: Text(
+                      'Name',
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: screenWidth * 0.02),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Page',
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: screenWidth * 0.02),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      'Description',
+                      style: TextStyle(
+                          fontStyle: FontStyle.italic,
+                          fontSize: screenWidth * 0.02),
+                    ),
+                  ),
+                ],
+                rows: [
+                  DataRow(
+                    cells: [
+                      DataCell(
+                        Text(
+                          'sample.pdf',
+                          style: TextStyle(fontSize: screenWidth * 0.015),
+                        ),
+                      ),
+                      DataCell(
+                        Text(
+                          '0',
+                          style: TextStyle(fontSize: screenWidth * 0.015),
+                        ),
+                      ),
+                      DataCell(
+                        Text(
+                          'Not provided',
+                          style: TextStyle(fontSize: screenWidth * 0.015),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // LayoutWidget(),
             ],
           ),
         ),

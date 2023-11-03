@@ -1,48 +1,83 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class LessonScheduleApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter Table'),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: TextButton(
+          onPressed: () {
+            // Go to meeting logic
+          },
+          child: Row(
+            children: [
+              Icon(Icons.arrow_back, color: Colors.blue),
+              Text('Go to meeting', style: TextStyle(color: Colors.blue)),
+            ],
+          ),
         ),
-        body: DataTable(
-          columns: [
-            DataColumn(
-              label: Text(
-                'Name',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Page',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-            DataColumn(
-              label: Text(
-                'Description',
-                style: TextStyle(fontStyle: FontStyle.italic),
-              ),
-            ),
-          ],
-          rows: [
-            DataRow(
-              cells: [
-                DataCell(Text('sample.pdf')),
-                DataCell(Text('0')),
-                DataCell(Text('Not provided')),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Cancel logic
+            },
+            child: Text('Cancel', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Container(
+            color: Colors.grey[200],
+            padding: EdgeInsets.all(5),
+            child: Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('calendar.png'),
+                  // radius: 40,
+                ),
+                SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Keegan DuRose', style: TextStyle(fontSize: 24)),
+                    TextButton.icon(
+                      onPressed: () {
+                        // Direct message logic
+                      },
+                      icon: Icon(Icons.message, color: Colors.white),
+                      label: Text('Direct Message',
+                          style: TextStyle(color: Colors.white)),
+                      // color: Colors.blue,
+                    ),
+                  ],
+                ),
               ],
             ),
-          ],
-        ),
+          ),
+          Expanded(
+            child: Center(
+              child: Text(
+                'Currently, there are no requests for this user. Please wait for new requests or invite the teacher.',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.grey[200],
+            padding: EdgeInsets.all(16),
+            child: TextButton(
+              onPressed: () {
+                // Edit request logic
+              },
+              child:
+                  Text('Edit Request', style: TextStyle(color: Colors.white)),
+              // color: Colors.grey,
+            ),
+          ),
+        ],
       ),
     );
   }
