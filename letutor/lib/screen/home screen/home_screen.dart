@@ -4,7 +4,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/tutor/card_info.dart';
 import 'package:letutor/model/three_column.dart';
-import 'package:letutor/bottom%20bar/footer.dart';
+import 'package:letutor/screen/bottom bar/footer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -40,12 +40,14 @@ class _TeacherPage extends State<HomePage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    bool checkSize = false;
-    if (screenWidth > 1720) {
-      checkSize = true;
-    } else {
-      checkSize = false;
+    DateTime selectedDate = DateTime.now();
+
+    void onDateChanged(String date) {
+      setState(() {
+        selectedDate = DateTime.parse(date);
+      });
     }
+
     List<Widget> cards = [];
     for (int i = 0; i < 10; i++) {
       cards.add(Card(
@@ -308,6 +310,15 @@ class _TeacherPage extends State<HomePage> {
                 ),
                 SizedBox(
                   height: screenHeight * 0.03,
+                ),
+                TextField(
+                  keyboardType: TextInputType.datetime,
+                  decoration: InputDecoration(
+                    labelText: 'Select a date',
+                  ),
+                  controller:
+                      TextEditingController(text: selectedDate.toString()),
+                  onChanged: onDateChanged,
                 ),
                 Column(
                   children: [
