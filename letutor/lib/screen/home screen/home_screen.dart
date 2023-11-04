@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/screen/bottom bar/footer.dart';
@@ -79,6 +80,7 @@ class _TeacherPage extends State<HomePage> {
           // Adjust the logo width as needed
         ),
         backgroundColor: Colors.white,
+        actions: [appbar()],
       ),
       body: SingleChildScrollView(
         child: Column(

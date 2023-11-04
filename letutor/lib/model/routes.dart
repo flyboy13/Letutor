@@ -12,6 +12,7 @@ class Routes {
   static const courseDetail = '/course_detail/';
   static const teacherDetail = '/teacher_detail';
   static const bookingDetail = '/booking_detail/';
+   static const discover = '/discover/';
   static const review = '/review/';
   static const writeReview = '/review/write_review/';
   static const videoCall = '/video_call/';
