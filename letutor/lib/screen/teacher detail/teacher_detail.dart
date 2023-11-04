@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:letutor/screen/teacher detail/dummy_data.dart';
+import 'package:letutor/screen/teacher%20detail/data.dart';
 import 'package:letutor/model/routes.dart';
 
 class TeacherDetailScreen extends StatefulWidget {
