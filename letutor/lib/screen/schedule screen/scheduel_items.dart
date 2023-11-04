@@ -100,7 +100,7 @@ Widget createScheduel(String name, double screenWidth) => Container(
         ),
         Container(
           padding: EdgeInsets.all(screenWidth * 0.02),
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: const Color.fromARGB(255, 255, 255, 255),
           child: TextButton(
             onPressed: () {},
             child: const Text(
