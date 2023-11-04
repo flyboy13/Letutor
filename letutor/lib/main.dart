@@ -8,6 +8,7 @@ import 'package:letutor/screen/home screen/home_screen.dart';
 import 'package:letutor/screen/bottom%20bar/footer.dart';
 import 'package:letutor/screen/schedule%20screen/scheduel.dart';
 import 'package:letutor/model/card_info.dart';
+import 'package:letutor/screen/teacher%20detail/teacher_detail.dart';
 import 'package:letutor/test.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(context) {
-    return MaterialApp(home: CourseDetail());
+    return MaterialApp(home: VideoCallRoom());
     // return LessonScheduleApp();
   }
 }

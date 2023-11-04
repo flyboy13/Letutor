@@ -188,7 +188,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                     Wrap(
                       spacing: screenWidth * 0.02,
                       children: List.generate(
-                        8,
+                        4,
                         (index) => FlutterCourseCard(
                           imageUrl: "course1.png",
                           title: "Life in the Internet Age",
