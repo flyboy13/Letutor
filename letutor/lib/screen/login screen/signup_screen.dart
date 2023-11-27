@@ -1,7 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -18,11 +21,16 @@ class SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    void signIn() {
-      print(error);
+    void signUp() {
+      setState(() {
+        error = "";
+      });
+      print("Email:  ");
+      print(_passwordController.text);
       print("clicked SignUp");
       if (_emailController.text == 'letutor@gmail.com' &&
           _passwordController.text == '12345678') {
+        context.go('/tutor');
       } else {
         setState(() {
           error = "Error: You type Email or Password wrong";
@@ -111,6 +119,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                                         0.01), // Responsive spacing
                                 TextFormField(
                                   controller: _emailController,
+                                  onSaved: (email) {},
                                   validator: (value) {
                                     if (value!.isEmpty) {
                                       return "Please input email!";
@@ -149,6 +158,8 @@ class SignUpScreenState extends State<SignUpScreen> {
                                     height: screenHeight *
                                         0.01), // Responsive spacing
                                 TextFormField(
+                                  controller: _passwordController,
+                                  onSaved: (password) {},
                                   decoration: InputDecoration(
                                     suffixIcon: IconButton(
                                       icon: Icon(
@@ -195,7 +206,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                                     alignment: Alignment.center,
                                     child: // Responsive spacing
                                         ElevatedButton(
-                                      onPressed: signIn,
+                                      onPressed: signUp,
                                       child: Text(
                                         'SIGN UP',
                                         style: TextStyle(
