@@ -1,4 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:email_validator/email_validator.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -10,11 +14,30 @@ class SignInScreen extends StatefulWidget {
 class SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  String error = "";
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
+    bool passwordVisible = false;
+
+    void signIn() {
+      setState(() {
+        error = "";
+      });
+      print("Email:  ");
+      print(_passwordController.text);
+      print("clicked SignUp");
+      if (_emailController.text == 'letutor@gmail.com' &&
+          _passwordController.text == '12345678') {
+        context.go('/tutor');
+      } else {
+        setState(() {
+          error = "Error: You type Email or Password wrong";
+        });
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -88,6 +111,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 height:
                                     screenHeight * 0.01), // Responsive spacing
                             TextFormField(
+                              controller: _emailController,
                               decoration: InputDecoration(
                                 hintText: 'mail@gmail.com',
                                 fillColor: Colors.white,
@@ -96,6 +120,15 @@ class SignInScreenState extends State<SignInScreen> {
                                   borderSide: const BorderSide(),
                                 ),
                               ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Please input email!";
+                                }
+                                if (!EmailValidator.validate(value)) {
+                                  return "Please input valid email!";
+                                }
+                                return null;
+                              },
                               keyboardType: TextInputType.emailAddress,
                               style: const TextStyle(
                                 fontFamily: "Poppins",
@@ -117,7 +150,24 @@ class SignInScreenState extends State<SignInScreen> {
                                 height:
                                     screenHeight * 0.01), // Responsive spacing
                             TextFormField(
+                              controller: _passwordController,
                               decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    // Based on passwordVisible state choose the icon
+                                    passwordVisible
+                                        // ignore: dead_code
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: Theme.of(context).primaryColorDark,
+                                  ),
+                                  onPressed: () {
+                                    // Update the state i.e. toogle the state of passwordVisible variable
+                                    setState(() {
+                                      passwordVisible = !passwordVisible;
+                                    });
+                                  },
+                                ),
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
@@ -149,14 +199,25 @@ class SignInScreenState extends State<SignInScreen> {
                               ),
                             ),
 
-                            SizedBox(height: screenHeight * 0.1),
+                            SizedBox(
+                                height:
+                                    screenHeight * 0.02), // Responsive spacing
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Text(
+                                error,
+                                style: TextStyle(
+                                    fontSize: screenWidth *
+                                        0.01), // Responsive font size
+                              ),
+                            ),
+
+                            SizedBox(height: screenHeight * 0.02),
                             Align(
                                 alignment: Alignment.center,
                                 child: // Responsive spacing
                                     ElevatedButton(
-                                  onPressed: () {
-                                    // Add your sign-in logic here
-                                  },
+                                  onPressed: signIn,
                                   child: Text(
                                     'LOG IN',
                                     style: TextStyle(
@@ -184,7 +245,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 FloatingActionButton(
                                   disabledElevation: 0,
                                   backgroundColor:
-                                      Color.fromARGB(0, 255, 255, 255),
+                                      const Color.fromARGB(0, 255, 255, 255),
                                   onPressed: () {},
                                   child:
                                       ClipOval(child: Image.asset("flogo.png")),
@@ -195,7 +256,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 FloatingActionButton(
                                   disabledElevation: 0,
                                   backgroundColor:
-                                      Color.fromARGB(0, 255, 255, 255),
+                                      const Color.fromARGB(0, 255, 255, 255),
                                   onPressed: () {},
                                   child: Image.asset("glogo.png"),
                                 ),
@@ -205,7 +266,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 FloatingActionButton(
                                   disabledElevation: 0,
                                   backgroundColor:
-                                      Color.fromARGB(0, 255, 255, 255),
+                                      const Color.fromARGB(0, 255, 255, 255),
                                   onPressed: () {},
                                   child: Image.asset("mlogo.png"),
                                 ),
@@ -225,7 +286,9 @@ class SignInScreenState extends State<SignInScreen> {
                                       ),
                                 ),
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    context.go('/signup');
+                                  },
                                   child: Text(
                                     'Sign Up',
                                     style: TextStyle(

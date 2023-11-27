@@ -8,6 +8,7 @@ import 'package:letutor/screen/teacher%20detail/teacher_detail.dart';
 
 import '../screen/error/error_screen.dart';
 import '../screen/home screen/home_screen.dart';
+import '../screen/login screen/forgot.dart';
 import '../screen/login screen/signup_screen.dart';
 
 final GoRouter router = GoRouter(
@@ -24,6 +25,13 @@ final GoRouter router = GoRouter(
       path: '/signup',
       builder: (BuildContext context, GoRouterState state) {
         return const SignUpScreen();
+      },
+    ),
+    GoRoute(
+      name: 'forgot',
+      path: '/forgot',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ForgotScreen();
       },
     ),
 
