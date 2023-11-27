@@ -14,7 +14,7 @@ class CourseInforState extends State<CourseInfor> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
 
     List<String> courseTitles = [
       "The Internet",
@@ -57,7 +57,7 @@ class CourseInforState extends State<CourseInfor> {
                           screenWidth: screenWidth)
                     ],
                   ),
-                  Container(
+                  SizedBox(
                       width: screenWidth * 0.7,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +90,7 @@ class CourseInforState extends State<CourseInfor> {
                           Container(
                               padding:
                                   EdgeInsets.only(left: screenWidth * 0.02),
-                              child: Text(
+                              child: const Text(
                                   "Our world is rapidly changing thanks to new technology, and the vocabulary needed to discuss modern life is evolving almost daily. In this course you will learn the most up-to-date terminology from expertly crafted lessons as well from your native-speaking tutor.  ",
                                   softWrap: true)),
                           SizedBox(
@@ -117,7 +117,7 @@ class CourseInforState extends State<CourseInfor> {
                           Container(
                               padding:
                                   EdgeInsets.only(left: screenWidth * 0.02),
-                              child: Text(
+                              child: const Text(
                                   "Our world is rapidly changing thanks to new technology, and the vocabulary needed to discuss modern life is evolving almost daily. In this course you will learn the most up-to-date terminology from expertly crafted lessons as well from your native-speaking tutor.  ",
                                   softWrap: true)),
                           SizedBox(
@@ -142,8 +142,8 @@ class CourseInforState extends State<CourseInfor> {
                                     children: [
                                       Text("$count ."),
                                       Text(courseTitle,
-                                          style: TextStyle(fontSize: 18.0)),
-                                      SizedBox(height: 10.0),
+                                          style: const TextStyle(fontSize: 18.0)),
+                                      const SizedBox(height: 10.0),
                                     ],
                                   ),
                                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:letutor/screen/teacher%20detail/data.dart';
-import 'package:letutor/model/routes.dart';
+import 'package:letutor/model/router.dart';
+import 'package:go_router/go_router.dart';
 
 class TeacherDetailScreen extends StatefulWidget {
   const TeacherDetailScreen({Key? key}) : super(key: key);
@@ -95,7 +96,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                 Expanded(
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, Routes.review);
+                      // Navigator.pushNamed(context, Routes.review);
                     },
                     child: Column(
                       children: const [
@@ -182,9 +183,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                       ),
                       const SizedBox(width: 16),
                       TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, Routes.courseDetail);
-                          },
+                          onPressed: () => context.go('/coursedetails'),
                           child: const Text('View'))
                     ],
                   ),
@@ -283,14 +282,16 @@ Future<void> bookLearningHour(
                         final dialogResult =
                             await showBookingConfirmDialog(context);
                         if (dialogResult) {
-                          Navigator.of(context).pushNamed(
-                            Routes.bookingDetail,
-                            arguments: {
-                              'selectedDate': selectedDate,
-                              'selectedHour': courseHours[index],
-                              'weekday': selectedDate.weekday
-                            },
-                          );
+                          // Navigator.of(context).pushNamed(
+                          //   Routes.bookingDetail,
+                          //   arguments: {
+                          //     'selectedDate': selectedDate,
+                          //     'selectedHour': courseHours[index],
+                          //     'weekday': selectedDate.weekday
+                          //   },
+                          // );
+
+                          GoRouter.of(context).go('/booking_detail');
                         }
                       },
                       child: Text(

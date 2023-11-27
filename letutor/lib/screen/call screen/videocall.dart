@@ -24,6 +24,8 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                 alignment: Alignment.center,
                 child: InkWell(
                   child: SizedBox(
+                    width: 40,
+                    height: 40,
                     child: Container(
                       color: Colors.grey,
                       child: Icon(
@@ -32,8 +34,6 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                         color: Colors.white,
                       ),
                     ),
-                    width: 40,
-                    height: 40,
                   ),
                   onTap: () {
                     setState(() {
@@ -48,6 +48,8 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                 alignment: Alignment.center,
                 child: InkWell(
                   child: SizedBox(
+                    width: 40,
+                    height: 40,
                     child: Container(
                       color: Colors.grey,
                       child: Icon(
@@ -56,8 +58,6 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                         color: Colors.white,
                       ),
                     ),
-                    width: 40,
-                    height: 40,
                   ),
                   onTap: () {
                     setState(() {
@@ -72,16 +72,16 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                 alignment: Alignment.center,
                 child: InkWell(
                   child: SizedBox(
+                    width: 40,
+                    height: 40,
                     child: Container(
                       color: Colors.red,
-                      child: Icon(
+                      child: const Icon(
                         Icons.call_end,
                         size: 30,
                         color: Colors.white,
                       ),
                     ),
-                    width: 40,
-                    height: 40,
                   ),
                   onTap: () {
                     Navigator.of(context).pop();
@@ -101,6 +101,7 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
               children: [
                 Expanded(
                   child: Container(
+                    alignment: Alignment.topLeft,
                     child: Row(
                       children: [
                         SizedBox(
@@ -110,10 +111,10 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                           ),
                         ),
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: const EdgeInsets.all(5),
                           color: Colors.black.withOpacity(0.5),
-                          margin: EdgeInsets.only(left: 10),
-                          child: Row(
+                          margin: const EdgeInsets.only(left: 10),
+                          child: const Row(
                             children: [
                               Text(
                                 "Tutoring meeting room",
@@ -127,7 +128,6 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                         ),
                       ],
                     ),
-                    alignment: Alignment.topLeft,
                   ),
                 ),
               ],
@@ -146,7 +146,7 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                             color: Colors.black.withOpacity(0.5),
                             alignment: Alignment.center,
                             width: 200,
-                            child: Text(
+                            child: const Text(
                               'Lesson start in: ',
                               style: TextStyle(
                                 fontSize: 20,
@@ -161,7 +161,7 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                             child: Text(
                               endTime.toString(),
                               style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
+                                  const TextStyle(fontSize: 20, color: Colors.white),
                             ),
                           ),
                         ],

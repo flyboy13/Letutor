@@ -37,6 +37,7 @@ class SignInScreenState extends State<SignInScreen> {
                   child: Container(
                     padding: EdgeInsets.all(screenWidth * 0.02),
                     child: Card(
+                      color: Colors.white,
                       elevation: 100,
                       shape: RoundedRectangleBorder(
                         side: BorderSide(
@@ -46,9 +47,10 @@ class SignInScreenState extends State<SignInScreen> {
                             const BorderRadius.all(Radius.circular(12)),
                       ),
                       child: Container(
-                        padding: EdgeInsets.all(screenWidth * 0.05),
+                        padding: EdgeInsets.all(screenWidth * 0.03),
+                        color: Colors.white,
                         width: screenWidth *
-                            0.5, // Adjust the container width as needed
+                            0.3, // Adjust the container width as needed
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -56,7 +58,7 @@ class SignInScreenState extends State<SignInScreen> {
                               'Say hello to your English tutors',
                               style: TextStyle(
                                 fontSize:
-                                    screenWidth * 0.04, // Responsive font size
+                                    screenWidth * 0.02, // Responsive font size
                                 fontWeight: FontWeight.bold,
                                 color: const Color.fromARGB(255, 0, 113, 240),
                               ),
@@ -68,7 +70,7 @@ class SignInScreenState extends State<SignInScreen> {
                               'Become fluent faster through one-on-one video chat lessons tailored to your goals.',
                               style: TextStyle(
                                   fontSize: screenWidth *
-                                      0.03), // Responsive font size
+                                      0.01), // Responsive font size
                             ),
                             SizedBox(
                                 height:
@@ -79,7 +81,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 'Email',
                                 style: TextStyle(
                                     fontSize: screenWidth *
-                                        0.02), // Responsive font size
+                                        0.01), // Responsive font size
                               ),
                             ),
                             SizedBox(
@@ -108,7 +110,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 'Password',
                                 style: TextStyle(
                                     fontSize: screenWidth *
-                                        0.02), // Responsive font size
+                                        0.01), // Responsive font size
                               ),
                             ),
                             SizedBox(
@@ -122,7 +124,7 @@ class SignInScreenState extends State<SignInScreen> {
                                 ),
                               ),
                               keyboardType: TextInputType.emailAddress,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Poppins",
                               ),
                             ),
@@ -142,7 +144,7 @@ class SignInScreenState extends State<SignInScreen> {
                                   'Forgot Password?',
                                   style: TextStyle(
                                       fontSize: screenWidth *
-                                          0.02), // Responsive font size
+                                          0.01), // Responsive font size
                                 ),
                               ),
                             ),
@@ -159,7 +161,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     'LOG IN',
                                     style: TextStyle(
                                         fontSize: screenWidth *
-                                            0.025), // Responsive font size
+                                            0.02), // Responsive font size
                                   ),
                                 )),
                             SizedBox(height: screenHeight * 0.04),
@@ -170,7 +172,7 @@ class SignInScreenState extends State<SignInScreen> {
                                   'Or continue with',
                                   style: TextStyle(
                                       fontSize: screenWidth *
-                                          0.02), // Responsive font size
+                                          0.01), // Responsive font size
                                 )),
 
                             SizedBox(
@@ -180,13 +182,20 @@ class SignInScreenState extends State<SignInScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 FloatingActionButton(
+                                  disabledElevation: 0,
+                                  backgroundColor:
+                                      Color.fromARGB(0, 255, 255, 255),
                                   onPressed: () {},
-                                  child: Image.asset("flogo.png"),
+                                  child:
+                                      ClipOval(child: Image.asset("flogo.png")),
                                 ),
                                 SizedBox(
                                     width: screenWidth *
                                         0.03), // Responsive spacing
                                 FloatingActionButton(
+                                  disabledElevation: 0,
+                                  backgroundColor:
+                                      Color.fromARGB(0, 255, 255, 255),
                                   onPressed: () {},
                                   child: Image.asset("glogo.png"),
                                 ),
@@ -194,6 +203,9 @@ class SignInScreenState extends State<SignInScreen> {
                                     width: screenWidth *
                                         0.03), // Responsive spacing
                                 FloatingActionButton(
+                                  disabledElevation: 0,
+                                  backgroundColor:
+                                      Color.fromARGB(0, 255, 255, 255),
                                   onPressed: () {},
                                   child: Image.asset("mlogo.png"),
                                 ),
@@ -209,7 +221,7 @@ class SignInScreenState extends State<SignInScreen> {
                                   "Not a member yet?",
                                   style: TextStyle(
                                       fontSize: screenWidth *
-                                          0.02 // Responsive font size
+                                          0.01 // Responsive font size
                                       ),
                                 ),
                                 TextButton(
@@ -218,7 +230,7 @@ class SignInScreenState extends State<SignInScreen> {
                                     'Sign Up',
                                     style: TextStyle(
                                         fontSize: screenWidth *
-                                            0.02), // Responsive font size
+                                            0.015), // Responsive font size
                                   ),
                                 ),
                               ],
@@ -231,9 +243,9 @@ class SignInScreenState extends State<SignInScreen> {
 
               // Picture Column
               Expanded(
-                flex: 1, // Adjust flex values as needed
+                flex: 2, // Adjust flex values as needed
                 child: Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   alignment: Alignment.center,
                   child: Image.asset(
                     "assets/login.png",
