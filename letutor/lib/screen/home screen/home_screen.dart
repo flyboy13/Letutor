@@ -57,20 +57,23 @@ class _TeacherPage extends State<TutorScreen> {
       });
     }
 
-    
-    
-
     SampleTutor sampleTutor = SampleTutor();
 
-    List<InforCard> list = sampleTutor.tutor.map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor,)).toList();
+    List<InforCard> list = sampleTutor.tutor
+        .map((tutor) => InforCard(
+              tutor: tutor,
+              sampleTutor: sampleTutor,
+            ))
+        .toList();
 
     void findTutor(String name) {
       // Search for a tutor with the given name
       // This is just a placeholder, replace with your actual search logic
       list = sampleTutor.tutor
-      .where((tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
-      .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
-      .toList();
+          .where(
+              (tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
+          .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
+          .toList();
       // Do something with the found tutor
     }
 
@@ -380,9 +383,7 @@ class _TeacherPage extends State<TutorScreen> {
                     Wrap(
                         spacing: screenWidth * 0.02,
                         runSpacing: screenWidth * 0.02,
-                        children:
-                            // List.generate(6, (index) => const InforCard()
-                            ,
+                        children: list)
 
                     // Second column
                   ],
