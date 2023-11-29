@@ -1,16 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
-
 import 'package:letutor/model/appbar.dart';
-
 import 'package:letutor/model/list_chip.dart';
-
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/sample.dart';
-
+import 'package:letutor/model/tutor.dart';
 import 'package:letutor/screen/bottom bar/footer.dart';
 
 class TutorScreen extends StatefulWidget {
@@ -61,7 +57,22 @@ class _TeacherPage extends State<TutorScreen> {
       });
     }
 
+    
+    
+
     SampleTutor sampleTutor = SampleTutor();
+
+    List<InforCard> list = sampleTutor.tutor.map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor,)).toList();
+
+    void findTutor(String name) {
+      // Search for a tutor with the given name
+      // This is just a placeholder, replace with your actual search logic
+      list = sampleTutor.tutor
+      .where((tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
+      .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
+      .toList();
+      // Do something with the found tutor
+    }
 
     List<Widget> cards = [];
 
@@ -213,6 +224,9 @@ class _TeacherPage extends State<TutorScreen> {
                   ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: screenWidth * 0.3),
                     child: TextFormField(
+                      onChanged: (val) {
+                        findTutor(val);
+                      },
                       decoration: InputDecoration(
                         hintText: 'Enter tutor name...',
 
@@ -227,12 +241,12 @@ class _TeacherPage extends State<TutorScreen> {
                       ),
                       validator: (val) {
                         if (val!.isEmpty) {
-                          return "Email cannot be empty";
+                          return "Please fill in the blank!";
                         } else {
                           return null;
                         }
                       },
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       style: const TextStyle(
                         fontFamily: "Poppins",
                       ),
@@ -365,12 +379,10 @@ class _TeacherPage extends State<TutorScreen> {
                     // First column
                     Wrap(
                         spacing: screenWidth * 0.02,
-                        runSpacing: screenWidth * 0.02  ,
+                        runSpacing: screenWidth * 0.02,
                         children:
                             // List.generate(6, (index) => const InforCard()
-                            sampleTutor.tutor
-                                .map((tutor) => InforCard(tutor: tutor))
-                                .toList()),
+                            ,
 
                     // Second column
                   ],

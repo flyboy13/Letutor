@@ -1,3 +1,5 @@
+import 'package:letutor/model/sample.dart';
+
 class Tutor {
   String id;
   String image;
@@ -10,14 +12,10 @@ class Tutor {
 
   List<String> specialties;
 
-  Tutor(
-      this.id,
-      this.image,
-      this.name,
-      this.country,
-      this.rate,
-      this.languages,
-      this.detail,
-      this.specialties,
-      this.love);
+  Tutor(this.id, this.image, this.name, this.country, this.rate, this.languages,
+      this.detail, this.specialties, this.love);
+
+  void toggleLove() {
+    love = !love;
+  }
 }

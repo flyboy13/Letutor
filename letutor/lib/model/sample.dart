@@ -74,4 +74,12 @@ class SampleTutor {
         ],
         false),
   ];
+  void toggleLove(String id) {
+    for (var t in tutor) {
+      if (t.id == id) {
+        t.toggleLove();
+        break;
+      }
+    }
+  }
 }

@@ -4,22 +4,38 @@ import 'package:flutter/material.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/rating_start.dart';
 import 'package:letutor/model/love_button.dart';
-
+import 'package:letutor/model/sample.dart';
+// import 'package:flushbar/flushbar.dart';
 import 'package:letutor/model/tutor.dart';
 
 class InforCard extends StatefulWidget {
-  const InforCard({super.key, required this.tutor});
+  const InforCard({super.key, required this.tutor, required this.sampleTutor});
   final Tutor tutor;
+  final SampleTutor sampleTutor;
   @override
   InforCardState createState() => InforCardState();
 }
 
 class InforCardState extends State<InforCard> {
-  bool isLoved = false;
+  // bool isLoved = false;
 
   void onLoveButtonPressed() {
     setState(() {
-      isLoved = !isLoved;
+      //
+      widget.sampleTutor.toggleLove(widget.tutor.id);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Update favourite tutor success'),
+          duration: Duration(seconds: 2),
+        ),
+      );
+
+      //      Flushbar(
+      //   message: "Update favourite tutor success",
+      //   duration: Duration(seconds: 3),
+      // )..show(context);
+
+      // widget.sampleTutor.tutor.map((tutor) => print(tutor.love));
     });
   }
 
@@ -35,7 +51,7 @@ class InforCardState extends State<InforCard> {
     ];
     Widget listSpecialities = createListChip(screenHeight, listChip);
 
-    double space1 = screenWidth * 0.25;
+    double space1 = screenWidth * 0.2;
 
     return Card(
       // margin: const EdgeInsets.only(bottom: 20),
@@ -81,7 +97,7 @@ class InforCardState extends State<InforCard> {
                   ],
                 ),
                 SizedBox(
-                  width: screenWidth * 0.104,
+                  width: screenWidth * 0.05,
                 ),
                 LoveButton(
                   isLoved: widget.tutor.love,
@@ -93,6 +109,33 @@ class InforCardState extends State<InforCard> {
               height: screenHeight * 0.01,
             ),
             Wrap(children: [listSpecialities]),
+            SizedBox(
+              height: screenHeight * 0.01,
+            ),
+            Text(
+              widget.tutor.detail,
+              style: TextStyle(fontSize: screenHeight * 0.02),
+            ),
+            SizedBox(
+              height: screenHeight * 0.01,
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: ElevatedButton(
+                // style: style,
+                onPressed: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(Icons.event_available),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('Book'),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
