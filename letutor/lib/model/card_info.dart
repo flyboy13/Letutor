@@ -41,20 +41,14 @@ class InforCardState extends State<InforCard> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
-
     List<String> listChip = [
       'IELTS',
       'TOEFL',
       'TOEIC',
     ];
-    Widget listSpecialities = createListChip(screenHeight, listChip);
-
-    double space1 = screenWidth * 0.2;
+    Widget listSpecialities = createListChip(listChip);
 
     return Card(
-      // margin: const EdgeInsets.only(bottom: 20),
       elevation: 5,
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -63,11 +57,7 @@ class InforCardState extends State<InforCard> {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: Container(
-        width: space1,
-        // constraints: BoxConstraints(
-        //   maxWidth: screenWidth * 0.2,
-        // ),
-        padding: EdgeInsets.all(screenWidth * 0.01),
+        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -75,29 +65,22 @@ class InforCardState extends State<InforCard> {
             Row(
               children: [
                 CircleAvatar(backgroundImage: AssetImage(widget.tutor.image)),
-                SizedBox(
-                  width: screenWidth * 0.01,
-                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       widget.tutor.name,
-                      style: TextStyle(
-                          fontSize: screenHeight * 0.02,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
                       widget.tutor.country,
-                      style: TextStyle(
-                          fontSize: screenHeight * 0.02,
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     RatingStart(rate: widget.tutor.rate),
                   ],
                 ),
-                SizedBox(
-                  width: screenWidth * 0.05,
+                Expanded(
+                  child: Container(),
                 ),
                 LoveButton(
                   isLoved: widget.tutor.love,
@@ -105,19 +88,9 @@ class InforCardState extends State<InforCard> {
                 ),
               ],
             ),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
             Wrap(children: [listSpecialities]),
-            SizedBox(
-              height: screenHeight * 0.01,
-            ),
             Text(
               widget.tutor.detail,
-              style: TextStyle(fontSize: screenHeight * 0.02),
-            ),
-            SizedBox(
-              height: screenHeight * 0.01,
             ),
             Align(
               alignment: Alignment.bottomRight,

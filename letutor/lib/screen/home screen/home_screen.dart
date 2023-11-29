@@ -100,20 +100,25 @@ class _TeacherPage extends State<TutorScreen> {
       'TOEIC'
     ];
 
-    Widget listSpecialities = createListChip(screenWidth, listChip);
+    Widget listSpecialities = createListChip(listChip);
 
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenWidth * 0.05,
-        title: Image.asset(
-          "Let_logo.png",
+        title: Wrap(
+          children: [
+            Image.asset(
+              "Let_logo.png",
 
-          width: screenWidth * 0.15,
+              width: screenWidth * 0.1,
+              alignment: Alignment.centerLeft,
 
-          // Adjust the logo width as needed
+              // Adjust the logo width as needed
+            ),
+            appbar(context)
+          ],
         ),
         backgroundColor: Colors.white,
-        actions: [appbar()],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -377,17 +382,21 @@ class _TeacherPage extends State<TutorScreen> {
                 SizedBox(
                   height: screenHeight * 0.1,
                 ),
-                Column(
-                  children: [
-                    // First column
-                    Wrap(
-                        spacing: screenWidth * 0.02,
-                        runSpacing: screenWidth * 0.02,
-                        children: list)
 
-                    // Second column
-                  ],
-                ),
+                // First column
+                // Wrap(children: list)
+                // LayoutBuilder(builder: (context, constraints) {
+                //   if (constraints.maxWidth > 500) {
+                //     // Display a horizontal layout
+                //     return Row(children: list);
+                //   } else {
+                //     // Display a vertical layout
+                //     return Column(children: list);
+                //   }
+                // }
+                //     ),
+
+                Wrap(children: list)
               ]),
             ),
             Footer()

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget createListChip(double screenWidth, List<String> listChip) => Container(
+Widget createListChip(List<String> listChip) => FittedBox(
+      fit: BoxFit.scaleDown,
       // padding: EdgeInsets.all(screenWidth * 0.03),
       child: Wrap(
         spacing: 5,
@@ -9,8 +10,7 @@ Widget createListChip(double screenWidth, List<String> listChip) => Container(
           (index) => Chip(
             label: Text(
               listChip[index],
-              style: TextStyle(
-                  fontSize: screenWidth * 0.01, fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             labelStyle: const TextStyle(color: Colors.blue),
             backgroundColor: Colors.blue[50],
