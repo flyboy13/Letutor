@@ -36,6 +36,36 @@ class _TeacherPage extends State<TutorScreen> {
 
   final TextEditingController textEditingController = TextEditingController();
 
+  SampleTutor sampleTutor = SampleTutor();
+  late List<InforCard> list;
+  @override
+  void initState() {
+    super.initState();
+    // You can use sampleTutor here
+    sampleTutor = SampleTutor();
+    list = sampleTutor.tutor
+        .map((tutor) => InforCard(
+              tutor: tutor,
+              sampleTutor: sampleTutor,
+            ))
+        .toList();
+  }
+
+  void findTutor(String name) {
+    print(name);
+    // Search for a tutor with the given name
+    // This is just a placeholder, replace with your actual search logic
+    setState(() {
+      list = sampleTutor.tutor
+          .where(
+              (tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
+          .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
+          .toList();
+    });
+
+    // Do something with the found tutor
+  }
+
   @override
   void dispose() {
     textEditingController.dispose();
@@ -55,34 +85,6 @@ class _TeacherPage extends State<TutorScreen> {
       setState(() {
         selectedDate = DateTime.parse(date);
       });
-    }
-
-    SampleTutor sampleTutor = SampleTutor();
-
-    List<InforCard> list = sampleTutor.tutor
-        .map((tutor) => InforCard(
-              tutor: tutor,
-              sampleTutor: sampleTutor,
-            ))
-        .toList();
-
-    void findTutor(String name) {
-      // Search for a tutor with the given name
-      // This is just a placeholder, replace with your actual search logic
-      list = sampleTutor.tutor
-          .where(
-              (tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
-          .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
-          .toList();
-      // Do something with the found tutor
-    }
-
-    List<Widget> cards = [];
-
-    for (int i = 0; i < 10; i++) {
-      cards.add(Card(
-        child: Text('Card $i'),
-      ));
     }
 
     List<String> listChip = [
