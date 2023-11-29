@@ -9,6 +9,7 @@ import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
 
 import 'package:letutor/model/card_info.dart';
+import 'package:letutor/model/sample.dart';
 
 import 'package:letutor/screen/bottom bar/footer.dart';
 
@@ -59,6 +60,8 @@ class _TeacherPage extends State<TutorScreen> {
         selectedDate = DateTime.parse(date);
       });
     }
+
+    SampleTutor sampleTutor = SampleTutor();
 
     List<Widget> cards = [];
 
@@ -194,13 +197,15 @@ class _TeacherPage extends State<TutorScreen> {
             Container(
               padding: EdgeInsets.all(screenWidth * 0.03),
               child: Column(children: [
-                Text(
-                  "Find a tutor",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                      fontSize: screenWidth * 0.025,
-                      fontWeight: FontWeight.bold),
-                ),
+                Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      "Find a tutor",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.015,
+                      ),
+                    )),
                 SizedBox(
                   height: screenHeight * 0.02,
                 ),
@@ -334,12 +339,14 @@ class _TeacherPage extends State<TutorScreen> {
                 SizedBox(
                   height: screenHeight * 0.03,
                 ),
-                Text(
-                  'Select available tutoring time:',
-                  style: TextStyle(fontSize: screenHeight * 0.03),
-                ),
+                Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      'Select available tutoring time:',
+                      style: TextStyle(fontSize: screenHeight * 0.03),
+                    )),
                 SizedBox(
-                  height: screenHeight * 0.03,
+                  height: screenHeight * 0.02,
                 ),
                 TextField(
                   keyboardType: TextInputType.datetime,
@@ -350,14 +357,20 @@ class _TeacherPage extends State<TutorScreen> {
                       TextEditingController(text: selectedDate.toString()),
                   onChanged: onDateChanged,
                 ),
+                SizedBox(
+                  height: screenHeight * 0.1,
+                ),
                 Column(
                   children: [
                     // First column
-
                     Wrap(
-                      spacing: screenWidth * 0.02,
-                      children: List.generate(6, (index) => const InforCard()),
-                    ),
+                        spacing: screenWidth * 0.02,
+                        runSpacing: screenWidth * 0.02  ,
+                        children:
+                            // List.generate(6, (index) => const InforCard()
+                            sampleTutor.tutor
+                                .map((tutor) => InforCard(tutor: tutor))
+                                .toList()),
 
                     // Second column
                   ],

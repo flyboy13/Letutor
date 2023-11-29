@@ -5,9 +5,11 @@ import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/rating_start.dart';
 import 'package:letutor/model/love_button.dart';
 
-class InforCard extends StatefulWidget {
-  const InforCard({Key? key}) : super(key: key);
+import 'package:letutor/model/tutor.dart';
 
+class InforCard extends StatefulWidget {
+  const InforCard({super.key, required this.tutor});
+  final Tutor tutor;
   @override
   InforCardState createState() => InforCardState();
 }
@@ -30,11 +32,11 @@ class InforCardState extends State<InforCard> {
       'IELTS',
       'TOEFL',
       'TOEIC',
-    
     ];
     Widget listSpecialities = createListChip(screenHeight, listChip);
 
     double space1 = screenWidth * 0.25;
+
     return Card(
       // margin: const EdgeInsets.only(bottom: 20),
       elevation: 5,
@@ -56,7 +58,7 @@ class InforCardState extends State<InforCard> {
           children: [
             Row(
               children: [
-                CircleAvatar(backgroundImage: AssetImage("flogo.png")),
+                CircleAvatar(backgroundImage: AssetImage(widget.tutor.image)),
                 SizedBox(
                   width: screenWidth * 0.01,
                 ),
@@ -64,25 +66,25 @@ class InforCardState extends State<InforCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Nguyen Duc Tai",
+                      widget.tutor.name,
                       style: TextStyle(
                           fontSize: screenHeight * 0.02,
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Location",
+                      widget.tutor.country,
                       style: TextStyle(
                           fontSize: screenHeight * 0.02,
                           fontWeight: FontWeight.bold),
                     ),
-                    RatingStart(),
+                    RatingStart(rate: widget.tutor.rate),
                   ],
                 ),
                 SizedBox(
                   width: screenWidth * 0.104,
                 ),
                 LoveButton(
-                  isLoved: isLoved,
+                  isLoved: widget.tutor.love,
                   onPressed: onLoveButtonPressed,
                 ),
               ],
