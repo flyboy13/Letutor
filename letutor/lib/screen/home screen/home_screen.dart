@@ -387,7 +387,7 @@ class _TeacherPage extends State<TutorScreen> {
 
                     // Second column
                   ],
-                )
+                ),
               ]),
             ),
             Footer()
