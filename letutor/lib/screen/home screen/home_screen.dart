@@ -7,7 +7,10 @@ import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/sample.dart';
 import 'package:letutor/model/tutor.dart';
+import 'package:letutor/model/userProfileButton.dart';
 import 'package:letutor/screen/bottom bar/footer.dart';
+
+import 'package:go_router/go_router.dart';
 
 class TutorScreen extends StatefulWidget {
   const TutorScreen({Key? key}) : super(key: key);
@@ -107,19 +110,7 @@ class _TeacherPage extends State<TutorScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenWidth * 0.05,
-        title: Wrap(
-          children: [
-            Image.asset(
-              "Let_logo.png",
-
-              width: screenWidth * 0.1,
-              alignment: Alignment.centerLeft,
-
-              // Adjust the logo width as needed
-            ),
-            appbar(context)
-          ],
-        ),
+        title: appbar(context),
         backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
