@@ -16,6 +16,7 @@ class Tutor {
       this.detail, this.specialties, this.love);
 
   void toggleLove() {
+    print("love");
     love = !love;
   }
 }

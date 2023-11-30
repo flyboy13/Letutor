@@ -22,19 +22,18 @@ class ForgotScreenState extends State<ForgotScreen> {
 
     bool passwordVisible = false;
 
-    void signIn() {
+    void sendLink() {
       setState(() {
         error = "";
       });
       print("Email:  ");
       print(_passwordController.text);
       print("clicked SignUp");
-      if (_emailController.text == 'letutor@gmail.com' &&
-          _passwordController.text == '12345678') {
+      if (_emailController.text == 'letutor@gmail.com') {
         context.go('/tutor');
       } else {
         setState(() {
-          error = "Error: You type Email or Password wrong";
+          error = "Error: You type Email wrong";
         });
       }
     }
@@ -209,9 +208,9 @@ class ForgotScreenState extends State<ForgotScreen> {
                                 alignment: Alignment.center,
                                 child: // Responsive spacing
                                     ElevatedButton(
-                                  onPressed: signIn,
+                                  onPressed: sendLink,
                                   child: Text(
-                                    'Get Code',
+                                    'Send link',
                                     style: TextStyle(
                                         fontSize: screenWidth *
                                             0.02), // Responsive font size
