@@ -10,7 +10,7 @@ Widget createListChip(List<String> listChip) => FittedBox(
           (index) => Chip(
             label: Text(
               listChip[index],
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             labelStyle: const TextStyle(color: Colors.blue),
             backgroundColor: Colors.blue[50],

@@ -398,7 +398,10 @@ class _TeacherPage extends State<TutorScreen> {
                 // }
                 //     ),
 
-                Wrap(children: list)
+                Wrap(
+                    spacing: MediaQuery.of(context).size.width * 0.01,
+                    runSpacing: MediaQuery.of(context).size.width * 0.01,
+                    children: list)
               ]),
             ),
             Footer()

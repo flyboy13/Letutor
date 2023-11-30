@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letutor/model/appbar.dart';
 import 'package:letutor/screen/history%20screen/history_items.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -16,10 +17,18 @@ class HistoryScreenState extends State<HistoryScreen> {
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: screenWidth * 0.05,
-          title: Image.asset(
-            "Let_logo.png",
-            width: screenWidth * 0.15,
-            // Adjust the logo width as needed
+          title: Wrap(
+            children: [
+              Image.asset(
+                "Let_logo.png",
+
+                width: screenWidth * 0.1,
+                alignment: Alignment.centerLeft,
+
+                // Adjust the logo width as needed
+              ),
+              appbar(context)
+            ],
           ),
           backgroundColor: Colors.white,
         ),
@@ -100,19 +109,17 @@ class HistoryScreenState extends State<HistoryScreen> {
                   ),
                 ),
                 /* LIST BEGIN HERE */
-                Container(
-                  child: ListView(
-                    padding: const EdgeInsets.only(top: 0),
-                    shrinkWrap: true,
-                    primary: false,
-                    children: [
-                      createHistory("Nguyen Duc Tai", screenWidth),
-                      createHistory("Keeran", screenWidth),
-                      createHistory("Justin", screenWidth),
-                      createHistory("John", screenWidth)
-                      // HistoryListTile(),
-                    ],
-                  ),
+                ListView(
+                  padding: const EdgeInsets.only(top: 0),
+                  shrinkWrap: true,
+                  primary: false,
+                  children: [
+                    createHistory("Nguyen Duc Tai", screenWidth),
+                    createHistory("Keeran", screenWidth),
+                    createHistory("Justin", screenWidth),
+                    createHistory("John", screenWidth)
+                    // HistoryListTile(),
+                  ],
                 )
               ],
             ),

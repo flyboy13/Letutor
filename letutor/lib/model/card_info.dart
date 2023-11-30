@@ -41,6 +41,9 @@ class InforCardState extends State<InforCard> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
+
     List<String> listChip = [
       'IELTS',
       'TOEFL',
@@ -49,6 +52,7 @@ class InforCardState extends State<InforCard> {
     Widget listSpecialities = createListChip(listChip);
 
     return Card(
+      // color: const Color.fromARGB(255, 255, 255, 255),
       elevation: 5,
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -57,7 +61,9 @@ class InforCardState extends State<InforCard> {
         borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
       child: Container(
-        padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.05),
+        color: const Color.fromARGB(255, 255, 255, 255),
+        padding: EdgeInsets.all(width * 0.01),
+        width: width / 5,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -65,6 +71,9 @@ class InforCardState extends State<InforCard> {
             Row(
               children: [
                 CircleAvatar(backgroundImage: AssetImage(widget.tutor.image)),
+                SizedBox(
+                  width: width * 0.01,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -89,6 +98,9 @@ class InforCardState extends State<InforCard> {
               ],
             ),
             Wrap(children: [listSpecialities]),
+            SizedBox(
+              height: height * 0.01,
+            ),
             Text(
               widget.tutor.detail,
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/calendar.dart';
 import 'package:letutor/test.dart';
 import 'package:letutor/screen/schedule screen/scheduel_items.dart';
@@ -22,10 +23,18 @@ class ScheduelScreenState extends State<ScheduelScreen> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenWidth * 0.05,
-        title: Image.asset(
-          "Let_logo.png",
-          width: screenWidth * 0.15,
-          // Adjust the logo width as needed
+        title: Wrap(
+          children: [
+            Image.asset(
+              "Let_logo.png",
+
+              width: screenWidth * 0.1,
+              alignment: Alignment.centerLeft,
+
+              // Adjust the logo width as needed
+            ),
+            appbar(context)
+          ],
         ),
         backgroundColor: Colors.white,
       ),

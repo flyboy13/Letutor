@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:letutor/model/appbar.dart';
 import 'package:letutor/screen/bottom%20bar/footer.dart';
 
 import 'package:letutor/screen/course%20info/card.dart';
@@ -31,10 +32,18 @@ class CourseInforState extends State<CourseInfor> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenWidth * 0.05,
-        title: Image.asset(
-          "Let_logo.png",
-          width: screenWidth * 0.15,
-          // Adjust the logo width as needed
+        title: Wrap(
+          children: [
+            Image.asset(
+              "Let_logo.png",
+
+              width: screenWidth * 0.1,
+              alignment: Alignment.centerLeft,
+
+              // Adjust the logo width as needed
+            ),
+            appbar(context)
+          ],
         ),
         backgroundColor: Colors.white,
       ),
@@ -142,7 +151,8 @@ class CourseInforState extends State<CourseInfor> {
                                     children: [
                                       Text("$count ."),
                                       Text(courseTitle,
-                                          style: const TextStyle(fontSize: 18.0)),
+                                          style:
+                                              const TextStyle(fontSize: 18.0)),
                                       const SizedBox(height: 10.0),
                                     ],
                                   ),
