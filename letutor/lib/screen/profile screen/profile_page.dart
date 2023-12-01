@@ -215,6 +215,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           userProvider.updateCountry(_country);
                           userProvider.updateLevel(_level);
                           userProvider.updateTopicToLearn(_topicToLearn);
+                          userProvider.updateEmail(_email);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Save profile success'),
