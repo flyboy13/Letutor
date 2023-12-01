@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:letutor/model/appbar.dart';
+import 'package:letutor/model/calendar.dart';
 import 'package:letutor/model/rate_comment.dart';
 import 'package:letutor/model/sample.dart';
 import 'package:letutor/model/tutor.dart';
@@ -21,7 +22,6 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
   List<Tutor> sampleTutor = SampleTutor.tutor;
   @override
   Widget build(BuildContext context) {
-    
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     teacher = findTutor(widget.id!);
@@ -262,7 +262,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                             ),
                           ),
                         ))),
-
+                const CalendarModel(),
                 ListView.builder(
                   itemCount: teacher.feedbacks.length,
                   itemBuilder: (context, index) {
