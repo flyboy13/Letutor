@@ -190,7 +190,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   DropdownEdit(
                     title: "Want to learn",
                     selectedItem: _topicToLearn,
-                    items: const ["TOEIC", "IELTS", "TOEFL"],
+                    items: const [
+                      "TOEIC",
+                      "IELTS",
+                      "TOEFL",
+                      'English for kids',
+                      'English for Business',
+                      'Conversational',
+                      'STARTERS',
+                      'MOVERS',
+                      'FLYERS',
+                    ],
                     onChange: setTopicToLearn,
                   ),
                   Container(

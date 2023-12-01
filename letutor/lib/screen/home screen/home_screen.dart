@@ -8,7 +8,6 @@ import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/sample.dart';
 import 'package:letutor/screen/bottom bar/footer.dart';
 
-
 class TutorScreen extends StatefulWidget {
   const TutorScreen({super.key});
 
@@ -17,8 +16,6 @@ class TutorScreen extends StatefulWidget {
 }
 
 class _TeacherPage extends State<TutorScreen> {
-
-
   final List<String> items = [
     'A_Item1',
     'A_Item2',
@@ -48,14 +45,16 @@ class _TeacherPage extends State<TutorScreen> {
         .toList();
   }
 
-  void findTutor(String name) {
-    print(name);
+  void findTutor(String input) {
+    // print(input);
+
     // Search for a tutor with the given name
     // This is just a placeholder, replace with your actual search logic
     setState(() {
       list = SampleTutor.tutor
-          .where(
-              (tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
+          .where((tutor) =>
+              tutor.name.toLowerCase().contains(input.toLowerCase()) ||
+              tutor.country.toLowerCase().contains(input.toLowerCase()))
           .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
           .toList();
     });
