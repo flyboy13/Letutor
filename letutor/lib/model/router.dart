@@ -13,6 +13,7 @@ import '../screen/login screen/forgot.dart';
 import '../screen/login screen/signup_screen.dart';
 
 final GoRouter router = GoRouter(
+  initialLocation: '/signin',
   routes: [
     GoRoute(
       name: 'signin',
