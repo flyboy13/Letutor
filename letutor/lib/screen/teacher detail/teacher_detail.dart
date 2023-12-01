@@ -1,23 +1,56 @@
+// ignore_for_file: dead_code
+
 import 'package:flutter/material.dart';
+import 'package:letutor/model/sample.dart';
+import 'package:letutor/model/tutor.dart';
 import 'package:letutor/screen/teacher%20detail/data.dart';
 import 'package:letutor/model/router.dart';
 import 'package:go_router/go_router.dart';
 
 class TeacherDetailScreen extends StatefulWidget {
-  const TeacherDetailScreen({Key? key}) : super(key: key);
+  TeacherDetailScreen(this.id, {super.key});
 
+  String? id;
   @override
   State<TeacherDetailScreen> createState() => _TeacherDetailScreenState();
 }
 
 class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
-  final teacher = teachers[0];
-
+  late Tutor teacher;
+  List<Tutor> sampleTutor = SampleTutor().tutor;
   @override
   Widget build(BuildContext context) {
+    void onLoveButtonPressed() {
+      setState(() {
+        //
+        for (var t in sampleTutor) {
+          if (t.id == teacher.id) {
+            t.love = !t.love;
+            break;
+          }
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Update favourite tutor success'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+
+        //      Flushbar(
+        //   message: "Update favourite tutor success",
+        //   duration: Duration(seconds: 3),
+        // )..show(context);
+
+        // widget.sampleTutor.tutor.map((tutor) => print(tutor.love));
+      });
+    }
+
     bool isFavorite = false;
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    // double screenHeight = MediaQuery.of(context).size.height;
+    teacher = findTutor(widget.id!);
+    // print("country");
+    // print(teacher.country);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: screenWidth * 0.05,
@@ -37,7 +70,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
               children: [
                 CircleAvatar(
                   radius: 45,
-                  backgroundImage: AssetImage(teacher.avatarUrl),
+                  backgroundImage: AssetImage(teacher.image),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -45,18 +78,18 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(teacher.name,
-                          style: Theme.of(context).textTheme.headline3),
-                      Text(teacher.nationality,
+                          style: Theme.of(context).textTheme.displaySmall),
+                      Text(teacher.country,
                           style: const TextStyle(fontSize: 16)),
                       Row(children: [
                         ...List<Widget>.generate(
-                          teacher.reviewScore,
+                          teacher.rate,
                           (index) =>
                               const Icon(Icons.star, color: Colors.amber),
                         ),
                         const SizedBox(width: 8),
-                        Text('(${teacher.reviewCount})',
-                            style: const TextStyle(fontSize: 18))
+                        // Text('(${teacher.reviewCount})',
+                        //     style: const TextStyle(fontSize: 18))
                       ])
                     ],
                   ),
@@ -65,8 +98,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(teacher.description,
-                  style: const TextStyle(fontSize: 16)),
+              child: Text(teacher.detail, style: const TextStyle(fontSize: 16)),
             ),
             Row(
               children: [
@@ -74,19 +106,19 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                   child: TextButton(
                     onPressed: () {
                       setState(() {
-                        isFavorite = !isFavorite;
+                        teacher.toggleLove();
                       });
                     },
                     child: Column(
                       children: [
                         Icon(
-                          isFavorite ? Icons.favorite : Icons.favorite_border,
-                          color: isFavorite ? Colors.red : Colors.blue,
+                          teacher.love ? Icons.favorite : Icons.favorite_border,
+                          color: teacher.love ? Colors.red : Colors.blue,
                         ),
                         Text(
                           'Favorite',
                           style: TextStyle(
-                            color: isFavorite ? Colors.red : Colors.blue,
+                            color: teacher.love ? Colors.red : Colors.blue,
                           ),
                         )
                       ],
@@ -98,8 +130,8 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                     onPressed: () {
                       // Navigator.pushNamed(context, Routes.review);
                     },
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Icon(Icons.reviews_outlined, color: Colors.blue),
                         Text('Review', style: TextStyle(color: Colors.blue))
                       ],
@@ -111,8 +143,8 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                     onPressed: () async {
                       await showReportDialog(context);
                     },
-                    child: Column(
-                      children: const [
+                    child: const Column(
+                      children: [
                         Icon(Icons.report_outlined, color: Colors.blue),
                         Text('Report', style: TextStyle(color: Colors.blue))
                       ],
@@ -138,7 +170,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
               ),
             ),
             const SizedBox(height: 8),
-            Text('Languages', style: Theme.of(context).textTheme.headline3),
+            Text('Languages', style: Theme.of(context).textTheme.displaySmall),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Wrap(children: [
@@ -152,7 +184,8 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
               ]),
             ),
             const SizedBox(height: 8),
-            Text('Specialties', style: Theme.of(context).textTheme.headline3),
+            Text('Specialties',
+                style: Theme.of(context).textTheme.displaySmall),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Wrap(
@@ -172,14 +205,14 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
             ),
             const SizedBox(height: 8),
             Text('Suggested Courses',
-                style: Theme.of(context).textTheme.headline3),
+                style: Theme.of(context).textTheme.displaySmall),
             ...courses.map((course) => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   child: Row(
                     children: [
                       Text(
                         course.name,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       const SizedBox(width: 16),
                       TextButton(
@@ -189,7 +222,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                   ),
                 )),
             const SizedBox(height: 12),
-            Text('Interests', style: Theme.of(context).textTheme.headline3),
+            Text('Interests', style: Theme.of(context).textTheme.displaySmall),
             const Padding(
               padding: EdgeInsets.only(left: 10, right: 8),
               child: Text('I loved the weather, the scenery and the '
@@ -197,7 +230,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
             ),
             const SizedBox(height: 12),
             Text('Teaching Experiences',
-                style: Theme.of(context).textTheme.headline3),
+                style: Theme.of(context).textTheme.displaySmall),
             const Padding(
               padding: EdgeInsets.only(left: 10, right: 8),
               child: Text(
@@ -262,7 +295,7 @@ Future<void> bookLearningHour(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   'Choose Your Time',
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
               Expanded(
@@ -333,6 +366,16 @@ Future<bool> showBookingConfirmDialog(BuildContext context) {
       );
     },
   ).then((value) => value ?? false);
+}
+
+Tutor findTutor(String id) {
+  List<Tutor> sampleTutor = SampleTutor().tutor;
+  for (var t in sampleTutor) {
+    if (t.id == id) {
+      return t;
+    }
+  }
+  return sampleTutor.last;
 }
 
 Future<bool> showReportDialog(BuildContext context) {

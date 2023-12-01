@@ -7,6 +7,7 @@ import 'package:letutor/model/love_button.dart';
 import 'package:letutor/model/sample.dart';
 // import 'package:flushbar/flushbar.dart';
 import 'package:letutor/model/tutor.dart';
+import 'package:go_router/go_router.dart';
 
 class InforCard extends StatefulWidget {
   const InforCard({super.key, required this.tutor, required this.sampleTutor});
@@ -77,10 +78,13 @@ class InforCardState extends State<InforCard> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      widget.tutor.name,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    TextButton(
+                        onPressed: () =>
+                            context.go('/tutor/${widget.tutor.id}'),
+                        child: Text(
+                          widget.tutor.name,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )),
                     Text(
                       widget.tutor.country,
                       style: TextStyle(fontWeight: FontWeight.bold),

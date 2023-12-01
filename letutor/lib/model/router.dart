@@ -43,10 +43,11 @@ final GoRouter router = GoRouter(
         },
         routes: [
           GoRoute(
-            name: "tutorDetail",
-            path: ":id",
+            name: 'tutorid',
+            path: ':tutorid',
             builder: (BuildContext context, GoRouterState state) {
-              return const TeacherDetailScreen();
+              String? id = state.pathParameters['tutorid'];
+              return TeacherDetailScreen(id);
             },
           ),
         ]),
@@ -71,6 +72,7 @@ final GoRouter router = GoRouter(
         return const CourseInfor();
       },
     ),
+
     // GoRoute(
     //   path: 'My courses',
     //   builder: (BuildContext context, GoRouterState state) {

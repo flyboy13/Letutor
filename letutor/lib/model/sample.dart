@@ -78,7 +78,8 @@ class SampleTutor {
     for (var t in tutor) {
       if (t.id == id) {
         print(t.id);
-        t.toggleLove();
+        // t.toggleLove();
+        t.love = !t.love;
         break;
       }
     }
