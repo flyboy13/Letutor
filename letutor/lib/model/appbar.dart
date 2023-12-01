@@ -74,7 +74,7 @@ Widget appbar(BuildContext context) => Row(children: [
       // Expanded(child: SizedBox()),
       FittedBox(
           child: ElevatedButton(
-              onPressed: () => context.go('/my_courses'),
+              onPressed: () => context.go('/profile'),
               // style: TextButton.styleFrom(backgroundColor: Colors.blue),
               child: UserNavigate())),
       // // Flexible(

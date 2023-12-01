@@ -45,8 +45,7 @@ class _TeacherPage extends State<TutorScreen> {
   void initState() {
     super.initState();
     // You can use sampleTutor here
-    sampleTutor = SampleTutor();
-    list = sampleTutor.tutor
+    list = SampleTutor.tutor
         .map((tutor) => InforCard(
               tutor: tutor,
               sampleTutor: sampleTutor,
@@ -59,7 +58,7 @@ class _TeacherPage extends State<TutorScreen> {
     // Search for a tutor with the given name
     // This is just a placeholder, replace with your actual search logic
     setState(() {
-      list = sampleTutor.tutor
+      list = SampleTutor.tutor
           .where(
               (tutor) => tutor.name.toLowerCase().contains(name.toLowerCase()))
           .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))

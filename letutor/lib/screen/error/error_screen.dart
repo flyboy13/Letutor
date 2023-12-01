@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:letutor/model/appbar.dart';
 
 class ErrorPage extends StatefulWidget {
   const ErrorPage({super.key});
@@ -13,7 +14,7 @@ class ErrorPageState extends State<ErrorPage> {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Error'),
+          title: appbar(context),
         ),
         body: Center(
           child: Column(children: [

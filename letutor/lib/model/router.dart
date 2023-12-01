@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:letutor/screen/course%20info/course_info.dart';
 import 'package:letutor/screen/history%20screen/history_screen.dart';
 import 'package:letutor/screen/login%20screen/signin_screen.dart';
+import 'package:letutor/screen/profile%20screen/profile_page.dart';
 import 'package:letutor/screen/schedule%20screen/scheduel.dart';
 import 'package:letutor/screen/teacher%20detail/teacher_detail.dart';
 
@@ -56,6 +57,13 @@ final GoRouter router = GoRouter(
       path: '/scheduel',
       builder: (BuildContext context, GoRouterState state) {
         return const ScheduelScreen();
+      },
+    ),
+    GoRoute(
+      name: 'profile',
+      path: '/profile',
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProfileScreen();
       },
     ),
     GoRoute(

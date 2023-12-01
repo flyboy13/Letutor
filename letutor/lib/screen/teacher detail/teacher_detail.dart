@@ -1,6 +1,8 @@
 // ignore_for_file: dead_code
 
 import 'package:flutter/material.dart';
+import 'package:letutor/model/appbar.dart';
+import 'package:letutor/model/rate_comment.dart';
 import 'package:letutor/model/sample.dart';
 import 'package:letutor/model/tutor.dart';
 import 'package:letutor/screen/teacher%20detail/data.dart';
@@ -17,7 +19,7 @@ class TeacherDetailScreen extends StatefulWidget {
 
 class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
   late Tutor teacher;
-  List<Tutor> sampleTutor = SampleTutor().tutor;
+  List<Tutor> sampleTutor = SampleTutor.tutor;
   @override
   Widget build(BuildContext context) {
     void onLoveButtonPressed() {
@@ -52,214 +54,253 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
     // print("country");
     // print(teacher.country);
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: screenWidth * 0.05,
-        title: Image.asset(
-          "Let_logo.png",
-          width: screenWidth * 0.15,
-          // Adjust the logo width as needed
-        ),
-        backgroundColor: Colors.white,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+        appBar:
+            AppBar(toolbarHeight: screenWidth * 0.05, title: appbar(context)),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  radius: 45,
-                  backgroundImage: AssetImage(teacher.image),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                // Expanded(
+                //     flex: 1,
+                // child:
+                Column(children: [
+                  Row(
                     children: [
-                      Text(teacher.name,
-                          style: Theme.of(context).textTheme.displaySmall),
-                      Text(teacher.country,
-                          style: const TextStyle(fontSize: 16)),
-                      Row(children: [
-                        ...List<Widget>.generate(
-                          teacher.rate,
-                          (index) =>
-                              const Icon(Icons.star, color: Colors.amber),
-                        ),
-                        const SizedBox(width: 8),
-                        // Text('(${teacher.reviewCount})',
-                        //     style: const TextStyle(fontSize: 18))
-                      ])
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: Text(teacher.detail, style: const TextStyle(fontSize: 16)),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      setState(() {
-                        teacher.toggleLove();
-                      });
-                    },
-                    child: Column(
-                      children: [
-                        Icon(
-                          teacher.love ? Icons.favorite : Icons.favorite_border,
-                          color: teacher.love ? Colors.red : Colors.blue,
-                        ),
-                        Text(
-                          'Favorite',
-                          style: TextStyle(
-                            color: teacher.love ? Colors.red : Colors.blue,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, Routes.review);
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(Icons.reviews_outlined, color: Colors.blue),
-                        Text('Review', style: TextStyle(color: Colors.blue))
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: TextButton(
-                    onPressed: () async {
-                      await showReportDialog(context);
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(Icons.report_outlined, color: Colors.blue),
-                        Text('Report', style: TextStyle(color: Colors.blue))
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(vertical: 8),
-              height: 200,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue, width: 2),
-                  borderRadius: const BorderRadius.all(Radius.circular(10))),
-              child: Text(
-                'Introduction Video Goes Here',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.blue[700],
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text('Languages', style: Theme.of(context).textTheme.displaySmall),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Wrap(children: [
-                Chip(
-                  label: const Text(
-                    'English',
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                  backgroundColor: Colors.blue[50],
-                ),
-              ]),
-            ),
-            const SizedBox(height: 8),
-            Text('Specialties',
-                style: Theme.of(context).textTheme.displaySmall),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Wrap(
-                spacing: 8,
-                runSpacing: -4,
-                children: List<Widget>.generate(
-                  teacher.specialties.length,
-                  (index) => Chip(
-                    label: Text(
-                      teacher.specialties[index],
-                      style: const TextStyle(color: Colors.blue),
-                    ),
-                    backgroundColor: Colors.blue[50],
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text('Suggested Courses',
-                style: Theme.of(context).textTheme.displaySmall),
-            ...courses.map((course) => Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    children: [
-                      Text(
-                        course.name,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                      CircleAvatar(
+                        radius: 45,
+                        backgroundImage: AssetImage(teacher.image),
                       ),
-                      const SizedBox(width: 16),
-                      TextButton(
-                          onPressed: () => context.go('/coursedetails'),
-                          child: const Text('View'))
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(teacher.name,
+                                style:
+                                    Theme.of(context).textTheme.displaySmall),
+                            Text(teacher.country,
+                                style: const TextStyle(fontSize: 16)),
+                            Row(children: [
+                              ...List<Widget>.generate(
+                                teacher.rate,
+                                (index) =>
+                                    const Icon(Icons.star, color: Colors.amber),
+                              ),
+                              const SizedBox(width: 8),
+                              // Text('(${teacher.reviewCount})',
+                              //     style: const TextStyle(fontSize: 18))
+                            ])
+                          ],
+                        ),
+                      ),
                     ],
                   ),
-                )),
-            const SizedBox(height: 12),
-            Text('Interests', style: Theme.of(context).textTheme.displaySmall),
-            const Padding(
-              padding: EdgeInsets.only(left: 10, right: 8),
-              child: Text('I loved the weather, the scenery and the '
-                  'laid-back lifestyle of the locals.'),
-            ),
-            const SizedBox(height: 12),
-            Text('Teaching Experiences',
-                style: Theme.of(context).textTheme.displaySmall),
-            const Padding(
-              padding: EdgeInsets.only(left: 10, right: 8),
-              child: Text(
-                  'I have more than 10 years of teaching english experience'),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24, bottom: 12),
-              child: OutlinedButton(
-                style: TextButton.styleFrom(
-                    minimumSize: const Size.fromHeight(0),
-                    padding: const EdgeInsets.all(8),
-                    side: const BorderSide(color: Colors.blue, width: 1.5)),
-                onPressed: () async {
-                  final selectedDate = await bookLearningDate(context);
-                  if (mounted) {
-                    await bookLearningHour(context, selectedDate!);
-                  }
-                  // Navigator.pushNamed(context, Routes.booking);
-                },
-                child: const Text(
-                  'Book This Tutor',
-                  style: TextStyle(fontSize: 18, color: Colors.blue),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Text(teacher.detail,
+                        style: const TextStyle(fontSize: 16)),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            setState(() {
+                              teacher.toggleLove();
+                            });
+                          },
+                          child: Column(
+                            children: [
+                              Icon(
+                                teacher.love
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: teacher.love ? Colors.red : Colors.blue,
+                              ),
+                              Text(
+                                'Favorite',
+                                style: TextStyle(
+                                  color:
+                                      teacher.love ? Colors.red : Colors.blue,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      // Expanded(
+                      //   child: TextButton(
+                      //     onPressed: () {
+                      //       // Navigator.pushNamed(context, Routes.review);
+                      //     },
+                      //     child: const Column(
+                      //       children: [
+                      //         Icon(Icons.reviews_outlined, color: Colors.blue),
+                      //         Text('Review',
+                      //             style: TextStyle(color: Colors.blue))
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () async {
+                            await showReportDialog(context);
+                          },
+                          child: const Column(
+                            children: [
+                              Icon(Icons.report_outlined, color: Colors.blue),
+                              Text('Report',
+                                  style: TextStyle(color: Colors.blue))
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ]),
+                // Column(
+                //   children: [
+                //     Container(
+                //       margin: const EdgeInsets.symmetric(vertical: 8),
+                //       height: 500,
+                //       alignment: Alignment.center,
+                //       decoration: BoxDecoration(
+                //           border: Border.all(color: Colors.blue, width: 2),
+                //           borderRadius:
+                //               const BorderRadius.all(Radius.circular(10))),
+                //       child: Text(
+                //         'Video',
+                //         style: TextStyle(
+                //           fontSize: 22,
+                //           fontWeight: FontWeight.w500,
+                //           color: Colors.blue[700],
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                const SizedBox(height: 8),
+                Text('Languages',
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.012,
+                        fontWeight: FontWeight.bold)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Wrap(children: [
+                    Chip(
+                      label: const Text(
+                        'English',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      backgroundColor: Colors.blue[50],
+                    ),
+                  ]),
                 ),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
+                const SizedBox(height: 8),
+                Text('Specialties',
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.012,
+                        fontWeight: FontWeight.bold)),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Wrap(
+                    spacing: 8,
+                    runSpacing: -4,
+                    children: List<Widget>.generate(
+                      teacher.specialties.length,
+                      (index) => Chip(
+                        label: Text(
+                          teacher.specialties[index],
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                        backgroundColor: Colors.blue[50],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text('Suggested Courses',
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.012,
+                        fontWeight: FontWeight.bold)),
+                ...courses.map((course) => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          Text(course.name,
+                              style: TextStyle(
+                                fontSize: screenWidth * 0.01,
+                              )),
+                          const SizedBox(width: 16),
+                          TextButton(
+                              onPressed: () => context.go('/coursedetails'),
+                              child: const Text('View'))
+                        ],
+                      ),
+                    )),
+                const SizedBox(height: 12),
+                Text('Interests',
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.012,
+                        fontWeight: FontWeight.bold)),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, right: 8),
+                  child: Text('I loved the weather, the scenery and the '
+                      'laid-back lifestyle of the locals.'),
+                ),
+                const SizedBox(height: 12),
+                Text('Teaching Experiences',
+                    style: TextStyle(
+                        fontSize: screenWidth * 0.012,
+                        fontWeight: FontWeight.bold)),
+                const Padding(
+                  padding: EdgeInsets.only(left: 10, right: 8),
+                  child: Text(
+                      'I have more than 10 years of teaching english experience'),
+                ),
+                Center(
+                    child: SizedBox(
+                        width: screenWidth * 0.2,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 24, bottom: 12),
+                          child: OutlinedButton(
+                            style: TextButton.styleFrom(
+                                minimumSize: const Size.fromHeight(0),
+                                padding: const EdgeInsets.all(15),
+                                side: const BorderSide(
+                                    color: Colors.blue, width: 1.5)),
+                            onPressed: () async {
+                              final selectedDate =
+                                  await bookLearningDate(context);
+                              if (mounted) {
+                                await bookLearningHour(context, selectedDate!);
+                              }
+                              // Navigator.pushNamed(context, Routes.booking);
+                            },
+                            child: const Text(
+                              'Book This Tutor',
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.blue),
+                            ),
+                          ),
+                        ))),
+
+                ListView.builder(
+                  itemCount: teacher.feedbacks.length,
+                  itemBuilder: (context, index) {
+                    return RateAndComment(feedback: teacher.feedbacks[index]);
+                  },
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                ),
+              ],
+            ),
+          ),
+        ));
   }
 }
 
@@ -369,7 +410,7 @@ Future<bool> showBookingConfirmDialog(BuildContext context) {
 }
 
 Tutor findTutor(String id) {
-  List<Tutor> sampleTutor = SampleTutor().tutor;
+  List<Tutor> sampleTutor = SampleTutor.tutor;
   for (var t in sampleTutor) {
     if (t.id == id) {
       return t;

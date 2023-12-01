@@ -38,175 +38,174 @@ class DiscoverScreenState extends State<DiscoverScreen> {
     // String placeholder = "";
     TextEditingController controller = TextEditingController();
     return Scaffold(
-        appBar: AppBar(
-          toolbarHeight: screenWidth * 0.05,
-          title: Image.asset(
-            "Let_logo.png",
-            width: screenWidth * 0.15,
-            // Adjust the logo width as needed
-          ),
-          backgroundColor: Colors.white,
-        ),
+        // appBar: AppBar(
+        //   toolbarHeight: screenWidth * 0.05,
+        //   title: Image.asset(
+        //     "Let_logo.png",
+        //     width: screenWidth * 0.15,
+        //     // Adjust the logo width as needed
+        //   ),
+        //   backgroundColor: Colors.white,
+        // ),
         body: SingleChildScrollView(
             child: Column(children: [
-          Container(
-            padding: EdgeInsets.all(screenWidth * 0.03),
-            child: Column(
-              children: [
-                Container(
-                  margin: const EdgeInsets.only(bottom: 20),
-                  child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                'avatar.png',
-                                width: screenWidth * 0.1,
-                                height: screenHeight * 0.1,
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                            flex: 7,
-                            child: Row(
+      Container(
+        padding: EdgeInsets.all(screenWidth * 0.03),
+        child: Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: IntrinsicHeight(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            'avatar.png',
+                            width: screenWidth * 0.1,
+                            height: screenHeight * 0.1,
+                          )
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        flex: 7,
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      margin: const EdgeInsets.only(bottom: 10),
-                                      child: const Text(
-                                        "Discover",
-                                        style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold,
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  margin: const EdgeInsets.only(bottom: 10),
+                                  child: const Text(
+                                    "Discover",
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                //Add an input text under Discover,
+                                Expanded(
+                                  child: Container(
+                                    width: screenWidth * 0.3,
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: TextFormField(
+                                      // placeholder:
+                                      //     'Search for tutors or topics',
+                                      controller: controller,
+                                      decoration: InputDecoration(
+                                        hintText: "Courses",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                        suffixIcon: IconButton(
+                                          icon: const Icon(Icons.search),
+                                          onPressed: () {
+                                            // TODO: Implement the search functionality
+                                          },
                                         ),
                                       ),
                                     ),
-                                    //Add an input text under Discover,
-                                    Expanded(
-                                      child: Container(
-                                        width: screenWidth * 0.3,
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10),
-                                        child: TextFormField(
-                                          // placeholder:
-                                          //     'Search for tutors or topics',
-                                          controller: controller,
-                                          decoration: InputDecoration(
-                                            hintText: "Courses",
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                            ),
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(Icons.search),
-                                              onPressed: () {
-                                                // TODO: Implement the search functionality
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  ),
+                                )
                               ],
-                            )),
-                      ],
-                    ),
-                  ),
+                            ),
+                          ],
+                        )),
+                  ],
                 ),
-                Column(
+              ),
+            ),
+            Column(
+              children: [
+                Text(
+                    "LiveTutor has built the most quality, methodical and scientific courses in the fields of life for those who are in need of improving their knowledge of the fields."),
+                SizedBox(
+                  height: screenWidth * 0.01,
+                ),
+                Row(
                   children: [
-                    Text(
-                        "LiveTutor has built the most quality, methodical and scientific courses in the fields of life for those who are in need of improving their knowledge of the fields."),
-                    SizedBox(
-                      height: screenWidth * 0.01,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: FlutterSelect(
-                            options: options,
-                            placeholder: "Select level",
-                            selectedValues: [],
-                            onChanged: (selectedValues) {
-                              // TODO: Implement the functionality to handle the selected values
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          width: screenWidth * 0.01,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: FlutterSelect(
-                            options: options,
-                            placeholder: "Select category",
-                            selectedValues: [],
-                            onChanged: (selectedValues) {
-                              // TODO: Implement the functionality to handle the selected values
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          width: screenWidth * 0.01,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: FlutterSelect(
-                            options: sort,
-                            placeholder: "Sort filter",
-                            selectedValues: [],
-                            onChanged: (selectedValues) {
-                              // TODO: Implement the functionality to handle the selected values
-                            },
-                          ),
-                        ),
-                      ],
+                    Expanded(
+                      flex: 1,
+                      child: FlutterSelect(
+                        options: options,
+                        placeholder: "Select level",
+                        selectedValues: [],
+                        onChanged: (selectedValues) {
+                          // TODO: Implement the functionality to handle the selected values
+                        },
+                      ),
                     ),
                     SizedBox(
-                      height: screenWidth * 0.01,
+                      width: screenWidth * 0.01,
                     ),
-                    FlutterTabs(
-                      tabs: tabs,
-                      content: Text("This is the content for the first tab."),
+                    Expanded(
+                      flex: 1,
+                      child: FlutterSelect(
+                        options: options,
+                        placeholder: "Select category",
+                        selectedValues: [],
+                        onChanged: (selectedValues) {
+                          // TODO: Implement the functionality to handle the selected values
+                        },
+                      ),
                     ),
                     SizedBox(
-                      height: screenWidth * 0.01,
+                      width: screenWidth * 0.01,
                     ),
-                    Wrap(
-                      spacing: screenWidth * 0.02,
-                      children: List.generate(
-                        4,
-                        (index) => FlutterCourseCard(
-                          imageUrl: "course1.png",
-                          title: "Life in the Internet Age",
-                          description:
-                              "Let's discuss how technology is changing the way we live",
-                          level: "Intermediate",
-                          lessonCount: 9,
-                          screenWidth: screenWidth,
-                        ),
+                    Expanded(
+                      flex: 1,
+                      child: FlutterSelect(
+                        options: sort,
+                        placeholder: "Sort filter",
+                        selectedValues: [],
+                        onChanged: (selectedValues) {
+                          // TODO: Implement the functionality to handle the selected values
+                        },
                       ),
                     ),
                   ],
                 ),
-                /* LIST BEGIN HERE */
+                SizedBox(
+                  height: screenWidth * 0.01,
+                ),
+                FlutterTabs(
+                  tabs: tabs,
+                  content: Text("This is the content for the first tab."),
+                ),
+                SizedBox(
+                  height: screenWidth * 0.01,
+                ),
+                Wrap(
+                  spacing: screenWidth * 0.02,
+                  children: List.generate(
+                    4,
+                    (index) => FlutterCourseCard(
+                      imageUrl: "course1.png",
+                      title: "Life in the Internet Age",
+                      description:
+                          "Let's discuss how technology is changing the way we live",
+                      level: "Intermediate",
+                      lessonCount: 9,
+                      screenWidth: screenWidth,
+                    ),
+                  ),
+                ),
               ],
             ),
-          ),
-          Footer()
-        ])));
+            /* LIST BEGIN HERE */
+          ],
+        ),
+      ),
+      Footer()
+    ])));
   }
 }

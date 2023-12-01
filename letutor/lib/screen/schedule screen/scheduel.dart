@@ -24,17 +24,7 @@ class ScheduelScreenState extends State<ScheduelScreen> {
       appBar: AppBar(
         toolbarHeight: screenWidth * 0.05,
         title: Wrap(
-          children: [
-            Image.asset(
-              "Let_logo.png",
-
-              width: screenWidth * 0.1,
-              alignment: Alignment.centerLeft,
-
-              // Adjust the logo width as needed
-            ),
-            appbar(context)
-          ],
+          children: [appbar(context)],
         ),
         backgroundColor: Colors.white,
       ),

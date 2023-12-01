@@ -3,7 +3,7 @@ import 'package:letutor/model/appbar.dart';
 import 'package:letutor/screen/history%20screen/history_items.dart';
 
 class HistoryScreen extends StatefulWidget {
-  const HistoryScreen({Key? key}) : super(key: key);
+  const HistoryScreen({super.key});
 
   @override
   HistoryScreenState createState() => HistoryScreenState();
@@ -18,17 +18,7 @@ class HistoryScreenState extends State<HistoryScreen> {
         appBar: AppBar(
           toolbarHeight: screenWidth * 0.05,
           title: Wrap(
-            children: [
-              Image.asset(
-                "Let_logo.png",
-
-                width: screenWidth * 0.1,
-                alignment: Alignment.centerLeft,
-
-                // Adjust the logo width as needed
-              ),
-              appbar(context)
-            ],
+            children: [appbar(context)],
           ),
           backgroundColor: Colors.white,
         ),
