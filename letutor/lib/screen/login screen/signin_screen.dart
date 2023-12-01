@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:email_validator/email_validator.dart';
 
 class SignInScreen extends StatefulWidget {
-  const SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({super.key});
 
   @override
   SignInScreenState createState() => SignInScreenState();

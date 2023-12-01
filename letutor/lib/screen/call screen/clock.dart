@@ -1,9 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 class Clock extends StatefulWidget {
-  const Clock({Key? key, this.color = Colors.white}) : super(key: key);
+  const Clock({super.key, this.color = Colors.white});
   final Color color;
   @override
   _ClockState createState() => _ClockState();
@@ -18,7 +20,7 @@ class _ClockState extends State<Clock> {
     initDate = DateTime.now();
     Duration duration = DateTime.now().difference(initDate);
     _timeString = _printDuration(duration);
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    _timer = Timer.periodic(const Duration(seconds: 1), (Timer t) => _getTime());
     super.initState();
   }
 
@@ -47,11 +49,9 @@ class _ClockState extends State<Clock> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(
-        _timeString,
-        style: TextStyle(color: widget.color),
-      ),
+    return Text(
+      _timeString,
+      style: TextStyle(color: widget.color),
     );
   }
 }

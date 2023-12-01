@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class FlutterSelect extends StatefulWidget {
@@ -7,12 +9,12 @@ class FlutterSelect extends StatefulWidget {
   final Function(List<String>) onChanged;
 
   const FlutterSelect({
-    Key? key,
+    super.key,
     required this.options,
     required this.placeholder,
     required this.selectedValues,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   _FlutterSelectState createState() => _FlutterSelectState();

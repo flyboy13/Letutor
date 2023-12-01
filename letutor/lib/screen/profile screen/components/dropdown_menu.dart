@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class DropdownEdit extends StatelessWidget {
   const DropdownEdit({
-    Key? key,
+    super.key,
     required this.title,
     required this.selectedItem,
     required this.items,
     required this.onChange,
-  }) : super(key: key);
+  });
 
   final String title, selectedItem;
   final List<String> items;
@@ -18,8 +18,8 @@ class DropdownEdit extends StatelessWidget {
     final listItems = items
         .map(
           (item) => DropdownMenuItem(
-            child: Text(item),
             value: item,
+            child: Text(item),
           ),
         )
         .toList();

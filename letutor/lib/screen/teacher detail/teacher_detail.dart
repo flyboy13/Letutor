@@ -6,7 +6,6 @@ import 'package:letutor/model/rate_comment.dart';
 import 'package:letutor/model/sample.dart';
 import 'package:letutor/model/tutor.dart';
 import 'package:letutor/screen/teacher%20detail/data.dart';
-import 'package:letutor/model/router.dart';
 import 'package:go_router/go_router.dart';
 
 class TeacherDetailScreen extends StatefulWidget {
@@ -22,32 +21,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
   List<Tutor> sampleTutor = SampleTutor.tutor;
   @override
   Widget build(BuildContext context) {
-    void onLoveButtonPressed() {
-      setState(() {
-        //
-        for (var t in sampleTutor) {
-          if (t.id == teacher.id) {
-            t.love = !t.love;
-            break;
-          }
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text('Update favourite tutor success'),
-              duration: Duration(seconds: 2),
-            ),
-          );
-        }
-
-        //      Flushbar(
-        //   message: "Update favourite tutor success",
-        //   duration: Duration(seconds: 3),
-        // )..show(context);
-
-        // widget.sampleTutor.tutor.map((tutor) => print(tutor.love));
-      });
-    }
-
-    bool isFavorite = false;
+    
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
     teacher = findTutor(widget.id!);
@@ -365,7 +339,7 @@ Future<void> bookLearningHour(
                           //   },
                           // );
 
-                          GoRouter.of(context).go('/booking_detail');
+                          // GoRouter.of(context).go('/booking_detail');
                         }
                       },
                       child: Text(

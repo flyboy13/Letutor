@@ -1,7 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class VideoCallRoom extends StatefulWidget {
-  const VideoCallRoom({Key? key}) : super(key: key);
+  const VideoCallRoom({super.key});
 
   @override
   _VideoCallRoomState createState() => _VideoCallRoomState();
@@ -138,34 +140,32 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            color: Colors.black.withOpacity(0.5),
-                            alignment: Alignment.center,
-                            width: 200,
-                            child: const Text(
-                              'Lesson start in: ',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
-                              ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          color: Colors.black.withOpacity(0.5),
+                          alignment: Alignment.center,
+                          width: 200,
+                          child: const Text(
+                            'Lesson start in: ',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.white,
                             ),
                           ),
-                          Container(
-                            color: Colors.black.withOpacity(0.5),
-                            alignment: Alignment.center,
-                            width: 200,
-                            child: Text(
-                              endTime.toString(),
-                              style:
-                                  const TextStyle(fontSize: 20, color: Colors.white),
-                            ),
+                        ),
+                        Container(
+                          color: Colors.black.withOpacity(0.5),
+                          alignment: Alignment.center,
+                          width: 200,
+                          child: Text(
+                            endTime.toString(),
+                            style:
+                                const TextStyle(fontSize: 20, color: Colors.white),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

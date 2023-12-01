@@ -71,12 +71,12 @@ Widget appbar(BuildContext context) => Row(children: [
               fontWeight: FontWeight.bold),
         ),
       )),
-      // Expanded(child: SizedBox()),
+      const Expanded(child: SizedBox()),
       FittedBox(
-          child: ElevatedButton(
-              onPressed: () => context.go('/profile'),
+          child: InkWell(
+              onTap: () => context.go('/profile'),
               // style: TextButton.styleFrom(backgroundColor: Colors.blue),
-              child: UserNavigate())),
+              child: const UserNavigate())),
       // // Flexible(
       // //     child: FittedBox(
       // //         child: TextButton(

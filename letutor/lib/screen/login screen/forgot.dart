@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:email_validator/email_validator.dart';
 
 class ForgotScreen extends StatefulWidget {
-  const ForgotScreen({Key? key}) : super(key: key);
+  const ForgotScreen({super.key});
 
   @override
   ForgotScreenState createState() => ForgotScreenState();
@@ -20,7 +20,6 @@ class ForgotScreenState extends State<ForgotScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    bool passwordVisible = false;
 
     void sendLink() {
       setState(() {

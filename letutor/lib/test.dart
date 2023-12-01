@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class LessonScheduleApp extends StatelessWidget {
+  const LessonScheduleApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +13,7 @@ class LessonScheduleApp extends StatelessWidget {
           onPressed: () {
             // Go to meeting logic
           },
-          child: Row(
+          child: const Row(
             children: [
               Icon(Icons.arrow_back, color: Colors.blue),
               Text('Go to meeting', style: TextStyle(color: Colors.blue)),
@@ -23,7 +25,7 @@ class LessonScheduleApp extends StatelessWidget {
             onPressed: () {
               // Cancel logic
             },
-            child: Text('Cancel', style: TextStyle(color: Colors.red)),
+            child: const Text('Cancel', style: TextStyle(color: Colors.red)),
           ),
         ],
       ),
@@ -31,24 +33,24 @@ class LessonScheduleApp extends StatelessWidget {
         children: [
           Container(
             color: Colors.grey[200],
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   backgroundImage: AssetImage('calendar.png'),
                   // radius: 40,
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Keegan DuRose', style: TextStyle(fontSize: 24)),
+                    const Text('Keegan DuRose', style: TextStyle(fontSize: 24)),
                     TextButton.icon(
                       onPressed: () {
                         // Direct message logic
                       },
-                      icon: Icon(Icons.message, color: Colors.white),
-                      label: Text('Direct Message',
+                      icon: const Icon(Icons.message, color: Colors.white),
+                      label: const Text('Direct Message',
                           style: TextStyle(color: Colors.white)),
                       // color: Colors.blue,
                     ),
@@ -57,7 +59,7 @@ class LessonScheduleApp extends StatelessWidget {
               ],
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Center(
               child: Text(
                 'Currently, there are no requests for this user. Please wait for new requests or invite the teacher.',
@@ -67,13 +69,13 @@ class LessonScheduleApp extends StatelessWidget {
           ),
           Container(
             color: Colors.grey[200],
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: TextButton(
               onPressed: () {
                 // Edit request logic
               },
               child:
-                  Text('Edit Request', style: TextStyle(color: Colors.white)),
+                  const Text('Edit Request', style: TextStyle(color: Colors.white)),
               // color: Colors.grey,
             ),
           ),

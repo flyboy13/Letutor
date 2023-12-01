@@ -4,7 +4,7 @@ import 'package:letutor/model/feedback.dart';
 import 'package:letutor/model/sample.dart';
 
 class RateAndComment extends StatelessWidget {
-  const RateAndComment({Key? key, required this.feedback}) : super(key: key);
+  const RateAndComment({super.key, required this.feedback});
 
   final FeedbackRate feedback;
 
@@ -35,7 +35,8 @@ class RateAndComment extends StatelessWidget {
                     children: [
                       Text(
                         user.fullName,
-                        style: const TextStyle(fontSize: 14),
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
                       ),
                       // RateStars(count: feedback.rating)
                     ],
@@ -44,7 +45,7 @@ class RateAndComment extends StatelessWidget {
               ],
             ),
             Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 10),
+                margin: const EdgeInsets.only(top: 10, bottom: 10, left: 100),
                 child: feedback.content.isNotEmpty
                     ? Text(feedback.content)
                     : null),

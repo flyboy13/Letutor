@@ -1,4 +1,3 @@
-
 import 'package:letutor/model/booking.dart';
 import 'package:letutor/model/session.dart';
 import 'package:uuid/uuid.dart';
@@ -7,8 +6,8 @@ var uuid = const Uuid();
 
 class User {
   String id;
-  final String email;
-  final String fullName;
+  String email;
+  String fullName;
   String image;
   DateTime birthDay;
   String phone;

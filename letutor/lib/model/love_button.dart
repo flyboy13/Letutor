@@ -5,12 +5,13 @@ class LoveButton extends StatefulWidget {
   final void Function() onPressed;
 
   const LoveButton({
-    Key? key,
+    super.key,
     required this.isLoved,
     required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoveButtonState createState() => _LoveButtonState();
 }
 

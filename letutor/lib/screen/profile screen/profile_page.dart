@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,8 @@ import 'package:letutor/model/countries.dart';
 import 'package:letutor/provider/user_provider.dart';
 import 'package:letutor/screen/profile%20screen/components/birthday.dart';
 import 'package:letutor/screen/profile%20screen/components/dropdown_menu.dart';
+import 'package:letutor/screen/profile%20screen/components/email.dart';
+import 'package:letutor/screen/profile%20screen/components/name.dart';
 import 'package:letutor/screen/profile%20screen/components/phone.dart';
 import 'package:provider/provider.dart';
 // import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -21,9 +24,11 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late DateTime _birthday;
   late String _phone;
+  late String _name;
   late String _country;
   late String _level;
   late String _topicToLearn;
+  late String _email;
   bool isInit = true;
 
   final ImagePicker _picker = ImagePicker();
@@ -37,6 +42,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void setPhone(String phone) {
     setState(() {
       _phone = phone;
+    });
+  }
+
+  void setName(String name) {
+    setState(() {
+      _name = name;
+    });
+  }
+
+  void setEmail(String email) {
+    setState(() {
+      _email = email;
     });
   }
 
@@ -68,9 +85,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
       if (isInit) {
         _birthday = user.birthDay;
         _phone = user.phone;
+        _name = user.fullName;
         _country = user.country;
         _level = user.level;
         _topicToLearn = user.topicToLearn;
+        _email = user.email;
         isInit = false;
       }
     });
@@ -108,13 +127,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: uploadImage != null
                                 ? ClipRRect(
                                     // borderRadius: BorderRadius.circular(10),
-                                    child: Image.file(
-                                      uploadImage,
-                                      width: 400,
-                                      height: 400,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
+
+                                    child:
+                                        // Image.asset(uploadImage.path))
+                                        Image.file(uploadImage!,
+                                            fit: BoxFit.cover))
                                 : ClipOval(
                                     // Wrap the Image.asset with ClipOval
                                     child: Image.asset("avatar1.png"),
@@ -153,6 +170,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  NameEdit(changeName: setName, name: _name),
+                  EmailEdit(changeEmail: setEmail, email: _email),
                   BirthdayEdition(
                       setBirthday: setBirthday, birthday: _birthday),
                   PhoneEdition(changePhone: setPhone, phone: _phone),
@@ -180,12 +199,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onPressed: () {
                         if (_phone.isEmpty) {
                         } else {
+                          userProvider.updateName(_name);
                           userProvider.updateBirthday(_birthday);
                           userProvider.updatePhone(_phone);
                           userProvider.updateCountry(_country);
                           userProvider.updateLevel(_level);
                           userProvider.updateTopicToLearn(_topicToLearn);
-                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Save profile success'),
+                              duration: Duration(seconds: 2),
+                            ),
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(

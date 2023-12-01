@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -6,23 +6,18 @@ import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/sample.dart';
-import 'package:letutor/model/tutor.dart';
-import 'package:letutor/model/userProfileButton.dart';
 import 'package:letutor/screen/bottom bar/footer.dart';
 
-import 'package:go_router/go_router.dart';
 
 class TutorScreen extends StatefulWidget {
-  const TutorScreen({Key? key}) : super(key: key);
+  const TutorScreen({super.key});
 
   @override
   _TeacherPage createState() => _TeacherPage();
 }
 
 class _TeacherPage extends State<TutorScreen> {
-  final TextEditingController _emailController = TextEditingController();
 
-  final TextEditingController _passwordController = TextEditingController();
 
   final List<String> items = [
     'A_Item1',

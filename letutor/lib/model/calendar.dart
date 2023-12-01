@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalendarModel extends StatefulWidget {
-  CalendarModel({super.key});
+  const CalendarModel({super.key});
 
 
 

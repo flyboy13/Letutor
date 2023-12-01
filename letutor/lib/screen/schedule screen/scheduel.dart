@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/calendar.dart';
-import 'package:letutor/test.dart';
 import 'package:letutor/screen/schedule screen/scheduel_items.dart';
 
 class ScheduelScreen extends StatefulWidget {
@@ -138,7 +137,7 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                     children: List.generate(
                         3, (index) => createScheduel("Tai", screenWidth))),
               ),
-              CalendarModel(),
+              const CalendarModel(),
             ],
           ),
         ),

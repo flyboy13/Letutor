@@ -2,12 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SignUpScreen({super.key});
 
   @override
   SignUpScreenState createState() => SignUpScreenState();

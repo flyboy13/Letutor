@@ -8,12 +8,12 @@ class FlutterCourseCardDetail extends StatelessWidget {
   final double screenWidth;
 
   const FlutterCourseCardDetail({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +48,13 @@ class FlutterCourseCardDetail extends StatelessWidget {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {},
-                        child: Text("Discover"),
                         style: ElevatedButton.styleFrom(
                           // minimumSize: 200,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(4.0),
                           ),
                         ),
+                        child: const Text("Discover"),
                       ))
                 ],
               ),

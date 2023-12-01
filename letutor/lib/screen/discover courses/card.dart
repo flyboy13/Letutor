@@ -9,14 +9,14 @@ class FlutterCourseCard extends StatelessWidget {
   final double screenWidth;
 
   const FlutterCourseCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.description,
     required this.level,
     required this.lessonCount,
     required this.screenWidth,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

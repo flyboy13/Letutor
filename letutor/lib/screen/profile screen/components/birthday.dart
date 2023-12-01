@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class BirthdayEdition extends StatefulWidget {
   const BirthdayEdition({
-    Key? key,
+    super.key,
     required this.setBirthday,
     required this.birthday,
-  }) : super(key: key);
+  });
 
   final Function(DateTime) setBirthday;
   final DateTime birthday;
@@ -50,6 +50,10 @@ class _BirthdayEditionState extends State<BirthdayEdition> {
               margin: const EdgeInsets.only(top: 7),
               padding: const EdgeInsets.only(left: 15, right: 15),
               height: 48,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black26, width: 0.3),
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -58,10 +62,6 @@ class _BirthdayEditionState extends State<BirthdayEdition> {
                     style: const TextStyle(fontSize: 17),
                   ),
                 ],
-              ),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black26, width: 0.3),
-                borderRadius: BorderRadius.circular(10),
               ),
             ),
           )

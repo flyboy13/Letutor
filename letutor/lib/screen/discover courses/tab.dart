@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 
 class FlutterTabs extends StatefulWidget {
@@ -5,10 +7,10 @@ class FlutterTabs extends StatefulWidget {
   final Widget content;
 
   const FlutterTabs({
-    Key? key,
+    super.key,
     required this.tabs,
     required this.content,
-  }) : super(key: key);
+  });
 
   @override
   _FlutterTabsState createState() => _FlutterTabsState();
@@ -25,8 +27,8 @@ class _FlutterTabsState extends State<FlutterTabs> {
           initialIndex: 0,
           length: 5,
           child: TabBar(
-            labelColor: Color.fromARGB(255, 49, 155, 255),
-            labelStyle: TextStyle(fontWeight: FontWeight.bold),
+            labelColor: const Color.fromARGB(255, 49, 155, 255),
+            labelStyle: const TextStyle(fontWeight: FontWeight.bold),
             unselectedLabelColor: const Color.fromARGB(255, 0, 0, 0),
             onTap: (index) {
               setState(() {

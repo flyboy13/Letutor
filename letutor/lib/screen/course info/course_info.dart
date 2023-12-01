@@ -5,7 +5,7 @@ import 'package:letutor/screen/bottom%20bar/footer.dart';
 import 'package:letutor/screen/course%20info/card.dart';
 
 class CourseInfor extends StatefulWidget {
-  const CourseInfor({Key? key}) : super(key: key);
+  const CourseInfor({super.key});
 
   @override
   CourseInforState createState() => CourseInforState();

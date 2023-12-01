@@ -67,6 +67,15 @@ class UserProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateName(String name) {
+    user.fullName = name;
+    notifyListeners();
+  }
+  void updateEmail(String email) {
+    user.email = email;
+    notifyListeners();
+  }
+
   void updateCountry(String country) {
     user.country = country;
     notifyListeners();

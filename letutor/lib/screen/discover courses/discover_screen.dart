@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:letutor/screen/bottom%20bar/footer.dart';
 import 'package:letutor/screen/discover%20courses/card.dart';
 import 'package:letutor/screen/discover%20courses/tab.dart';
-import 'package:letutor/screen/history%20screen/history_items.dart';
 import 'package:letutor/screen/discover%20courses/select.dart';
 
 class DiscoverScreen extends StatefulWidget {
-  const DiscoverScreen({Key? key}) : super(key: key);
+  const DiscoverScreen({super.key});
 
   @override
   DiscoverScreenState createState() => DiscoverScreenState();
@@ -18,18 +17,6 @@ class DiscoverScreenState extends State<DiscoverScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     List<String> options = ["Beginner", "Intermediate", "Advanced"];
-    List<String> category = [
-      "For studying abroad",
-      "English for Traveling",
-      "Conversational English",
-      "English for Beginners",
-      "Business English",
-      "STARTERS",
-      "English for Kid",
-      "PET",
-      "KET",
-      "MOVERS"
-    ];
     List<String> sort = [
       "Level decreasing",
       "Level ascending",
@@ -126,7 +113,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
             ),
             Column(
               children: [
-                Text(
+                const Text(
                     "LiveTutor has built the most quality, methodical and scientific courses in the fields of life for those who are in need of improving their knowledge of the fields."),
                 SizedBox(
                   height: screenWidth * 0.01,
@@ -138,7 +125,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                       child: FlutterSelect(
                         options: options,
                         placeholder: "Select level",
-                        selectedValues: [],
+                        selectedValues: const [],
                         onChanged: (selectedValues) {
                           // TODO: Implement the functionality to handle the selected values
                         },
@@ -152,7 +139,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                       child: FlutterSelect(
                         options: options,
                         placeholder: "Select category",
-                        selectedValues: [],
+                        selectedValues: const [],
                         onChanged: (selectedValues) {
                           // TODO: Implement the functionality to handle the selected values
                         },
@@ -166,7 +153,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                       child: FlutterSelect(
                         options: sort,
                         placeholder: "Sort filter",
-                        selectedValues: [],
+                        selectedValues: const [],
                         onChanged: (selectedValues) {
                           // TODO: Implement the functionality to handle the selected values
                         },
@@ -179,7 +166,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                 ),
                 FlutterTabs(
                   tabs: tabs,
-                  content: Text("This is the content for the first tab."),
+                  content: const Text("This is the content for the first tab."),
                 ),
                 SizedBox(
                   height: screenWidth * 0.01,
@@ -205,7 +192,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
           ],
         ),
       ),
-      Footer()
+      const Footer()
     ])));
   }
 }
