@@ -31,7 +31,7 @@ class CourseInforState extends State<CourseInfor> {
     int count = 0;
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: screenWidth * 0.05,
+        toolbarHeight: screenWidth * 0.06,
         title: Wrap(
           children: [appbar(context)],
         ),

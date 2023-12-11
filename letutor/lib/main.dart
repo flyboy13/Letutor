@@ -25,6 +25,11 @@ class MyApp extends StatelessWidget {
           // )
         ],
         child: MaterialApp.router(
+          theme: ThemeData(
+            // enable Material 3
+            useMaterial3: true,
+            primarySwatch: Colors.indigo,
+          ),
           routerConfig: router,
           debugShowCheckedModeBanner: false,
         ));

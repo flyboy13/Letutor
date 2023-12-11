@@ -64,7 +64,7 @@ class InforCardState extends State<InforCard> {
       child: Container(
         color: const Color.fromARGB(255, 255, 255, 255),
         padding: EdgeInsets.all(width * 0.01),
-        width: width / 5,
+        width: width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -110,18 +110,21 @@ class InforCardState extends State<InforCard> {
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: ElevatedButton(
-                // style: style,
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Icon(Icons.event_available),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Book'),
-                  ],
+              child: Padding(
+                padding: EdgeInsets.all(10),
+                child: ElevatedButton(
+                  // style: style,
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.event_available),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('Book'),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -13,7 +13,6 @@ class HistoryScreenState extends State<HistoryScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
           toolbarHeight: screenWidth * 0.05,
@@ -30,73 +29,46 @@ class HistoryScreenState extends State<HistoryScreen> {
                 Container(
                   margin: const EdgeInsets.only(bottom: 20),
                   child: IntrinsicHeight(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                'history.png',
-                                width: screenWidth * 0.1,
-                                height: screenHeight * 0.1,
-                              )
-                            ],
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Image.asset(
+                        'history.png',
+                        width: screenWidth * 0.27,
+                      ),
+                      VerticalDivider(
+                        color: Colors.transparent,
+                        width: screenWidth * 0.03,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: Text(
+                              "History",
+                              style: TextStyle(
+                                  fontSize: screenWidth * 0.07,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromARGB(255, 66, 66, 66)),
+                            ),
                           ),
-                        ),
-                        Expanded(
-                            flex: 7,
-                            child: Row(
-                              children: [
-                                const VerticalDivider(
-                                  thickness: 5,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      margin: const EdgeInsets.only(bottom: 10),
-                                      child: const Text(
-                                        "History",
-                                        style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: const Text(
-                                        "The following is a list of lessons you have attended",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic,
-                                          color: Color(0xff787878),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: const Text(
-                                        "You can review the details of the lessons you have attended",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic,
-                                          color: Color(0xff787878),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            )),
-                      ],
-                    ),
-                  ),
+                          SizedBox(
+                            width: screenWidth * 0.6,
+                            child: Text(
+                              "The following is a list of lessons you have  \n You can review the details of the lessons you have attended  ",
+                              style: TextStyle(
+                                fontSize: screenWidth * 0.027,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )),
                 ),
                 /* LIST BEGIN HERE */
                 ListView(

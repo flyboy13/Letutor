@@ -54,54 +54,57 @@ Widget createScheduel(String name, double screenWidth) => Container(
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                color: const Color.fromARGB(255, 255, 255, 255),
-                padding: EdgeInsets.all(screenWidth * 0.03),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('18:00 - 18:25'),
-                        TextButton(
-                          // color: Colors.red,
-                          onPressed: () {},
-                          child: const Text(
-                            'Cancel',
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 255, 41, 41)),
-                          ),
-                        )
-                      ],
-                    ),
-                    ExpansionPanelList(
-                      expansionCallback: (int index, bool isExpanded) {},
-                      children: [
-                        ExpansionPanel(
-                          headerBuilder:
-                              (BuildContext context, bool isExpanded) {
-                            return const ListTile(
-                              title: Text('Request for lesson'),
-                            );
-                          },
-                          body: const ListTile(
-                            title: Text(
-                                'Currently there are no requests for this class. Please write down any requests for the teacher.'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )
           ],
         ),
         Container(
-          padding: EdgeInsets.all(screenWidth * 0.02),
           color: const Color.fromARGB(255, 255, 255, 255),
+          padding: EdgeInsets.all(screenWidth * 0.03),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text('18:00 - 18:25'),
+                  TextButton(
+                    // color: Colors.red,
+                    onPressed: () {},
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(color: Color.fromARGB(255, 255, 41, 41)),
+                    ),
+                  )
+                ],
+              ),
+              ExpansionPanelList(
+                expansionCallback: (int index, bool isExpanded) {},
+                children: [
+                  ExpansionPanel(
+                    headerBuilder: (BuildContext context, bool isExpanded) {
+                      return const ListTile(
+                        title: Text('Request for lesson'),
+                      );
+                    },
+                    body: const ListTile(
+                      title: Text(
+                          'Currently there are no requests for this class. Please write down any requests for the teacher.'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: screenWidth * 0.02,
+        ),
+        Align(
+          alignment: Alignment.centerRight,
           child: TextButton(
+            style: TextButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: const Color.fromARGB(255, 41, 169, 255),
+              disabledForegroundColor: Colors.grey.withOpacity(0.38),
+            ),
             onPressed: () {},
             child: const Text(
               'Go to meeting',

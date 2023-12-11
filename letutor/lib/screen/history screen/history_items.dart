@@ -18,38 +18,40 @@ Widget createHistory(String name, double screenWidth) => Container(
           Row(
             children: [
               Expanded(
+                  flex: 4,
                   child: Column(children: [
-                Text(
-                  DateFormat(
-                    'EE, dd MMM y',
-                  ).format(
-                    DateTime.now(),
-                  ),
-                  textAlign: TextAlign.left,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 20,
-                  ),
-                  child: Text(
-                    timeago.format(DateTime.now()),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                // ListView(
-                //   padding: const EdgeInsets.only(top: 0),
-                //   shrinkWrap: true,
-                //   primary: false,
-                //   children: [
-                //     // LessonHistoryListTile(),
-                //   ],
-                // ),
-              ])),
+                    Text(
+                      DateFormat(
+                        'EE, dd MMM y',
+                      ).format(
+                        DateTime.now(),
+                      ),
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        bottom: 20,
+                      ),
+                      child: Text(
+                        timeago.format(DateTime.now()),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    // ListView(
+                    //   padding: const EdgeInsets.only(top: 0),
+                    //   shrinkWrap: true,
+                    //   primary: false,
+                    //   children: [
+                    //     // LessonHistoryListTile(),
+                    //   ],
+                    // ),
+                  ])),
               Expanded(
+                flex: 6,
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   margin: const EdgeInsets.only(bottom: 20),
@@ -61,7 +63,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 2,
+                        flex: 4,
                         child: Column(
                           children: [
                             Container(
@@ -89,7 +91,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                                 child: Text(
                                   name,
                                   style: TextStyle(
-                                      fontSize: screenWidth * 0.02,
+                                      fontSize: screenWidth * 0.035,
                                       fontWeight: FontWeight.w600,
                                       color:
                                           const Color.fromARGB(255, 0, 0, 0)),
@@ -100,7 +102,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                                 child: Text(
                                   "Viet Nam",
                                   style: TextStyle(
-                                      fontSize: screenWidth * 0.01,
+                                      fontSize: screenWidth * 0.027,
                                       color:
                                           const Color.fromARGB(255, 0, 0, 0)),
                                 ),
@@ -109,9 +111,9 @@ Widget createHistory(String name, double screenWidth) => Container(
                                 children: [
                                   Container(
                                     child: TextButton(
-                                      child: const Row(
+                                      child: Row(
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.chat_outlined,
                                             size: 20,
                                             color: Colors.blue,
@@ -119,7 +121,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                                           Text(
                                             "Direct Message ",
                                             style: TextStyle(
-                                              fontSize: 14,
+                                              fontSize: screenWidth * 0.027,
                                               color: Colors.blue,
                                               fontWeight: FontWeight.w700,
                                             ),
@@ -149,7 +151,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   child: Text(
                     "Lesson Time: 13:30 - 13:55",
-                    style: TextStyle(fontSize: screenWidth * 0.01),
+                    style: TextStyle(fontSize: screenWidth * 0.03),
                   ),
                 ),
               )
@@ -166,7 +168,9 @@ Widget createHistory(String name, double screenWidth) => Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   child: Text(
                     "No request for lesson",
-                    style: TextStyle(fontSize: screenWidth * 0.01),
+                    style: TextStyle(
+                      fontSize: screenWidth * 0.03,
+                    ),
                   ),
                 ),
               )
@@ -180,7 +184,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                   color: const Color.fromARGB(255, 255, 255, 255),
                   child: Text(
                     "Tutor haven't reviewed yet",
-                    style: TextStyle(fontSize: screenWidth * 0.01),
+                    style: TextStyle(fontSize: screenWidth * 0.03),
                   ),
                 ),
               )
@@ -197,7 +201,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                     color: const Color.fromARGB(255, 255, 255, 255),
                     child: Text(
                       "Rating",
-                      style: TextStyle(fontSize: screenWidth * 0.01),
+                      style: TextStyle(fontSize: screenWidth * 0.03),
                     ),
                   )),
                   Row(
@@ -208,7 +212,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                           onPressed: () {},
                           style: TextButton.styleFrom(
                               textStyle:
-                                  TextStyle(fontSize: screenWidth * 0.01)),
+                                  TextStyle(fontSize: screenWidth * 0.04)),
                           child: const Text("Edit"),
                         ),
                       ),
@@ -221,7 +225,7 @@ Widget createHistory(String name, double screenWidth) => Container(
                           onPressed: () {},
                           style: TextButton.styleFrom(
                               textStyle:
-                                  TextStyle(fontSize: screenWidth * 0.01)),
+                                  TextStyle(fontSize: screenWidth * 0.04)),
                           child: const Text("Report"),
                         ),
                       ),

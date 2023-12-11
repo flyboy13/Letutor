@@ -26,36 +26,36 @@ class MainPage extends StatelessWidget {
             icon: Icon(
               Icons.home,
             ),
-            label: 'Trang chủ',
+            label: 'Tutor',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.discount,
+              Icons.calendar_month,
             ),
-            label: 'Ưu đãi',
+            label: 'Schedule',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite_border,
+              Icons.history,
             ),
-            label: 'Yêu thích',
+            label: 'History',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.luggage_outlined,
+              Icons.school,
             ),
-            label: 'Chuyến đi',
+            label: 'Courses',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.face_6_outlined,
+              Icons.account_circle,
             ),
-            label: 'Tài khoản',
+            label: 'Account',
           ),
         ],
         currentIndex: child.currentIndex,
         onTap: _onItemSelected,
-        selectedItemColor: const Color.fromARGB(255, 248, 75, 0),
+        selectedItemColor: const Color.fromARGB(255, 41, 169, 255),
         unselectedItemColor: Colors.grey,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,

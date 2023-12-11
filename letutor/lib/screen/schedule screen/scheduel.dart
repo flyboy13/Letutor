@@ -39,7 +39,11 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                 children: [
                   Image.asset(
                     "calendar.png",
-                    width: screenWidth * 0.07,
+                    width: screenWidth * 0.3,
+                  ),
+                  VerticalDivider(
+                    color: Colors.transparent,
+                    width: screenWidth * 0.03,
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -48,18 +52,17 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                       Text(
                         "Schedule",
                         style: TextStyle(
-                          fontSize: screenWidth * 0.02,
-                          fontWeight: FontWeight.bold,
+                            fontSize: screenWidth * 0.07,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 66, 66, 66)),
+                      ),
+                      SizedBox(
+                        width: screenWidth * 0.6,
+                        child: Text(
+                          "Here is a list of the sessions you have booked\nYou can track when the meeting starts, join the meeting with one click or can cancel the meeting before 2 hours ",
+                          style: TextStyle(fontSize: screenWidth * 0.027),
                         ),
                       ),
-                      Text(
-                        "Here is a list of the sessions you have booked ",
-                        style: TextStyle(fontSize: screenWidth * 0.01),
-                      ),
-                      Text(
-                        "You can track when the meeting starts, join the meeting with one click or can cancel the meeting before 2 hours",
-                        style: TextStyle(fontSize: screenWidth * 0.01),
-                      )
                     ],
                   ),
                 ],
@@ -70,7 +73,9 @@ class ScheduelScreenState extends State<ScheduelScreen> {
               Row(
                 children: [
                   Text("Latest book",
-                      style: TextStyle(fontSize: screenWidth * 0.015)),
+                      style: TextStyle(
+                          fontSize: screenWidth * 0.03,
+                          fontWeight: FontWeight.bold)),
                 ],
               ),
               DataTable(
@@ -80,7 +85,7 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                       'Name',
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          fontSize: screenWidth * 0.012),
+                          fontSize: screenWidth * 0.02),
                     ),
                   ),
                   DataColumn(
@@ -88,7 +93,7 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                       'Page',
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          fontSize: screenWidth * 0.012),
+                          fontSize: screenWidth * 0.02),
                     ),
                   ),
                   DataColumn(
@@ -96,7 +101,7 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                       'Description',
                       style: TextStyle(
                           fontStyle: FontStyle.italic,
-                          fontSize: screenWidth * 0.012),
+                          fontSize: screenWidth * 0.02),
                     ),
                   ),
                 ],
@@ -106,19 +111,19 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                       DataCell(
                         Text(
                           'sample.pdf',
-                          style: TextStyle(fontSize: screenWidth * 0.015),
+                          style: TextStyle(fontSize: screenWidth * 0.02),
                         ),
                       ),
                       DataCell(
                         Text(
                           '0',
-                          style: TextStyle(fontSize: screenWidth * 0.015),
+                          style: TextStyle(fontSize: screenWidth * 0.02),
                         ),
                       ),
                       DataCell(
                         Text(
                           'Not provided',
-                          style: TextStyle(fontSize: screenWidth * 0.015),
+                          style: TextStyle(fontSize: screenWidth * 0.02),
                         ),
                       ),
                     ],
