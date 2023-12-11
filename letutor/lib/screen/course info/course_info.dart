@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:letutor/model/appbar.dart';
-import 'package:letutor/screen/bottom%20bar/footer.dart';
+
 
 import 'package:letutor/screen/course%20info/card.dart';
 
@@ -383,7 +383,7 @@ class CourseInforState extends State<CourseInfor> {
                 ],
               ),
             ),
-            const Footer(),
+           
           ],
         ),
       ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:letutor/screen/bottom%20bar/footer.dart';
+
 import 'package:letutor/screen/discover%20courses/card.dart';
 import 'package:letutor/screen/discover%20courses/tab.dart';
 import 'package:letutor/screen/discover%20courses/select.dart';
@@ -192,7 +192,6 @@ class DiscoverScreenState extends State<DiscoverScreen> {
           ],
         ),
       ),
-      const Footer()
     ])));
   }
 }
