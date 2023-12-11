@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:letutor/model/booking.dart';
+import 'package:letutor/control/booking.dart';
 import 'package:letutor/model/sample.dart';
 
-import 'package:letutor/model/user.dart';
+import 'package:letutor/control/user.dart';
 import 'package:uuid/uuid.dart';
 
 var uuid = const Uuid();

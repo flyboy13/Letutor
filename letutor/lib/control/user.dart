@@ -1,4 +1,4 @@
-import 'package:letutor/model/booking.dart';
+import 'package:letutor/control/booking.dart';
 import 'package:letutor/model/session.dart';
 import 'package:uuid/uuid.dart';
 

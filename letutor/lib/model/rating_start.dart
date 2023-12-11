@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // ignore: unused_import
-import 'package:letutor/model/tutor.dart';
+import 'package:letutor/control/tutor.dart';
 
 class RatingStart extends StatefulWidget {
   final int rate;

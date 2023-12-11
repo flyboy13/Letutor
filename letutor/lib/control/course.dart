@@ -1,9 +1,25 @@
-class Course {
-  final String name;
-  final String imageUrl;
-  final String description;
-  final String level;
-  final int numberOfLessons;
 
-  const Course(this.name, this.imageUrl, this.description, this.level, this.numberOfLessons);
+
+import 'tutor.dart';
+
+class Course {
+  String id;
+  List<String> topics;
+  String about;
+  String title;
+  String image;
+  String level;
+  List<Tutor> tutors;
+  Map<String, String> overview;
+
+  Course({
+    required this.id,
+    required this.topics,
+    required this.about,
+    required this.title,
+    required this.image,
+    required this.level,
+    required this.tutors,
+    required this.overview,
+  });
 }

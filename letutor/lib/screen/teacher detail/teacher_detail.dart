@@ -5,19 +5,18 @@ import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/calendar.dart';
 import 'package:letutor/model/rate_comment.dart';
 import 'package:letutor/model/sample.dart';
-import 'package:letutor/model/tutor.dart';
-import 'package:letutor/screen/teacher%20detail/data.dart';
+import 'package:letutor/control/tutor.dart';
 import 'package:go_router/go_router.dart';
 
 class TeacherDetailScreen extends StatefulWidget {
-  TeacherDetailScreen(this.id, {super.key});
+  const TeacherDetailScreen(this.id, {super.key});
 
-  String? id;
+  final String? id;
   @override
-  State<TeacherDetailScreen> createState() => _TeacherDetailScreenState();
+  State<TeacherDetailScreen> createState() => TeacherDetailScreenState();
 }
 
-class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
+class TeacherDetailScreenState extends State<TeacherDetailScreen> {
   late Tutor teacher;
   List<Tutor> sampleTutor = SampleTutor.tutor;
   @override
@@ -205,7 +204,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: Row(
                         children: [
-                          Text(course.name,
+                          Text(course.title,
                               style: TextStyle(
                                 fontSize: screenWidth * 0.01,
                               )),

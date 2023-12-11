@@ -6,7 +6,7 @@ import 'package:letutor/model/rating_start.dart';
 import 'package:letutor/model/love_button.dart';
 import 'package:letutor/model/sample.dart';
 // import 'package:flushbar/flushbar.dart';
-import 'package:letutor/model/tutor.dart';
+import 'package:letutor/control/tutor.dart';
 import 'package:go_router/go_router.dart';
 
 class InforCard extends StatefulWidget {

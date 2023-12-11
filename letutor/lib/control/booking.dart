@@ -1,5 +1,5 @@
 
-import 'package:letutor/model/tutor.dart';
+import 'package:letutor/control/tutor.dart';
 
 class Booking {
   String id;

@@ -2,7 +2,7 @@
 
 import 'dart:ui';
 
-import 'package:letutor/model/feedback.dart';
+import 'package:letutor/control/feedback.dart';
 import 'package:letutor/model/schedule.dart';
 
 class Tutor {
