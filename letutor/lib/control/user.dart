@@ -1,56 +1,101 @@
-import 'package:letutor/control/booking.dart';
-import 'package:letutor/model/session.dart';
-import 'package:uuid/uuid.dart';
+import 'package:intl/intl.dart';
+import 'package:letutor/control/topic.dart';
+import 'package:letutor/model/date_time.dart';
+import 'course.dart';
 
-var uuid = const Uuid();
 
 class User {
+  int timezone;
   String id;
   String email;
-  String fullName;
-  String image;
-  DateTime birthDay;
-  String phone;
+  String name;
+  String avatar;
   String country;
+  String languages;
   String level;
-  String topicToLearn;
-  List<Booking> bookingHistory = [];
-  List<Session> sessionHistory = [];
+  String google;
+  String facebook;
+  String apple;
+  String phone;
+  String studySchedule;
+  List<String> roles;
+  bool isActivated;
+  bool isPhoneActivated;
+  bool canSendMessage;
+  bool isOnline;
+  //language
+  //walletInfo
+  DateTime birthday;
+  List<Topic> learnTopics;
+  List<Topic> testPreparations;
+  List<Course> courses;
 
   User({
-    required this.id,
-    required this.email,
-    required this.fullName,
-    required this.image,
-    required this.birthDay,
-    required this.country,
-    required this.level,
-    required this.topicToLearn,
-    required this.bookingHistory,
-    required this.sessionHistory,
-    this.phone = "",
+    this.timezone = 7,
+    this.id = '',
+    this.email = '',
+    this.name = '',
+    this.avatar = '',
+    this.country = '',
+    this.languages = '',
+    this.level = "",
+    this.google = '',
+    this.facebook = '',
+    this.apple = '',
+    this.phone = '',
+    this.studySchedule = '',
+    this.roles = const [],
+    this.learnTopics = const [],
+    this.testPreparations = const [],
+    this.courses = const [],
+    this.isActivated = false,
+    this.isPhoneActivated = false,
+    this.canSendMessage = false,
+    this.isOnline = false,
+    required this.birthday,
   });
 
-  List<Booking> getUpcomming() {
-    return bookingHistory
-        .where((booking) => booking.isCancelled == false)
-        .toList();
+  factory User.fromJson(json) {
+    return User(
+      id: json['id'] ?? "",
+      email: json['email'] ?? "",
+      name: json['name'] ?? "",
+      avatar: json['avatar'] ?? "",
+      country: json['country'] ?? "",
+      level: json['level'] ?? "",
+      timezone: json['timezone'] ?? 7,
+      languages: json['languages'] ?? "",
+      google: json['google'] ?? "",
+      facebook: json['facebook'] ?? "",
+      apple: json['apple'] ?? "",
+      phone: json['phone'] ?? "",
+      studySchedule: json['studySchedule'] ?? "",
+      isOnline: json['isOnline'] ?? false,
+      roles: json['roles'] == null
+          ? []
+          : (json['roles'] as List).map((e) => e.toString()).toList(),
+      learnTopics: json['learnTopics'] == null
+          ? []
+          : (json['learnTopics'] as List)
+          .map((e) => Topic.fromJson(e))
+          .toList(),
+      testPreparations: json['testPreparations'] == null
+          ? []
+          : (json['testPreparations'] as List)
+          .map((e) => Topic.fromJson(e))
+          .toList(),
+      isActivated: json['isActivated'] ?? false,
+      isPhoneActivated: json['isPhoneActivated'] ?? false,
+      canSendMessage: json['canSendMessage'] ?? false,
+      birthday: json['birthday'] != null
+          ? DateFormat(time1).parse(json['birthday'])
+          : DateTime(1990),
+      courses: json['courses'] == null
+          ? []
+          : (json['courses'] as List).map((e) => Course.fromJson(e)).toList(),
+    );
   }
 
-  int getTotalLessonTime() {
-    int total = 0;
 
-    for (Booking b in bookingHistory) {
-      if (b.isCancelled == false) {
-        total += b.end.difference(b.start).inMinutes;
-      }
-    }
-    return total;
-  }
-
-  Booking? getNearestLesson() {
-    List<Booking> upcoming = getUpcomming();
-    upcoming.sort((a, b) => a.start.compareTo(b.start));
-    return upcoming.isNotEmpty ? upcoming.first : null;
-  }
+  List<Topic> getListWantToLearn() => [...learnTopics, ...testPreparations];
 }

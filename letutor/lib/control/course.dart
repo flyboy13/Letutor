@@ -1,25 +1,41 @@
+import 'package:letutor/control/topic.dart';
 
-
-import 'tutor.dart';
+  
 
 class Course {
+  int coursePrice;
+  int defaultPrice;
   String id;
-  List<String> topics;
-  String about;
-  String title;
-  String image;
+  String name;
+  String description;
+  String imageUrl;
+  String reason;
+  String purpose;
+  String other_details;
   String level;
-  List<Tutor> tutors;
-  Map<String, String> overview;
+  bool visible;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  List<Topic> topics;
+
 
   Course({
-    required this.id,
-    required this.topics,
-    required this.about,
-    required this.title,
-    required this.image,
-    required this.level,
-    required this.tutors,
-    required this.overview,
+    this.coursePrice = 0,
+    this.defaultPrice = 0,
+    this.id = '',
+    this.name = '',
+    this.description = '',
+    this.imageUrl = '',
+    this.reason = '',
+    this.purpose = '',
+    this.other_details = '',
+    this.level = '',
+    this.visible = false,
+    this.createdAt,
+    this.updatedAt,
+    this.topics = const [],
+
   });
+
+  
 }

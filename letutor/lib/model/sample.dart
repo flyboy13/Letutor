@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:letutor/model/book.dart';
+import 'package:letutor/control/book.dart';
 import 'package:letutor/control/feedback.dart';
 import 'package:letutor/model/schedule.dart';
 import 'package:letutor/control/tutor.dart';
@@ -194,16 +194,7 @@ class SampleTutor {
       sampleFeedback(),
     ),
   ];
-  void toggleLove(String id) {
-    for (var t in tutor) {
-      if (t.id == id) {
-        print(t.id);
-        // t.toggleLove();
-        t.love = !t.love;
-        break;
-      }
-    }
-  }
+ 
 }
 
 class CoursesSample {
