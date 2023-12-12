@@ -33,21 +33,21 @@ List<FeedbackRate> sampleFeedback() {
     FeedbackRate(
       id: uuid.v4(),
       userId: UsersSample.users[1].id,
-      content: "Greate!",
+      feedback: "Greate!",
       createdAt: DateTime(2023, 11, 29),
       rating: 5,
     ),
     FeedbackRate(
       id: uuid.v4(),
       userId: UsersSample.users[2].id,
-      content: "Thank you!",
+      feedback: "Thank you!",
       createdAt: DateTime(2023, 11, 28),
       rating: 5,
     ),
     FeedbackRate(
       id: uuid.v4(),
       userId: UsersSample.users[3].id,
-      content: "Very good!",
+      feedback: "Very good!",
       createdAt: DateTime(2023, 11, 29),
       rating: 5,
     ),
@@ -194,7 +194,6 @@ class SampleTutor {
       sampleFeedback(),
     ),
   ];
- 
 }
 
 class CoursesSample {

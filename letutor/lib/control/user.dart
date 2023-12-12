@@ -3,9 +3,7 @@ import 'package:letutor/control/topic.dart';
 import 'package:letutor/model/date_time.dart';
 import 'course.dart';
 
-
 class User {
-  int timezone;
   String id;
   String email;
   String name;
@@ -14,14 +12,8 @@ class User {
   String languages;
   String level;
   String google;
-  String facebook;
-  String apple;
-  String phone;
   String studySchedule;
   List<String> roles;
-  bool isActivated;
-  bool isPhoneActivated;
-  bool canSendMessage;
   bool isOnline;
   //language
   //walletInfo
@@ -31,7 +23,6 @@ class User {
   List<Course> courses;
 
   User({
-    this.timezone = 7,
     this.id = '',
     this.email = '',
     this.name = '',
@@ -40,17 +31,11 @@ class User {
     this.languages = '',
     this.level = "",
     this.google = '',
-    this.facebook = '',
-    this.apple = '',
-    this.phone = '',
     this.studySchedule = '',
     this.roles = const [],
     this.learnTopics = const [],
     this.testPreparations = const [],
     this.courses = const [],
-    this.isActivated = false,
-    this.isPhoneActivated = false,
-    this.canSendMessage = false,
     this.isOnline = false,
     required this.birthday,
   });
@@ -63,12 +48,8 @@ class User {
       avatar: json['avatar'] ?? "",
       country: json['country'] ?? "",
       level: json['level'] ?? "",
-      timezone: json['timezone'] ?? 7,
       languages: json['languages'] ?? "",
       google: json['google'] ?? "",
-      facebook: json['facebook'] ?? "",
-      apple: json['apple'] ?? "",
-      phone: json['phone'] ?? "",
       studySchedule: json['studySchedule'] ?? "",
       isOnline: json['isOnline'] ?? false,
       roles: json['roles'] == null
@@ -77,16 +58,13 @@ class User {
       learnTopics: json['learnTopics'] == null
           ? []
           : (json['learnTopics'] as List)
-          .map((e) => Topic.fromJson(e))
-          .toList(),
+              .map((e) => Topic.fromJson(e))
+              .toList(),
       testPreparations: json['testPreparations'] == null
           ? []
           : (json['testPreparations'] as List)
-          .map((e) => Topic.fromJson(e))
-          .toList(),
-      isActivated: json['isActivated'] ?? false,
-      isPhoneActivated: json['isPhoneActivated'] ?? false,
-      canSendMessage: json['canSendMessage'] ?? false,
+              .map((e) => Topic.fromJson(e))
+              .toList(),
       birthday: json['birthday'] != null
           ? DateFormat(time1).parse(json['birthday'])
           : DateTime(1990),
@@ -95,7 +73,6 @@ class User {
           : (json['courses'] as List).map((e) => Course.fromJson(e)).toList(),
     );
   }
-
 
   List<Topic> getListWantToLearn() => [...learnTopics, ...testPreparations];
 }

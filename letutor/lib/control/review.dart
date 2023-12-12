@@ -1,14 +1,10 @@
-
 import 'package:intl/intl.dart';
 import 'package:letutor/control/user.dart';
 import 'package:letutor/model/date_time.dart';
 
-
 class Review {
   String id;
   String bookingId;
-  String firstId;
-  String secondId;
   int rating;
   String content;
   DateTime? createdAt;
@@ -18,8 +14,6 @@ class Review {
   Review({
     this.id = '',
     this.bookingId = '',
-    this.firstId = '',
-    this.secondId = '',
     this.rating = 0,
     this.content = '',
     this.createdAt,
@@ -31,8 +25,6 @@ class Review {
     return Review(
       id: json['id'] ?? '',
       bookingId: json['bookingId'] ?? '',
-      firstId: json['firstId'] ?? '',
-      secondId: json['secondId'] ?? '',
       rating: json['rating'] ?? 0,
       content: json['content'] ?? '',
       createdAt: json['createdAt'] != null
