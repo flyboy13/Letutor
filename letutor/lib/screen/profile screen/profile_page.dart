@@ -4,7 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/countries.dart';
-import 'package:letutor/provider/user_provider.dart';
+import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/screen/profile%20screen/components/birthday.dart';
 import 'package:letutor/screen/profile%20screen/components/dropdown_menu.dart';
 import 'package:letutor/screen/profile%20screen/components/email.dart';

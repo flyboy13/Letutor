@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:letutor/model/router.dart';
-import 'package:letutor/provider/user_provider.dart';
+import 'package:letutor/database/service/user_api.dart';
 import 'package:provider/provider.dart';
 
 void main() {
