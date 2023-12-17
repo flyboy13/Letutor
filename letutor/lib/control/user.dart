@@ -8,6 +8,7 @@ class User {
   String email;
   String name;
   String avatar;
+  String phone;
   String country;
   String languages;
   String level;
@@ -26,6 +27,7 @@ class User {
     this.id = '',
     this.email = '',
     this.name = '',
+    this.phone = "",
     this.avatar = '',
     this.country = '',
     this.languages = '',
@@ -46,6 +48,7 @@ class User {
       email: json['email'] ?? "",
       name: json['name'] ?? "",
       avatar: json['avatar'] ?? "",
+      phone: json['phone'] ?? "",
       country: json['country'] ?? "",
       level: json['level'] ?? "",
       languages: json['languages'] ?? "",

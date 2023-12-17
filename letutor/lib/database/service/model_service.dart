@@ -1,18 +1,20 @@
-import 'dart:convert';
+// ignore_for_file: constant_identifier_names
 
-import 'package:get/get.dart';
+import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
+import 'package:letutor/control/app.dart';
+import 'package:letutor/database/service/authen_api.dart';
 
 enum JsonType { FULL_RESPONSE, JSON_RESPONSE, BODY_BYTES, STRING_RESPONSE }
 
-abstract class BaseService {
-  final appController = Get.find<AppController>();
+abstract class ServiceModel {
+  final appController = App;
 
   Future<dynamic> get(String path,
       {Map<String, dynamic>? params,
       JsonType responseType = JsonType.FULL_RESPONSE}) async {
     final response =
-        await RestClient.getDio().get(path, queryParameters: params);
+        await AuthenApi.getDio().get(path, queryParameters: params);
     return _handleResponse(response, responseType: responseType);
   }
 
@@ -20,25 +22,25 @@ abstract class BaseService {
       {data,
       bool enableCache = false,
       JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response = await RestClient.getDio().post(path, data: data);
+    final response = await AuthenApi.getDio().post(path, data: data);
     return _handleResponse(response, responseType: responseType);
   }
 
   Future<dynamic> patch(String path,
       {data, JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response = await RestClient.getDio().patch(path, data: data);
+    final response = await AuthenApi.getDio().patch(path, data: data);
     return _handleResponse(response, responseType: responseType);
   }
 
   Future<dynamic> put(String path,
       {data, JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response = await RestClient.getDio().put(path, data: data);
+    final response = await AuthenApi.getDio().put(path, data: data);
     return _handleResponse(response, responseType: responseType);
   }
 
   Future<dynamic> delete(String path,
       {data, JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response = await RestClient.getDio().delete(path, data: data);
+    final response = await AuthenApi.getDio().delete(path, data: data);
     return _handleResponse(response, responseType: responseType);
   }
 
@@ -76,7 +78,7 @@ abstract class BaseService {
 
   void saveUser(response) {
     appController.userModel.value = UserModel.fromJson(response['user']);
-    RestClient.instance.setToken(response['tokens']['access']['token']);
+    AuthenApi.instance.setToken(response['tokens']['access']['token']);
   }
 //
 // void saveLanguages(response) {

@@ -2,13 +2,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart' as dio;
 import 'package:intl/intl.dart';
+import 'package:letutor/common/constant.dart';
+import 'package:letutor/control/user.dart';
 import '../../provider/base_services.dart';
 
-class UserService extends BaseService {
+class UserApi extends BaseService {
   Future<void> loginAccount(
       {required String email, required String password}) async {
     final body = {"email": email, "password": password};
-    final response = await post(API.LOGIN, data: body);
+    final response = await post(API.login, data: body);
 
     saveUser(response);
   }
@@ -16,18 +18,15 @@ class UserService extends BaseService {
   Future<void> registerAccount(
       {required String email, required String password}) async {
     final body = {"email": email, "password": password};
-    final response = await post(API.REGISTER, data: body);
+    final response = await post(API.signup, data: body);
   }
 
   Future<void> forgotPassword({required String email}) async {
     final body = {"email": email};
-    final response = await post(API.FORGOT_PASSWORD, data: body);
+    final response = await post(API.forgotPassword, data: body);
   }
 
-  Future<dynamic> getTotalTime() async {
-    final response = await get(API.TOTAL_TIME);
-    return response;
-  }
+
 
   Future<dynamic> getSchedule({page = 1, type = 0}) async {
     final data = type == 0
@@ -51,25 +50,17 @@ class UserService extends BaseService {
             'orderBy': 'meeting',
             'sortBy': 'desc',
           };
-    final response = await get(API.SCHEDULE_ALL, params: data);
+    final response = await get(API.scheduelAll, params: data);
     return response;
   }
 
-  Future<dynamic> uploadImage(File file) async {
-    final dio.FormData formData = dio.FormData.fromMap(
-        {'avatar': await dio.MultipartFile.fromFile(file.path)});
-
-    final response = await post(API.UP_AVATAR, data: formData);
-    appController.userModel.value = UserModel.fromJson(response);
-    return response;
-  }
 
   Future<void> getUserInfo() async {
-    final response = await get(API.USER_INFO);
-    appController.userModel.value = UserModel.fromJson(response['user']);
+    final response = await get(API.userInfor);
+    appController.userModel.value = User.fromJson(response['user']);
   }
 
-  Future<void> updateUserInfo({required UserModel user}) async {
+  Future<void> updateUserInfo({required User user}) async {
     final body = {
       'name': user.name,
       // 'email': user.email,
