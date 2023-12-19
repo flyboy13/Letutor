@@ -1,11 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:letutor/model/user.dart';
 import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/database/service/authen_api.dart';
 import 'package:letutor/database/service/user_api.dart';
+
+enum AuthState { unauthorized, authorized }
 
 class App extends GetxController {
   late Rx<Locale?> locale;
@@ -15,7 +15,7 @@ class App extends GetxController {
 
   init() async {
     await Future.wait([initStorage()]);
-    final appStorage = Get.find<AppStorage>();
+    AppStorage;
 
     setupApp();
     await initApi(null);
@@ -23,7 +23,6 @@ class App extends GetxController {
 
   void setupApp() {
     Get.put(UserApi());
-  
   }
 
   initApi(String? accessToken) async {
@@ -43,5 +42,3 @@ class App extends GetxController {
     await Get.find<AppStorage>().logout();
   }
 }
-
-enum AuthState { unauthorized, authorized }

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 class AuthenApi {
   var timeOut = 60000;
   static const log = true;
-  static const ACCESS_TOKEN_HEADER = 'Authorization';
+  static const accessToken = 'Authorization';
 
   // singleton
   static final AuthenApi instance = AuthenApi._internal();
@@ -26,11 +26,11 @@ class AuthenApi {
   }
 
   void setToken(String token) {
-    headers[ACCESS_TOKEN_HEADER] = "Bearer $token";
+    headers[accessToken] = "Bearer $token";
   }
 
   void clearToken() {
-    headers.remove(ACCESS_TOKEN_HEADER);
+    headers.remove(accessToken);
   }
 
   static Dio getDio() {

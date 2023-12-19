@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:letutor/database/service/user_api.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -15,27 +16,40 @@ class SignInScreenState extends State<SignInScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String error = "";
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     bool passwordVisible = false;
+    final userApi = UserApi();
 
-    void signIn() {
+    Future<void> signIn() async {
       setState(() {
         error = "";
       });
       print("Email:  ");
       print(_passwordController.text);
-      print("clicked SignUp");
-      if (_emailController.text == 'letutor@gmail.com' &&
-          _passwordController.text == '12345678') {
-        context.go('/tutor');
-      } else {
+      print("clicked SignIn");
+
+      try {
+        // if (_emailController.text == 'letutor@gmail.com' &&
+        //     _passwordController.text == '12345678') {
+        //   context.go('/tutor');
+        // } else {
+        //   setState(() {
+        //     error = "Error: You type Email or Password wrong";
+        //   });
+        // }
+
+        await userApi.loginAccount(
+            email: _emailController.text, password: _passwordController.text);
+      } catch (e) {
         setState(() {
           error = "Error: You type Email or Password wrong";
         });
+        print(e.toString());
       }
     }
 

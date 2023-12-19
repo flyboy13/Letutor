@@ -6,11 +6,12 @@ import 'package:letutor/control/api_response.dart';
 import 'package:letutor/control/app.dart';
 import 'package:letutor/control/control_error_api.dart';
 import 'package:letutor/database/service/authen_api.dart';
+import 'package:letutor/model/user.dart';
 
 enum JsonType { FULL_RESPONSE, JSON_RESPONSE, BODY_BYTES, STRING_RESPONSE }
 
 abstract class ServiceModel {
-  final appController = App;
+  final appController = App();
 
   Future<dynamic> get(String path,
       {Map<String, dynamic>? params,
@@ -79,7 +80,7 @@ abstract class ServiceModel {
   }
 
   void saveUser(response) {
-    appController.userModel.value = UserModel.fromJson(response['user']);
+    appController.userModel.value = User.fromJson(response['user']);
     AuthenApi.instance.setToken(response['tokens']['access']['token']);
   }
 //

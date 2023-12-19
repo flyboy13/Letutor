@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:dio/dio.dart' as dio;
+// ignore_for_file: unused_local_variable
 import 'package:intl/intl.dart';
 import 'package:letutor/common/constant.dart';
 import 'package:letutor/model/user.dart';
@@ -25,8 +23,6 @@ class UserApi extends BaseService {
     final body = {"email": email};
     final response = await post(API.forgotPassword, data: body);
   }
-
-
 
   Future<dynamic> getSchedule({page = 1, type = 0}) async {
     final data = type == 0
@@ -54,7 +50,6 @@ class UserApi extends BaseService {
     return response;
   }
 
-
   Future<void> getUserInfo() async {
     final response = await get(API.userInfor);
     appController.userModel.value = User.fromJson(response['user']);
@@ -72,8 +67,8 @@ class UserApi extends BaseService {
       'studySchedule': user.studySchedule,
       // 'testPreparations': user.testPreparations
     };
-    final response = await put(API.USER_INFO, data: body);
-    appController.userModel.value = UserModel.fromJson(response);
+    final response = await put(API.userInfor, data: body);
+    appController.userModel.value = User.fromJson(response);
   }
 
 //
