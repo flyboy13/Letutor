@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
+import 'package:letutor/control/api_response.dart';
 import 'package:letutor/control/app.dart';
+import 'package:letutor/control/control_error_api.dart';
 import 'package:letutor/database/service/authen_api.dart';
 
 enum JsonType { FULL_RESPONSE, JSON_RESPONSE, BODY_BYTES, STRING_RESPONSE }
@@ -64,10 +66,10 @@ abstract class ServiceModel {
             message: response.data,
             error: response.data);
       } else {
-        return DataException.fromJson(jsonDecode(response.data));
+        return ControlErrorApi.fromJson(jsonDecode(response.data));
       }
     } else {
-      return DataException.fromJson(jsonDecode(response.data));
+      return ControlErrorApi.fromJson(jsonDecode(response.data));
     }
   }
 

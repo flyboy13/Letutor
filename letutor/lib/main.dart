@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(context) {
     return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => UserProvider(),
-          ),
+        providers: const [
           // ChangeNotifierProvider(
           //   create: (_) => NavigationIndex(),
           // ),
