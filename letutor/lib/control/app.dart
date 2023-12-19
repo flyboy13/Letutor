@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:letutor/control/user.dart';
+import 'package:letutor/model/user.dart';
 import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/database/service/authen_api.dart';
 import 'package:letutor/database/service/user_api.dart';

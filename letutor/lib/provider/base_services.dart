@@ -1,14 +1,9 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:letutor/services/rest_client.dart';
+
 import 'package:dio/dio.dart' as dio;
 
-import '../handler/exception/data_exception.dart';
-import '../handler/response/api_response.dart';
-import '../models/user_model.dart';
-import '../ui/controllers/app_controller.dart';
 
 enum JsonType { FULL_RESPONSE, JSON_RESPONSE, BODY_BYTES, STRING_RESPONSE }
 

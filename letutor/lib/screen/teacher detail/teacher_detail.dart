@@ -5,7 +5,7 @@ import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/calendar.dart';
 import 'package:letutor/model/rate_comment.dart';
 import 'package:letutor/model/sample.dart';
-import 'package:letutor/control/tutor.dart';
+import 'package:letutor/model/tutor.dart';
 import 'package:go_router/go_router.dart';
 
 class TeacherDetailScreen extends StatefulWidget {

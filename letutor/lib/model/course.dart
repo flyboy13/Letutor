@@ -1,5 +1,5 @@
-import 'package:letutor/control/category.dart';
-import 'package:letutor/control/topic.dart';
+import 'package:letutor/model/category.dart';
+import 'package:letutor/model/topic.dart';
 
   
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:letutor/control/course.dart';
+import 'package:letutor/model/course.dart';
 import 'package:letutor/model/sample.dart';
 import 'package:woozy_search/woozy_search.dart';
 

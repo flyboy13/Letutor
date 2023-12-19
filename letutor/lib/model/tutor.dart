@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-import 'package:letutor/control/user.dart';
+import 'package:letutor/model/user.dart';
 import 'package:letutor/model/date_time.dart';
 
 import 'review.dart';

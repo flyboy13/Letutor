@@ -1,5 +1,5 @@
 
-import 'package:letutor/control/tutor.dart';
+import 'package:letutor/model/tutor.dart';
 
 class Session {
   String id;

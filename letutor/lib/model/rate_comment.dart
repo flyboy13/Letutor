@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 
-import 'package:letutor/control/feedback.dart';
+import 'package:letutor/model/feedback.dart';
 
 import 'package:letutor/model/sample.dart';
 

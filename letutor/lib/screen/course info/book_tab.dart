@@ -6,7 +6,7 @@ import 'package:letutor/model/sample.dart';
 
 import 'package:woozy_search/woozy_search.dart';
 
-import '../../control/book.dart';
+import '../../model/book.dart';
 
 class BookTab extends StatefulWidget {
   const BookTab({Key? key}) : super(key: key);

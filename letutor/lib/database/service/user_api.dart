@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart' as dio;
 import 'package:intl/intl.dart';
 import 'package:letutor/common/constant.dart';
-import 'package:letutor/control/user.dart';
+import 'package:letutor/model/user.dart';
 import '../../provider/base_services.dart';
 
 class UserApi extends BaseService {
