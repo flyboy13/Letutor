@@ -8,22 +8,19 @@ import 'package:letutor/model/sample.dart';
 import 'package:letutor/model/tutor.dart';
 import 'package:go_router/go_router.dart';
 
-class TeacherDetailScreen extends StatefulWidget {
-  const TeacherDetailScreen(this.id, {super.key});
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:letutor/screen/teacher%20detail/teacher_detail_controller.dart';
 
-  final String? id;
-  @override
-  State<TeacherDetailScreen> createState() => TeacherDetailScreenState();
-}
+class TeacherDetailScreen extends GetWidget<TeacherDetailController> {
+  const TeacherDetailScreen({super.key});
 
-class TeacherDetailScreenState extends State<TeacherDetailScreen> {
-  late Tutor teacher;
-  List<Tutor> sampleTutor = SampleTutor.tutor;
+  // List<Tutor> sampleTutor = SampleTutor.tutor;
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
-    teacher = findTutor(widget.id!);
+    // teacher = findTutor(widget.id!);
     // print("country");
     // print(teacher.country);
     return Scaffold(
@@ -44,66 +41,68 @@ class TeacherDetailScreenState extends State<TeacherDetailScreen> {
                     children: [
                       CircleAvatar(
                         radius: 45,
-                        backgroundImage: AssetImage(teacher.image),
+                        backgroundImage: AssetImage("teacher.image"),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(teacher.name,
+                            Text("teacher.name",
                                 style:
                                     Theme.of(context).textTheme.displaySmall),
-                            Text(teacher.country,
+                            Text("teacher.country",
                                 style: const TextStyle(fontSize: 16)),
-                            Row(children: [
-                              ...List<Widget>.generate(
-                                teacher.rate,
-                                (index) =>
-                                    const Icon(Icons.star, color: Colors.amber),
-                              ),
-                              const SizedBox(width: 8),
-                              // Text('(${teacher.reviewCount})',
-                              //     style: const TextStyle(fontSize: 18))
-                            ])
+                            // Row(children: [
+                            //   ...List<Widget>.generate(
+                            //     teacher.rate,
+                            //     (index) =>
+                            //         const Icon(Icons.star, color: Colors.amber),
+                            //   ),
+                            //   const SizedBox(width: 8),
+                            //   // Text('(${teacher.reviewCount})',
+                            //   //     style: const TextStyle(fontSize: 18))
+                            // ])
                           ],
                         ),
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    child: Text(teacher.detail,
-                        style: const TextStyle(fontSize: 16)),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    child:
+                        Text("teacher.detail", style: TextStyle(fontSize: 16)),
                   ),
                   Row(
                     children: [
-                      Expanded(
-                        child: TextButton(
-                          onPressed: () {
-                            setState(() {
-                              teacher.toggleLove();
-                            });
-                          },
-                          child: Column(
-                            children: [
-                              Icon(
-                                teacher.love
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: teacher.love ? Colors.red : Colors.blue,
-                              ),
-                              Text(
-                                'Favorite',
-                                style: TextStyle(
-                                  color:
-                                      teacher.love ? Colors.red : Colors.blue,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+//Todo : teacher love
+
+                      // Expanded(
+                      //   child: TextButton(
+                      //     onPressed: () {
+                      //       setState(() {
+                      //         teacher.toggleLove();
+                      //       });
+                      //     },
+                      //     child: Column(
+                      //       children: [
+                      //         Icon(
+                      //           teacher.love
+                      //               ? Icons.favorite
+                      //               : Icons.favorite_border,
+                      //           color: teacher.love ? Colors.red : Colors.blue,
+                      //         ),
+                      //         Text(
+                      //           'Favorite',
+                      //           style: TextStyle(
+                      //             color:
+                      //                 teacher.love ? Colors.red : Colors.blue,
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       // Expanded(
                       //   child: TextButton(
                       //     onPressed: () {
@@ -178,43 +177,46 @@ class TeacherDetailScreenState extends State<TeacherDetailScreen> {
                     style: TextStyle(
                         fontSize: screenWidth * 0.012,
                         fontWeight: FontWeight.bold)),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Wrap(
-                    spacing: 8,
-                    runSpacing: -4,
-                    children: List<Widget>.generate(
-                      teacher.specialties.length,
-                      (index) => Chip(
-                        label: Text(
-                          teacher.specialties[index],
-                          style: const TextStyle(color: Colors.blue),
-                        ),
-                        backgroundColor: Colors.blue[50],
-                      ),
+                const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    child: Text("teacher specialiest")
+                    // Wrap(
+                    //   spacing: 8,
+                    //   runSpacing: -4,
+                    //   children: List<Widget>.generate(
+                    //     teacher.specialties.length,
+                    //     (index) => Chip(
+                    //       label: const Text(
+                    //         "teacher.specialties[index],",
+                    //         style: TextStyle(color: Colors.blue),
+                    //       ),
+                    //       backgroundColor: Colors.blue[50],
+                    //     ),
+                    //   ),
+                    // ),
                     ),
-                  ),
-                ),
                 const SizedBox(height: 8),
                 Text('Suggested Courses',
                     style: TextStyle(
                         fontSize: screenWidth * 0.012,
                         fontWeight: FontWeight.bold)),
-                ...courses.map((course) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          Text(course.title,
-                              style: TextStyle(
-                                fontSize: screenWidth * 0.01,
-                              )),
-                          const SizedBox(width: 16),
-                          TextButton(
-                              onPressed: () => context.go('/coursedetails'),
-                              child: const Text('View'))
-                        ],
-                      ),
-                    )),
+
+                //Todo: view course
+                // ...courses.map((course) => Padding(
+                //       padding: const EdgeInsets.symmetric(horizontal: 12),
+                //       child: Row(
+                //         children: [
+                //           Text(course.title,
+                //               style: TextStyle(
+                //                 fontSize: screenWidth * 0.01,
+                //               )),
+                //           const SizedBox(width: 16),
+                //           TextButton(
+                //               onPressed: () => context.go('/coursedetails'),
+                //               child: const Text('View'))
+                //         ],
+                //       ),
+                //     )),
                 const SizedBox(height: 12),
                 Text('Interests',
                     style: TextStyle(
@@ -249,9 +251,9 @@ class TeacherDetailScreenState extends State<TeacherDetailScreen> {
                             onPressed: () async {
                               final selectedDate =
                                   await bookLearningDate(context);
-                              if (mounted) {
-                                await bookLearningHour(context, selectedDate!);
-                              }
+                              // if (mounted) {
+                              //   await bookLearningHour(context, selectedDate!);
+                              // }
                               // Navigator.pushNamed(context, Routes.booking);
                             },
                             child: const Text(
@@ -262,14 +264,15 @@ class TeacherDetailScreenState extends State<TeacherDetailScreen> {
                           ),
                         ))),
                 const CalendarModel(),
-                ListView.builder(
-                  itemCount: teacher.feedbacks.length,
-                  itemBuilder: (context, index) {
-                    return RateAndComment(feedback: teacher.feedbacks[index]);
-                  },
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                ),
+                //Todo : teacher feedback
+                // ListView.builder(
+                //   itemCount: teacher.feedbacks.length,
+                //   itemBuilder: (context, index) {
+                //     return RateAndComment(feedback: teacher.feedbacks[index]);
+                //   },
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                // ),
               ],
             ),
           ),
@@ -312,44 +315,44 @@ Future<void> bookLearningHour(
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
-              Expanded(
-                child: GridView.count(
-                  padding: const EdgeInsets.all(24),
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 24,
-                  crossAxisSpacing: 32,
-                  childAspectRatio: 3,
-                  children: List<Widget>.generate(
-                    courseHours.length,
-                    (index) => ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                      ),
-                      onPressed: () async {
-                        final dialogResult =
-                            await showBookingConfirmDialog(context);
-                        if (dialogResult) {
-                          // Navigator.of(context).pushNamed(
-                          //   Routes.bookingDetail,
-                          //   arguments: {
-                          //     'selectedDate': selectedDate,
-                          //     'selectedHour': courseHours[index],
-                          //     'weekday': selectedDate.weekday
-                          //   },
-                          // );
+              // Expanded(
+              //   child: GridView.count(
+              //     padding: const EdgeInsets.all(24),
+              //     crossAxisCount: 2,
+              //     mainAxisSpacing: 24,
+              //     crossAxisSpacing: 32,
+              //     childAspectRatio: 3,
+              //     children:
+              // List<Widget>.generate(
+              //   "courseHours.length",
+              //   (index) => ElevatedButton(
+              //     style: ElevatedButton.styleFrom(
+              //       backgroundColor: Colors.blue,
+              //     ),
+              //     onPressed: () async {
+              //       final dialogResult =
+              //           await showBookingConfirmDialog(context);
+              //       if (dialogResult) {
+              //         // Navigator.of(context).pushNamed(
+              //         //   Routes.bookingDetail,
+              //         //   arguments: {
+              //         //     'selectedDate': selectedDate,
+              //         //     'selectedHour': courseHours[index],
+              //         //     'weekday': selectedDate.weekday
+              //         //   },
+              //         // );
 
-                          // GoRouter.of(context).go('/booking_detail');
-                        }
-                      },
-                      child: Text(
-                        courseHours[index],
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              //         // GoRouter.of(context).go('/booking_detail');
+              //       }
+              //     },
+              //     child: const Text(
+              //       "courseHours[index]",
+              //       style: TextStyle(fontSize: 16, color: Colors.white),
+              //     ),
+              //   ),
+              // ),
+              // ),
+              // ),
             ],
           ),
         ),
@@ -382,15 +385,15 @@ Future<bool> showBookingConfirmDialog(BuildContext context) {
   ).then((value) => value ?? false);
 }
 
-Tutor findTutor(String id) {
-  List<Tutor> sampleTutor = SampleTutor.tutor;
-  for (var t in sampleTutor) {
-    if (t.id == id) {
-      return t;
-    }
-  }
-  return sampleTutor.last;
-}
+// Tutor findTutor(String id) {
+//   List<Tutor> sampleTutor = SampleTutor.tutor;
+//   for (var t in sampleTutor) {
+//     if (t.id == id) {
+//       return t;
+//     }
+//   }
+//   return sampleTutor.last;
+// }
 
 Future<bool> showReportDialog(BuildContext context) {
   return showDialog<bool>(

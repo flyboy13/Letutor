@@ -64,7 +64,7 @@ final GoRouter router = GoRouter(
                     path: ':tutorid',
                     builder: (BuildContext context, GoRouterState state) {
                       String? id = state.pathParameters['tutorid'];
-                      return TeacherDetailScreen(id);
+                      return const TeacherDetailScreen();
                     },
                   ),
                 ])

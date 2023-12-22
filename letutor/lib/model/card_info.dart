@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/rating_start.dart';
 import 'package:letutor/model/love_button.dart';
-import 'package:letutor/model/sample.dart';
 // import 'package:flushbar/flushbar.dart';
 import 'package:letutor/model/tutor.dart';
 import 'package:go_router/go_router.dart';
@@ -93,14 +92,14 @@ class InforCardState extends State<InforCard> {
                       widget.tutor.user?.country ?? 'country',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    RatingStart(rate: widget.tutor.rating),
+                    RatingStart(rate: widget.tutor.rating as int),
                   ],
                 ),
                 Expanded(
                   child: Container(),
                 ),
                 LoveButton(
-                  isLoved: widget.tutor.love,
+                  isLoved: widget.tutor.isFavorite,
                   onPressed: onLoveButtonPressed,
                 ),
               ],
@@ -110,7 +109,7 @@ class InforCardState extends State<InforCard> {
               height: height * 0.01,
             ),
             Text(
-              widget.tutor.detail,
+              widget.tutor.experience,
             ),
             Align(
               alignment: Alignment.bottomRight,

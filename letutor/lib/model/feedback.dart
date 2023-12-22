@@ -1,16 +1,44 @@
+import 'package:intl/intl.dart';
+import 'package:letutor/model/user.dart';
 
-class FeedbackRate {
+class Feedback {
   String id;
-  String userId;
-  String feedback;
-  DateTime createdAt;
+  String bookingId;
+  String firstId;
+  String secondId;
   int rating;
+  String content;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  User? firstInfo;
 
-  FeedbackRate({
-    required this.id,
-    required this.userId,
-    required this.feedback,
-    required this.createdAt,
-    required this.rating,
+  Feedback({
+    this.id = '',
+    this.bookingId = '',
+    this.firstId = '',
+    this.secondId = '',
+    this.rating = 0,
+    this.content = '',
+    this.createdAt,
+    this.updatedAt,
+    this.firstInfo,
   });
+
+  factory Feedback.fromJson(json) {
+    return Feedback(
+      id: json['id'] ?? '',
+      bookingId: json['bookingId'] ?? '',
+      firstId: json['firstId'] ?? '',
+      secondId: json['secondId'] ?? '',
+      rating: json['rating'] ?? 0,
+      content: json['content'] ?? '',
+      createdAt: json['createdAt'] != null
+          ? DateFormat("yyyy-MM-dd").parse(json['createdAt'])
+          : DateTime(1990),
+      updatedAt: json['updatedAt'] != null
+          ? DateFormat("yyyy-MM-dd").parse(json['updatedAt'])
+          : DateTime(1990),
+      firstInfo: User.fromJson(json['firstInfo']),
+    );
+  }
 }

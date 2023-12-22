@@ -9,7 +9,6 @@ import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/multiple_select.dart';
-import 'package:letutor/model/sample.dart';
 import 'package:letutor/model/tutor.dart';
 
 class TutorScreen extends StatefulWidget {
@@ -66,31 +65,28 @@ class TeacherPage extends State<TutorScreen> {
 
   // SampleTutor sampleTutor = SampleTutor();
   late List<InforCard> list;
-  @override
-  void initState() {
-    super.initState();
-    // You can use sampleTutor here
-    // list = SampleTutor.tutor
-    //     .map((tutor) => InforCard(
-    //           tutor: tutor,
-    //           sampleTutor: sampleTutor,
-    //         ))
-    //     .toList();
-  }
+  // void initState() {
+  //   super.initState();
+  //   // You can use sampleTutor here
+  //   // list = SampleTutor.tutor
+  //   //     .map((tutor) => InforCard(
+  //   //           tutor: tutor,
+  //   //           sampleTutor: sampleTutor,
+  //   //         ))
+  //   //     .toList();
+  // }
 
   void findTutor(String input) {
-    // print(input);
-
-    // Search for a tutor with the given name
-    // This is just a placeholder, replace with your actual search logic
-    setState(() {
-      list = SampleTutor.tutor
-          .where((tutor) =>
-              tutor.name.toLowerCase().contains(input.toLowerCase()) ||
-              tutor.country.toLowerCase().contains(input.toLowerCase()))
-          .map((tutor) => InforCard(tutor: tutor, sampleTutor: sampleTutor))
-          .toList();
-    });
+    setState(
+      () {
+        // list = SampleTutor.tutor
+        //     .where((tutor) =>
+        //         tutor.name.toLowerCase().contains(input.toLowerCase()) ||
+        //         tutor.country.toLowerCase().contains(input.toLowerCase()))
+        //     .map((tutor) => InforCard(tutor: tutor))
+        //     .toList();
+      },
+    );
 
     // Do something with the found tutor
   }

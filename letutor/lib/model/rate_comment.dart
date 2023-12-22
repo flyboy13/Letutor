@@ -1,72 +1,69 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:intl/intl.dart';
+// import 'package:letutor/model/feedback.dart';
+// import 'package:letutor/model/sample.dart';
 
-import 'package:intl/intl.dart';
+// class RateAndComment extends StatelessWidget {
+//   const RateAndComment({super.key, required this.feedback});
 
-import 'package:letutor/model/feedback.dart';
+//   final FeedbackRate feedback;
 
-import 'package:letutor/model/sample.dart';
+//   @override
+//   Widget build(BuildContext context) {
+//     final user =
+//         UsersSample.users.where((user) => user.id == feedback.userId).first;
 
-class RateAndComment extends StatelessWidget {
-  const RateAndComment({super.key, required this.feedback});
+//     return Card(
+//       elevation: 8,
+//       child: Container(
+//         padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Row(
+//               //crossAxisAlignment: CrossAxisAlignment.start,
 
-  final FeedbackRate feedback;
+//               children: [
+//                 Container(
+//                     margin: const EdgeInsets.only(right: 10),
+//                     child: ClipOval(
+//                       // Wrap the Image.asset with ClipOval
 
-  @override
-  Widget build(BuildContext context) {
-    final user =
-        UsersSample.users.where((user) => user.id == feedback.userId).first;
+//                       child: Image.asset(user.avatar),
+//                     )),
+//                 Expanded(
+//                   child: Row(
+//                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                     children: [
+//                       Text(
+//                         user.name,
+//                         style: const TextStyle(
+//                             fontSize: 20, fontWeight: FontWeight.bold),
+//                       ),
 
-    return Card(
-      elevation: 8,
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              //crossAxisAlignment: CrossAxisAlignment.start,
-
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(right: 10),
-                    child: ClipOval(
-                      // Wrap the Image.asset with ClipOval
-
-                      child: Image.asset(user.avatar),
-                    )),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        user.name,
-                        style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-
-                      // RateStars(count: feedback.rating)
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Container(
-                margin: const EdgeInsets.only(top: 10, bottom: 10, left: 100),
-                child: feedback.feedback.isNotEmpty
-                    ? Text(feedback.feedback)
-                    : null),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  DateFormat.yMEd().add_jm().format(feedback.createdAt),
-                  style: const TextStyle(color: Colors.grey),
-                )
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-}
+//                       // RateStars(count: feedback.rating)
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//             Container(
+//                 margin: const EdgeInsets.only(top: 10, bottom: 10, left: 100),
+//                 child: feedback.feedback.isNotEmpty
+//                     ? Text(feedback.feedback)
+//                     : null),
+//             Row(
+//               mainAxisAlignment: MainAxisAlignment.end,
+//               children: [
+//                 Text(
+//                   DateFormat.yMEd().add_jm().format(feedback.createdAt),
+//                   style: const TextStyle(color: Colors.grey),
+//                 )
+//               ],
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

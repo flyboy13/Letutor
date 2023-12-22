@@ -1,29 +1,37 @@
 // ignore_for_file: unused_local_variable
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:intl/intl.dart';
 import 'package:letutor/common/constant.dart';
 import 'package:letutor/model/user.dart';
 import '../../provider/base_services.dart';
 
 class UserApi extends BaseService {
-  Future<void> loginAccount(
-      {required String email, required String password}) async {
+  Future<void> login({required String email, required String password}) async {
     final body = {"email": email, "password": password};
     final response = await post(API.login, data: body);
+    print(response.toString());
 
     saveUser(response);
   }
 
-  Future<void> registerAccount(
-      {required String email, required String password}) async {
+  Future<void> signUp(
+      {required context,
+      required String email,
+      required String password}) async {
     final body = {"email": email, "password": password};
     final response = await post(API.signup, data: body);
+    if (response.statusCode == 200) {
+      debugPrint("signUp done");
+      //add navigate to homepage using Go router
+    } else {}
   }
 
   Future<void> forgotPassword({required String email}) async {
     final body = {"email": email};
     final response = await post(API.forgotPassword, data: body);
   }
-
 
   Future<dynamic> getSchedule({page = 1, type = 0}) async {
     final data = type == 0

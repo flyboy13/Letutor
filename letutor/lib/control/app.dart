@@ -15,7 +15,7 @@ class App extends GetxController {
 
   init() async {
     await Future.wait([initStorage()]);
-    AppStorage;
+    Get.find<AppStorage>();
 
     setupApp();
     await initApi(null);

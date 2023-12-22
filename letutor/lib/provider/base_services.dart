@@ -1,6 +1,8 @@
 // ignore_for_file: constant_identifier_names
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:letutor/control/api_response.dart';
 import 'package:letutor/control/app.dart';
 import 'package:letutor/control/control_error_api.dart';
@@ -10,7 +12,7 @@ import 'package:letutor/model/user.dart';
 enum JsonType { FULL_RESPONSE, JSON_RESPONSE, BODY_BYTES, STRING_RESPONSE }
 
 abstract class BaseService {
-  final appController = App();
+  final appController = Get.put(App());
 
   Future<dynamic> get(String path,
       {Map<String, dynamic>? params,

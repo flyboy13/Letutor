@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:letutor/control/app.dart';
 import 'package:letutor/model/router.dart';
-import 'package:letutor/database/service/user_api.dart';
+import 'package:letutor/provider/navigation_index.dart';
+import 'package:letutor/provider/setting.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Get.put<App>(App()).init();
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends GetWidget<App> {
   const MyApp({super.key});
 
   @override
   Widget build(context) {
     return MultiProvider(
-        providers: const [
-          // ChangeNotifierProvider(
-          //   create: (_) => NavigationIndex(),
-          // ),
-          // ChangeNotifierProvider(
-          //   create: (_) => SettingProvider(),
-          // )
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => NavigationIndex(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => SettingProvider(),
+          )
         ],
         child: MaterialApp.router(
           theme: ThemeData(
@@ -30,6 +36,7 @@ class MyApp extends StatelessWidget {
           routerConfig: router,
           debugShowCheckedModeBanner: false,
         ));
+
     // return LessonScheduleApp();
   }
 }

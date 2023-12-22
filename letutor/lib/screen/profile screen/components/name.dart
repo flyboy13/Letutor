@@ -28,7 +28,7 @@ class _NameEditState extends State<NameEdit> {
           Container(
             margin: const EdgeInsets.only(bottom: 7, left: 5),
             child: const Text(
-              "Your name",
+              "Name:",
               style: TextStyle(fontSize: 17),
             ),
           ),
