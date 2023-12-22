@@ -24,6 +24,7 @@ class UserApi extends BaseService {
     final response = await post(API.forgotPassword, data: body);
   }
 
+
   Future<dynamic> getSchedule({page = 1, type = 0}) async {
     final data = type == 0
         ? {

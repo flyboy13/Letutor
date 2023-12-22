@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:letutor/database/service/tutor_api.dart';
+import 'package:letutor/database/service/user_api.dart';
 
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/multiple_select.dart';
 import 'package:letutor/model/sample.dart';
+import 'package:letutor/model/tutor.dart';
 
 class TutorScreen extends StatefulWidget {
   const TutorScreen({super.key});
@@ -17,6 +21,20 @@ class TutorScreen extends StatefulWidget {
 
 class TeacherPage extends State<TutorScreen> {
   List<String> _selectedItems = [];
+  final _tutor = TutorApi();
+  final _user = UserApi();
+
+  RxList<Tutor> listTutor = <Tutor>[].obs;
+  @override
+  void initState() async {
+    super.initState();
+  }
+
+  void initData() async {
+    final res = await _tutor.getAllTutorByPage();
+    listTutor.value =
+        (res['tutors']['rows'] as List).map((e) => Tutor.fromJson(e)).toList();
+  }
 
   void _showMultiSelect() async {
     // a list of selectable items
@@ -46,18 +64,18 @@ class TeacherPage extends State<TutorScreen> {
 
   final TextEditingController textEditingController = TextEditingController();
 
-  SampleTutor sampleTutor = SampleTutor();
+  // SampleTutor sampleTutor = SampleTutor();
   late List<InforCard> list;
   @override
   void initState() {
     super.initState();
     // You can use sampleTutor here
-    list = SampleTutor.tutor
-        .map((tutor) => InforCard(
-              tutor: tutor,
-              sampleTutor: sampleTutor,
-            ))
-        .toList();
+    // list = SampleTutor.tutor
+    //     .map((tutor) => InforCard(
+    //           tutor: tutor,
+    //           sampleTutor: sampleTutor,
+    //         ))
+    //     .toList();
   }
 
   void findTutor(String input) {

@@ -10,9 +10,11 @@ import 'package:letutor/model/tutor.dart';
 import 'package:go_router/go_router.dart';
 
 class InforCard extends StatefulWidget {
-  const InforCard({super.key, required this.tutor, required this.sampleTutor});
+  const InforCard({
+    super.key,
+    required this.tutor,
+  });
   final Tutor tutor;
-  final SampleTutor sampleTutor;
   @override
   InforCardState createState() => InforCardState();
 }
@@ -71,7 +73,9 @@ class InforCardState extends State<InforCard> {
           children: [
             Row(
               children: [
-                CircleAvatar(backgroundImage: AssetImage(widget.tutor.image)),
+                CircleAvatar(
+                    backgroundImage:
+                        AssetImage(widget.tutor.user?.avatar ?? 'avatar')),
                 SizedBox(
                   width: width * 0.01,
                 ),
@@ -82,14 +86,14 @@ class InforCardState extends State<InforCard> {
                         onPressed: () =>
                             context.go('/tutor/${widget.tutor.id}'),
                         child: Text(
-                          widget.tutor.name,
+                          widget.tutor.user?.name ?? "name",
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )),
                     Text(
-                      widget.tutor.country,
+                      widget.tutor.user?.country ?? 'country',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    RatingStart(rate: widget.tutor.rate),
+                    RatingStart(rate: widget.tutor.rating),
                   ],
                 ),
                 Expanded(

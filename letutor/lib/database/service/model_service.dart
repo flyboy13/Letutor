@@ -10,7 +10,7 @@ import 'package:letutor/model/user.dart';
 
 enum JsonType { FULL_RESPONSE, JSON_RESPONSE, BODY_BYTES, STRING_RESPONSE }
 
-abstract class ServiceModel {
+abstract class ModelService {
   final appController = App();
 
   Future<dynamic> get(String path,

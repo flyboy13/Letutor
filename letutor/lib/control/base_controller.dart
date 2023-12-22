@@ -1,9 +1,5 @@
 import 'dart:ui';
-
 import 'package:get/get.dart';
-
-
-
 
 abstract class BaseController<C> extends GetxController {
   bool isHaveDrawer = true;
