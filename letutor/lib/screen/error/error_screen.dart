@@ -21,7 +21,7 @@ class ErrorPageState extends State<ErrorPage> {
         body: Center(
           child: Column(children: [
             Image.asset(
-              "error.png",
+              "assets/error.png",
               width: screenWidth * 0.15,
               // Adjust the logo width as needed
             ),

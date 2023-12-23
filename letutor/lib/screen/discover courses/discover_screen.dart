@@ -53,7 +53,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            'avatar.png',
+                            'assets/avatar.png',
                             width: screenWidth * 0.1,
                             height: screenHeight * 0.1,
                           )
@@ -176,7 +176,7 @@ class DiscoverScreenState extends State<DiscoverScreen> {
                   children: List.generate(
                     4,
                     (index) => FlutterCourseCard(
-                      imageUrl: "course1.png",
+                      imageUrl: "assets/course1.png",
                       title: "Life in the Internet Age",
                       description:
                           "Let's discuss how technology is changing the way we live",

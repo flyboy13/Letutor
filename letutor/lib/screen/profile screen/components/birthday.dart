@@ -1,31 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
 
-class BirthdayEdition extends StatefulWidget {
-  const BirthdayEdition({
-    super.key,
-    required this.setBirthday,
-    required this.birthday,
-  });
+class BirthdayEdit extends StatelessWidget {
+  const BirthdayEdit({super.key, required this.controller});
 
-  final Function(DateTime) setBirthday;
-  final DateTime birthday;
-
-  @override
-  State<BirthdayEdition> createState() => _BirthdayEditionState();
-}
-
-class _BirthdayEditionState extends State<BirthdayEdition> {
-  void _selectDate(BuildContext context) async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: widget.birthday, // Refer step 1
-      firstDate: DateTime(1900),
-      lastDate: DateTime(2022),
-    );
-    if (picked != null && picked != widget.birthday) {
-      widget.setBirthday(picked);
-    }
-  }
+  final ProfileController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -33,46 +13,32 @@ class _BirthdayEditionState extends State<BirthdayEdition> {
       margin: const EdgeInsets.only(bottom: 10, top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: const EdgeInsets.only(left: 5),
+            margin: const EdgeInsets.only(bottom: 7, left: 5),
             child: const Text(
-              "Birthday",
-              style: TextStyle(fontSize: 17),
+              "Birthday:",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
-          InkWell(
-            onTap: () {
-              _selectDate(context);
-            },
-            child: Container(
-              margin: const EdgeInsets.only(top: 7),
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              height: 48,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black26, width: 0.3),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    stringFormatDateTime(widget.birthday),
-                    style: const TextStyle(fontSize: 17),
-                  ),
-                ],
-              ),
-            ),
-          )
+          TextField(
+              readOnly: true,
+              onTap: () {
+                showDatePicker(
+                        initialDatePickerMode: DatePickerMode.day,
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1990),
+                        lastDate: DateTime(2050))
+                    .then((value) => {
+                          controller.controllers['birthdayField']?.text =
+                              DateFormat("yyyy-MM-dd").format(value!)
+                        });
+              },
+              controller: controller.controllers['birthdayField'],
+              onChanged: (value) {}),
         ],
       ),
     );
   }
-}
-
-String stringFormatDateTime(DateTime date) {
-  String twoDigits(int n) => n.toString().padLeft(2, "0");
-
-  return "${twoDigits(date.day)}/${twoDigits(date.month)}/${date.year}";
 }

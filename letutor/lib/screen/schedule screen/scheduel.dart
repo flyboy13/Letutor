@@ -38,7 +38,7 @@ class ScheduelScreenState extends State<ScheduelScreen> {
                 // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    "calendar.png",
+                    "assets/calendar.png",
                     width: screenWidth * 0.3,
                   ),
                   VerticalDivider(

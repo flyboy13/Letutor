@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:letutor/model/appbar.dart';
 
-
 import 'package:letutor/screen/course%20info/card.dart';
 
 class CourseInfor extends StatefulWidget {
@@ -49,7 +48,7 @@ class CourseInforState extends State<CourseInfor> {
                   Column(
                     children: [
                       FlutterCourseCardDetail(
-                          imageUrl: "course2.png",
+                          imageUrl: "assets/course2.png",
                           title: "Life in the Internet Age",
                           description:
                               "Let's discuss how technology is changing the way we live",
@@ -73,7 +72,7 @@ class CourseInforState extends State<CourseInfor> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Image.asset(
-                                  "question.png",
+                                  "assets/question.png",
                                   width: screenWidth * 0.02,
                                 ),
                                 SizedBox(
@@ -100,7 +99,7 @@ class CourseInforState extends State<CourseInfor> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Image.asset(
-                                  "question.png",
+                                  "assets/question.png",
                                   width: screenWidth * 0.02,
                                 ),
                                 SizedBox(
@@ -163,7 +162,7 @@ class CourseInforState extends State<CourseInfor> {
                   Column(
                     children: [
                       FlutterCourseCardDetail(
-                          imageUrl: "course1.png",
+                          imageUrl: "assets/course1.png",
                           title: "Life in the Internet Age",
                           description:
                               "Let's discuss how technology is changing the way we live",
@@ -187,7 +186,7 @@ class CourseInforState extends State<CourseInfor> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Image.asset(
-                                  "question.png",
+                                  "assets/question.png",
                                   width: screenWidth * 0.02,
                                 ),
                                 SizedBox(
@@ -214,7 +213,7 @@ class CourseInforState extends State<CourseInfor> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Image.asset(
-                                  "question.png",
+                                  "assets/question.png",
                                   width: screenWidth * 0.02,
                                 ),
                                 SizedBox(
@@ -277,7 +276,7 @@ class CourseInforState extends State<CourseInfor> {
                   Column(
                     children: [
                       FlutterCourseCardDetail(
-                          imageUrl: "lesson.png",
+                          imageUrl: "assets/lesson.png",
                           title: "Life in the Internet Age",
                           description:
                               "Let's discuss how technology is changing the way we live",
@@ -301,7 +300,7 @@ class CourseInforState extends State<CourseInfor> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Image.asset(
-                                  "question.png",
+                                  "assets/question.png",
                                   width: screenWidth * 0.02,
                                 ),
                                 SizedBox(
@@ -328,7 +327,7 @@ class CourseInforState extends State<CourseInfor> {
                               crossAxisAlignment: WrapCrossAlignment.center,
                               children: [
                                 Image.asset(
-                                  "question.png",
+                                  "assets/question.png",
                                   width: screenWidth * 0.02,
                                 ),
                                 SizedBox(
@@ -383,7 +382,6 @@ class CourseInforState extends State<CourseInfor> {
                 ],
               ),
             ),
-           
           ],
         ),
       ),

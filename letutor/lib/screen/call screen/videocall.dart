@@ -108,7 +108,7 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                       children: [
                         SizedBox(
                           child: Image.asset(
-                            'calendar.png',
+                            'assets/calendar.png',
                             scale: 50,
                           ),
                         ),
@@ -161,8 +161,8 @@ class _VideoCallRoomState extends State<VideoCallRoom> {
                           width: 200,
                           child: Text(
                             endTime.toString(),
-                            style:
-                                const TextStyle(fontSize: 20, color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 20, color: Colors.white),
                           ),
                         ),
                       ],

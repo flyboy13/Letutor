@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/database/service/user_api.dart';
 
@@ -10,23 +10,26 @@ import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/card_info.dart';
 import 'package:letutor/model/multiple_select.dart';
 import 'package:letutor/model/tutor.dart';
+import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
 
 class TutorScreen extends StatefulWidget {
   const TutorScreen({super.key});
 
   @override
-  TeacherPage createState() => TeacherPage();
+  TutorScreenState createState() => TutorScreenState();
 }
 
-class TeacherPage extends State<TutorScreen> {
+class TutorScreenState extends State<TutorScreen> {
   List<String> _selectedItems = [];
   final _tutor = TutorApi();
   final _user = UserApi();
 
   RxList<Tutor> listTutor = <Tutor>[].obs;
   @override
-  void initState() async {
+  void initState() {
     super.initState();
+    initData();
+    Get.put(ProfileController());
   }
 
   void initData() async {
@@ -64,7 +67,7 @@ class TeacherPage extends State<TutorScreen> {
   final TextEditingController textEditingController = TextEditingController();
 
   // SampleTutor sampleTutor = SampleTutor();
-  late List<InforCard> list;
+  // late List<InforCard> list;
   // void initState() {
   //   super.initState();
   //   // You can use sampleTutor here
@@ -337,10 +340,10 @@ class TeacherPage extends State<TutorScreen> {
                 SizedBox(
                   height: screenHeight * 0.1,
                 ),
-                Wrap(
-                    spacing: MediaQuery.of(context).size.width * 0.01,
-                    runSpacing: MediaQuery.of(context).size.width * 0.01,
-                    children: list)
+                // Wrap(
+                //     spacing: MediaQuery.of(context).size.width * 0.01,
+                //     runSpacing: MediaQuery.of(context).size.width * 0.01,
+                //     children: list)
               ]),
             ),
           ],

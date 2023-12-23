@@ -31,7 +31,7 @@ Widget createScheduel(String name, double screenWidth) => Container(
                           ClipRRect(
                             borderRadius: BorderRadius.circular(100.0),
                             child: Image.asset(
-                              'avatar.png',
+                              'assets/avatar.png',
                               height: screenWidth * 0.07,
                             ),
                           ),

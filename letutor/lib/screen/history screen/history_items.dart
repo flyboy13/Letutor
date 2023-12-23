@@ -72,7 +72,8 @@ Widget createHistory(String name, double screenWidth) => Container(
                               height: 70,
                               child: const CircleAvatar(
                                 radius: 70,
-                                backgroundImage: AssetImage("avatar1.png"),
+                                backgroundImage:
+                                    AssetImage("assets/avatar1.png"),
                                 backgroundColor: Colors.transparent,
                               ),
                             ),

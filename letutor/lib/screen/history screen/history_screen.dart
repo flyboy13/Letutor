@@ -34,7 +34,7 @@ class HistoryScreenState extends State<HistoryScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Image.asset(
-                        'history.png',
+                        'assets/history.png',
                         width: screenWidth * 0.27,
                       ),
                       VerticalDivider(
