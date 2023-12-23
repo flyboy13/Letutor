@@ -8,6 +8,7 @@ import 'package:letutor/screen/profile%20screen/components/my_level.dart';
 import 'package:letutor/screen/profile%20screen/components/name.dart';
 import 'package:letutor/screen/profile%20screen/components/phone.dart';
 import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
+import 'package:letutor/screen/profile%20screen/components/study_schedule.dart';
 import 'package:letutor/screen/profile%20screen/components/want_to_learn.dart';
 // import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 // import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -95,7 +96,32 @@ class ProfileScreen extends GetWidget<ProfileController> {
                   LevelEdit(
                     controller: controller,
                   ),
-                  WantToLearnEdit(controller: controller)
+                  WantToLearnEdit(controller: controller),
+                  StudyScheduleEdit(
+                    controller: controller.controllers['studyScheduleField'],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 20),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        controller.updateProfile();
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Center(
+                              child: Text('Update Profile Successfull!')),
+                        ));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 71, 135, 255),
+                        minimumSize: const Size(200, 50),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      child: const Text('Save'),
+                    ),
+                  ),
                 ],
               ),
             ),

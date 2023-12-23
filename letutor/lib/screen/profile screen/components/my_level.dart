@@ -9,8 +9,7 @@ class LevelEdit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? valueLevel = controller.controllers['levelField']?.text;
-    if (valueLevel!.isEmpty)
-    {
+    if (valueLevel!.isEmpty) {
       valueLevel = 'BEGINNER';
     }
     return Container(
@@ -39,6 +38,7 @@ class LevelEdit extends StatelessWidget {
             ],
             onChanged: (Object? value) {
               controller.controllers['levelField']!.text = value.toString();
+              debugPrint(controller.controllers['levelField']!.text);
               controller.update();
             },
             decoration: const InputDecoration(

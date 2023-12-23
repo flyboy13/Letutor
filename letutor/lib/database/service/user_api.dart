@@ -1,10 +1,12 @@
 // ignore_for_file: unused_local_variable
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
 import 'package:letutor/common/constant.dart';
+import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/model/user.dart';
+import 'package:letutor/screen/home%20screen/dash_board_list_controller.dart';
 import '../../provider/base_services.dart';
 
 class UserApi extends BaseService {
@@ -13,7 +15,9 @@ class UserApi extends BaseService {
     final body = {"email": email, "password": password};
     final response = await post(API.login, data: body);
     debugPrint(response.toString());
-
+    Get.put(TutorApi());
+    Get.put(UserApi());
+    Get.put(HomeScreenController());
     saveUser(response);
   }
 

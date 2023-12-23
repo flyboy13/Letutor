@@ -58,7 +58,7 @@ final GoRouter router = GoRouter(
             GoRoute(
                 path: '/tutor',
                 builder: (BuildContext context, GoRouterState state) =>
-                    const TutorScreen(),
+                    TutorScreen(),
                 routes: [
                   GoRoute(
                     path: ':tutorid',

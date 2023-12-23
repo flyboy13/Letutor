@@ -26,7 +26,9 @@ class AuthenApi {
   }
 
   void setToken(String token) {
-    headers[accessToken] = "Bearer $token";
+    // headers[accessToken] = "Bearer $token";
+    headers[accessToken] =
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjllN2RlYi0zMzgyLTQ4ZGItYjA3Yy05MGFjZjUyZjU0MWMiLCJpYXQiOjE3MDMzMDI1NjksImV4cCI6MTcwMzM4ODk2OSwidHlwZSI6ImFjY2VzcyJ9.OA9R3zRLTdJAEIzrbBJ8jVb_bmqm0W7iq2vcV6QVGmg";
   }
 
   void clearToken() {

@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
 
   final StatefulNavigationShell child;
 
-  void _onItemSelected(int index) {
+  void  _onItemSelected(int index) {
     child.goBranch(
       index,
       initialLocation: index == child.currentIndex,

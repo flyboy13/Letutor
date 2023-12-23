@@ -1,36 +1,25 @@
-// ignore_for_file: prefer_const_constructors, avoid_print
+// ignore_for_file: prefer_const_constructors, avoid_print, must_be_immutable, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:letutor/conponent/information_teacher_component.dart';
 import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/database/service/user_api.dart';
 
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
-import 'package:letutor/model/card_info.dart';
-import 'package:letutor/model/multiple_select.dart';
 import 'package:letutor/model/tutor.dart';
+import 'package:letutor/screen/home%20screen/dash_board_list_controller.dart';
 import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
 
-class TutorScreen extends StatefulWidget {
-  const TutorScreen({super.key});
-
-  @override
-  TutorScreenState createState() => TutorScreenState();
-}
-
-class TutorScreenState extends State<TutorScreen> {
-  List<String> _selectedItems = [];
+class TutorScreen extends GetWidget<HomeScreenController> {
+  final List<String> _selectedItems = [];
   final _tutor = TutorApi();
   final _user = UserApi();
 
   RxList<Tutor> listTutor = <Tutor>[].obs;
-  @override
-  void initState() {
-    super.initState();
-    initData();
-    Get.put(ProfileController());
-  }
+
+  TutorScreen({super.key});
 
   void initData() async {
     final res = await _tutor.getAllTutorByPage();
@@ -46,74 +35,20 @@ class TutorScreenState extends State<TutorScreen> {
       "Vietnamese Tutor",
       "Native English Tutor"
     ];
-
-    final List<String>? results = await showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return MultiSelect(items: items);
-      },
-    );
-
-    // Update UI
-    if (results != null) {
-      setState(() {
-        _selectedItems = results;
-      });
-    }
   }
 
-  String? selectedValue;
-
-  final TextEditingController textEditingController = TextEditingController();
-
-  // SampleTutor sampleTutor = SampleTutor();
-  // late List<InforCard> list;
-  // void initState() {
-  //   super.initState();
-  //   // You can use sampleTutor here
-  //   // list = SampleTutor.tutor
-  //   //     .map((tutor) => InforCard(
-  //   //           tutor: tutor,
-  //   //           sampleTutor: sampleTutor,
-  //   //         ))
-  //   //     .toList();
-  // }
-
-  void findTutor(String input) {
-    setState(
-      () {
-        // list = SampleTutor.tutor
-        //     .where((tutor) =>
-        //         tutor.name.toLowerCase().contains(input.toLowerCase()) ||
-        //         tutor.country.toLowerCase().contains(input.toLowerCase()))
-        //     .map((tutor) => InforCard(tutor: tutor))
-        //     .toList();
-      },
-    );
-
-    // Do something with the found tutor
-  }
-
-  @override
-  void dispose() {
-    textEditingController.dispose();
-
-    super.dispose();
-  }
+  // Update UI
 
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
+    
+    
     double screenWidth = MediaQuery.of(context).size.width;
 
     double screenHeight = MediaQuery.of(context).size.height;
 
     DateTime selectedDate = DateTime.now();
-
-    void onDateChanged(String date) {
-      setState(() {
-        selectedDate = DateTime.parse(date);
-      });
-    }
 
     List<String> listChip = [
       'All',
@@ -257,9 +192,7 @@ class TutorScreenState extends State<TutorScreen> {
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: screenWidth * 0.47),
                     child: TextFormField(
-                      onChanged: (val) {
-                        findTutor(val);
-                      },
+                      onChanged: (val) {},
                       decoration: InputDecoration(
                         hintText: 'Enter tutor name...',
 
@@ -335,15 +268,17 @@ class TutorScreenState extends State<TutorScreen> {
                       )),
                   controller:
                       TextEditingController(text: selectedDate.toString()),
-                  onChanged: onDateChanged,
                 ),
                 SizedBox(
                   height: screenHeight * 0.1,
                 ),
-                // Wrap(
-                //     spacing: MediaQuery.of(context).size.width * 0.01,
-                //     runSpacing: MediaQuery.of(context).size.width * 0.01,
-                //     children: list)
+                ...controller.listTutor.map(
+                  (element) => InformationTeacherComponent(
+                    tutor: element,
+                    controller: controller,
+                    countRating: element.rating,
+                  ),
+                )
               ]),
             ),
           ],

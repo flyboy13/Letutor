@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:letutor/common/constant.dart';
+
 import 'package:letutor/control/app.dart';
 import 'package:letutor/control/base_controller.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/date_time.dart';
+import 'package:letutor/model/notify_bar.dart';
 import 'package:letutor/model/user.dart';
 
 class ProfileController extends BaseController {
@@ -30,7 +31,7 @@ class ProfileController extends BaseController {
     ),
   );
   List<String> wantToLearnField = [];
-  Rx<User> user = User(birthday: DateTime(1990)).obs;
+  Rx<User> user = User(birthday: DateTime(2002)).obs;
 
   RxBool isLoading = true.obs;
 
@@ -72,7 +73,7 @@ class ProfileController extends BaseController {
       );
       await _userService.updateUserInfo(user: userModel);
       // setUpDataProfile();
-      // notifyBar(message: 'Cập nhật thành công', isSuccess: true);
+      notifyBar(message: 'Cập nhật thành công', isSuccess: true);
     }
   }
 
