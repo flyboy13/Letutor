@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:go_router/go_router.dart';
@@ -16,7 +17,7 @@ class SignUpScreen extends StatefulWidget {
 class SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String error = "";
   final userApi = UserApi();
   void onSignUpSuccess() {
@@ -42,15 +43,12 @@ class SignUpScreenState extends State<SignUpScreen> {
       // }
       try {
         await userApi.signUp(
-            context: onSignUpSuccess,
-            email: _emailController.text,
-            password: _passwordController.text);
-      } catch (e) {
+            email: _emailController.text, password: _passwordController.text);
+      } on DioException catch (e) {
         setState(() {
-          error =
-              "Error: Our Server is not responding. You may try again later";
+          error = "Error: ${e.response?.data['message']}";
         });
-        print(e.toString());
+        print("Eror: ");
       }
     }
 
@@ -228,31 +226,35 @@ class SignUpScreenState extends State<SignUpScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
+                              heroTag: null,
                               disabledElevation: 0,
                               backgroundColor:
                                   const Color.fromARGB(0, 255, 255, 255),
                               onPressed: () {},
-                              child: ClipOval(child: Image.asset("flogo.png")),
+                              child: ClipOval(
+                                  child: Image.asset("assets/flogo.png")),
                             ),
                             SizedBox(
                                 width:
                                     screenWidth * 0.03), // Responsive spacing
                             FloatingActionButton(
+                              heroTag: null,
                               disabledElevation: 0,
                               backgroundColor:
                                   const Color.fromARGB(0, 255, 255, 255),
                               onPressed: () {},
-                              child: Image.asset("glogo.png"),
+                              child: Image.asset("assets/glogo.png"),
                             ),
                             SizedBox(
                                 width:
                                     screenWidth * 0.03), // Responsive spacing
                             FloatingActionButton(
+                              heroTag: null,
                               disabledElevation: 0,
                               backgroundColor:
                                   const Color.fromARGB(0, 255, 255, 255),
                               onPressed: () {},
-                              child: Image.asset("mlogo.png"),
+                              child: Image.asset("assets/mlogo.png"),
                             ),
                           ],
                         ),
@@ -270,7 +272,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                context.go('/login');
+                                context.go('/signin');
                               },
                               child: Text(
                                 'Login',

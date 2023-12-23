@@ -244,31 +244,35 @@ class SignInScreenState extends State<SignInScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             FloatingActionButton(
+                              heroTag: null,
                               disabledElevation: 0,
                               backgroundColor:
                                   const Color.fromARGB(0, 255, 255, 255),
                               onPressed: () {},
-                              child: ClipOval(child: Image.asset("flogo.png")),
+                              child: ClipOval(
+                                  child: Image.asset("assets/flogo.png")),
                             ),
                             SizedBox(
                                 width:
                                     screenWidth * 0.03), // Responsive spacing
                             FloatingActionButton(
+                              heroTag: null,
                               disabledElevation: 0,
                               backgroundColor:
                                   const Color.fromARGB(0, 255, 255, 255),
                               onPressed: () {},
-                              child: Image.asset("glogo.png"),
+                              child: Image.asset("assets/glogo.png"),
                             ),
                             SizedBox(
                                 width:
                                     screenWidth * 0.03), // Responsive spacing
                             FloatingActionButton(
+                              heroTag: null,
                               disabledElevation: 0,
                               backgroundColor:
                                   const Color.fromARGB(0, 255, 255, 255),
                               onPressed: () {},
-                              child: Image.asset("mlogo.png"),
+                              child: Image.asset("assets/mlogo.png"),
                             ),
                           ],
                         ),

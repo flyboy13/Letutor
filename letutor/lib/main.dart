@@ -10,11 +10,12 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Get.put<App>(App()).init();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends GetWidget<App> {
-  const MyApp({super.key});
+  MyApp({super.key});
+  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Widget build(context) {

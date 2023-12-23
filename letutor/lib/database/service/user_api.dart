@@ -8,24 +8,18 @@ import 'package:letutor/model/user.dart';
 import '../../provider/base_services.dart';
 
 class UserApi extends BaseService {
+  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
   Future<void> login({required String email, required String password}) async {
     final body = {"email": email, "password": password};
     final response = await post(API.login, data: body);
-    print(response.toString());
+    debugPrint(response.toString());
 
     saveUser(response);
   }
 
-  Future<void> signUp(
-      {required context,
-      required String email,
-      required String password}) async {
+  Future<void> signUp({required String email, required String password}) async {
     final body = {"email": email, "password": password};
-    final response = await post(API.signup, data: body);
-    if (response.statusCode == 200) {
-      debugPrint("signUp done");
-      //add navigate to homepage using Go router
-    } else {}
+    var response = await post(API.signup, data: body);
   }
 
   Future<void> forgotPassword({required String email}) async {
