@@ -6,7 +6,6 @@ import 'package:letutor/control/app.dart';
 import 'package:letutor/control/base_controller.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/date_time.dart';
-import 'package:letutor/model/notify_bar.dart';
 import 'package:letutor/model/user.dart';
 
 class ProfileController extends BaseController {
@@ -15,6 +14,7 @@ class ProfileController extends BaseController {
 
   final Map<String, TextEditingController> controllers = Map.fromEntries(
     [
+      'avatarField',
       'nameField',
       'emailField',
       'countryField',
@@ -41,12 +41,32 @@ class ProfileController extends BaseController {
     setUpDataProfile();
   }
 
-  void onReloadData() {}
+  Future<void> onReloadData() async {
+    await _userService.getUserInfo();
+  }
+
+  void uploadPhotoProfile(String url) async {
+    {
+      print(url);
+      User userModel = User(
+        avatar: url,
+        // email: controllers[emailField]!.value.text,
+        country: controllers['countryField']!.value.text,
+        phone: controllers['phoneField']!.value.text,
+        birthday: controllers['birthdayField']?.text != null
+            ? DateTime.parse(controllers['birthdayField']!.value.text)
+            : DateTime(2024),
+      );
+      await _userService.updateUserInfo(user: userModel);
+      // setUpDataProfile();
+      // notifyBar(message: 'Cập nhật thành công', isSuccess: true);
+        }
+  }
 
   void setUpDataProfile() async {
     await _userService.getUserInfo();
     user.value = _appController.userModel.value!;
-
+    controllers['avatarField']?.text = user.value.avatar;
     controllers['nameField']?.text = user.value.name;
     controllers['emailField']?.text = user.value.email;
     controllers['countryField']?.text = user.value.country;
@@ -60,6 +80,14 @@ class ProfileController extends BaseController {
 
   void updateProfile() async {
     {
+      String tempScheduel;
+      print(controllers['levelField']!.value.text);
+      print(controllers['phoneField']!.value.text);
+      if (controllers['studyScheduleField']!.value.text == "") {
+        tempScheduel = "";
+      } else {
+        tempScheduel = controllers['studyScheduleField']!.value.text;
+      }
       User userModel = User(
         name: controllers['nameField']!.value.text,
         // email: controllers[emailField]!.value.text,
@@ -67,13 +95,14 @@ class ProfileController extends BaseController {
         phone: controllers['phoneField']!.value.text,
         birthday: controllers['birthdayField']?.text != null
             ? DateTime.parse(controllers['birthdayField']!.value.text)
-            : DateTime(1990),
+            : DateTime(2024),
         level: controllers['levelField']!.value.text,
-        studySchedule: controllers['studyScheduleField']!.value.text,
+        studySchedule: tempScheduel,
       );
       await _userService.updateUserInfo(user: userModel);
+      setUpDataProfile();
       // setUpDataProfile();
-      notifyBar(message: 'Cập nhật thành công', isSuccess: true);
+      // notifyBar(message: 'Cập nhật thành công', isSuccess: true);
     }
   }
 

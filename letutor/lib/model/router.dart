@@ -1,123 +1,109 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
+import 'package:letutor/common/constant.dart';
+import 'package:letutor/database/data/storage.dart';
+import 'package:letutor/database/service/authen_api.dart';
+import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/screen/course%20info/course_info.dart';
 import 'package:letutor/screen/history%20screen/history_screen.dart';
 import 'package:letutor/screen/home%20screen/main_page.dart';
+import 'package:letutor/screen/home%20screen/tutor_binding.dart';
 import 'package:letutor/screen/login%20screen/signin_screen.dart';
+import 'package:letutor/screen/profile%20screen/components/profile_binding.dart';
 import 'package:letutor/screen/profile%20screen/profile_page.dart';
+import 'package:letutor/screen/review/review_binding.dart';
+import 'package:letutor/screen/review/review_page.dart';
 import 'package:letutor/screen/schedule%20screen/scheduel.dart';
-import 'package:letutor/screen/teacher%20detail/teacher_detail.dart';
+import 'package:letutor/screen/tutor%20detail/component/tutor_detail_binding.dart';
+import 'package:letutor/screen/tutor%20detail/component/tutor_detail_component.dart';
+import 'package:letutor/screen/tutor%20detail/tutor_detail.dart';
+import 'package:letutor/screen/tutor%20detail/tutor_detail_controller.dart';
+import '../database/service/user_api.dart';
 import '../screen/error/error_screen.dart';
-import '../screen/home screen/home_screen.dart';
+import '../screen/home screen/tutor_controller.dart';
+import '../screen/home screen/tutor_screen.dart';
 import '../screen/login screen/forgot.dart';
 import '../screen/login screen/signup_screen.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'root');
-final GlobalKey<NavigatorState> _profileNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'shell');
+class BottomNavigate {
+  static String tutor = '/tutor';
+  static String courses = '/courses';
+  static String scheduel = '/schedule';
+  static String history = '/history';
+  static String profile = '/profile';
+}
 
-final GoRouter router = GoRouter(
-  navigatorKey: _rootNavigatorKey,
-  initialLocation: '/signin',
-  routes: [
-    GoRoute(
-      parentNavigatorKey: _rootNavigatorKey,
-      name: 'signin',
-      path: '/signin',
-      builder: (BuildContext context, GoRouterState state) {
-        return const SignInScreen();
-      },
+class Routes {
+  static final pages = <GetPage>[
+    GetPage(
+      name: '/signin',
+      page: () => const SignInScreen(),
     ),
-    GoRoute(
-      parentNavigatorKey: _rootNavigatorKey,
-      name: 'signup',
-      path: '/signup',
-      builder: (BuildContext context, GoRouterState state) {
-        return const SignUpScreen();
-      },
+    GetPage(
+      name: '/signup',
+      page: () => const SignUpScreen(),
+      // binding: SignUpScreen(),
     ),
-    GoRoute(
-      parentNavigatorKey: _rootNavigatorKey,
-      name: 'forgot',
-      path: '/forgot',
-      builder: (BuildContext context, GoRouterState state) {
-        return const ForgotScreen();
-      },
+    GetPage(
+      name: '/forgot',
+      page: () => const ForgotScreen(),
+      // binding: ForgotPasswordBinding(),
     ),
-    StatefulShellRoute.indexedStack(
-      parentNavigatorKey: _rootNavigatorKey,
-      builder: (context, state, navigationShell) {
-        return MainPage(
-          child: navigationShell,
-        );
+    GetPage(
+      name: '/tutor',
+      page: () {
+        if (!Get.isRegistered<TutorApi>()) {
+          Get.put(TutorApi());
+        }
+        if (!Get.isRegistered<UserApi>()) {
+          Get.put(UserApi());
+        }
+        if (!Get.isRegistered<TutorController>()) {
+          Get.put(TutorController());
+        }
+        return TutorScreen();
       },
-      branches: [
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-                path: '/tutor',
-                builder: (BuildContext context, GoRouterState state) =>
-                    TutorScreen(),
-                routes: [
-                  GoRoute(
-                    path: ':tutorid',
-                    builder: (BuildContext context, GoRouterState state) {
-                      String? id = state.pathParameters['tutorid'];
-                      return const TeacherDetailScreen();
-                    },
-                  ),
-                ])
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/schedule',
-              builder: (BuildContext context, GoRouterState state) {
-                return const ScheduelScreen();
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/history',
-              builder: (BuildContext context, GoRouterState state) {
-                return const HistoryScreen();
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          routes: [
-            GoRoute(
-              path: '/courses',
-              builder: (BuildContext context, GoRouterState state) {
-                return const CourseInfor();
-              },
-            ),
-          ],
-        ),
-        StatefulShellBranch(
-          navigatorKey: _profileNavigatorKey,
-          routes: [
-            GoRoute(
-              parentNavigatorKey: _profileNavigatorKey,
-              path: '/profile',
-              builder: (BuildContext context, GoRouterState state) {
-                return const ProfileScreen();
-              },
-            ),
-          ],
-        ),
-      ],
+      binding: TutorScreenBinding(),
     ),
-  ],
-  errorBuilder: (BuildContext context, GoRouterState state) {
-    return const ErrorPage();
-  },
-);
-
-// GoRouter configuration
+    GetPage(
+      name: '/tutor_detail',
+      page: () {
+        if (!Get.isRegistered<TutorDetailController>()) {
+          Get.put(TutorDetailController());
+        }
+        if (!Get.isRegistered<TutorApi>()) {
+          Get.put(TutorApi());
+        }
+        return const TutorDetailScreen();
+      },
+      binding: TutorDetailBinding(),
+    ),
+    GetPage(
+      name: '/profile',
+      page: () => const ProfileScreen(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: "/courses",
+      page: () => const CourseInfor(),
+      // binding: CoursesBinding(),
+    ),
+    GetPage(
+      name: '/schedule',
+      page: () => const ScheduelScreen(),
+      // binding: ScheduleBinding(),
+    ),
+    GetPage(
+      name: '/history',
+      page: () => const HistoryScreen(),
+      // binding: HistoryPageBinding(),
+    ),
+    GetPage(
+        name: API.feedback,
+        page: () => const ReviewPage(),
+        binding: ReviewBinding()),
+  ];
+}

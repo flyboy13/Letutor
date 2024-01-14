@@ -1,25 +1,33 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:intl/intl.dart';
+
 import 'package:letutor/control/base_controller.dart';
 import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/database/service/user_api.dart';
+import 'package:letutor/model/favourite_tutor.dart';
 import 'package:letutor/model/schedule.dart';
 import 'package:letutor/model/tutor.dart';
+import 'package:letutor/screen/tutor%20detail/tutor_detail.dart';
 
-class HomeScreenController extends BaseController {
+class TutorController extends BaseController {
   final _tutorService = Get.find<TutorApi>();
   final _userService = Get.find<UserApi>();
+  RxBool isLoading = false.obs;
 
-  RxList<Tutor> listTutor = <Tutor>[].obs;
   RxString currentType = 'All'.obs;
   RxList<String> valueContriesSelected = <String>[].obs;
+  RxList<FavouriteTutor> listFavouriteTutor = <FavouriteTutor>[].obs;
+  RxList<Tutor> listTutor = <Tutor>[].obs;
 
   RxList<Schedule> schedules = <Schedule>[].obs;
   RxInt totalTime = 0.obs;
   Rx<String> upComming = ''.obs;
+
+  RxInt pageSelected = 0.obs;
+  RxInt totalPage = 9.obs;
 
   final listType = [
     'All',
@@ -51,20 +59,38 @@ class HomeScreenController extends BaseController {
   @override
   void onInit() async {
     super.onInit();
+    if (!Get.isRegistered<TutorApi>()) {
+      Get.put(TutorApi());
+    }
+
+    pageSelected = 0.obs;
     initData();
     getDataSchedule();
-    debugPrint("Tutor Controller");
 
-    Timer.periodic(const Duration(seconds: 1), (Timer t) => renderUpComming());
+    isLoading = false.obs;
+
+    // Timer.periodic(const Duration(seconds: 1), (Timer t) => renderUpComming());
   }
 
   void initData() async {
     final res = await _tutorService.getAllTutorByPage();
     listTutor.value =
         (res['tutors']['rows'] as List).map((e) => Tutor.fromJson(e)).toList();
-    debugPrint(listTutor.value.toString());
+    listFavouriteTutor.value = (res['favoriteTutor'] as List).map((e) {
+      FavouriteTutor favouriteTutor;
+      try {
+        favouriteTutor = FavouriteTutor.fromJson(e);
+      } catch (e1) {
+        favouriteTutor = FavouriteTutor();
+      }
+      // FavouriteTutor favouriteTutor = FavouriteTutor.fromJson(e);
+      return favouriteTutor;
+    }).toList();
+    int total = res['tutors']['count'];
+    totalPage.value = (total ~/ 9 + 1);
     // final resTotal = await _userService.getTotalTime();
     // totalTime.value = resTotal['total'];
+    sortTutorList();
   }
 
   void search() async {
@@ -93,9 +119,23 @@ class HomeScreenController extends BaseController {
     initData();
   }
 
+  final tutorApi = TutorApi();
 //Todo: Navigate here
-  void navigateTutorDetail(Tutor tutor) {
-    // Get.toNamed(AppRoutes.TEACHER_DETAIL, arguments: {'id': tutor.userId});
+  Future<void> navigateTutorDetail(Tutor tutor) async {
+    String id = tutor.userId;
+    try {
+      isLoading.value = true;
+      // final res = await tutorApi.getTutorById(tutor.id);
+      // final tutorDetail = Tutor.fromJson(res);
+
+      await tutorApi.getTutorById(id);
+      // await tutorApi.getTutorById(tutor.id);
+    } catch (e) {
+      e.printError();
+    } finally {
+      isLoading.value = false;
+    }
+    Get.toNamed('/tutor_detail', arguments: {'id': id});
   }
 
   void getDataSchedule({page = 1}) async {
@@ -111,8 +151,34 @@ class HomeScreenController extends BaseController {
     }
   }
 
+  void manageTeacherFavorite(String id) {
+    _tutorService.manageTeacherFavorite(id);
+  }
+
+  bool favouriteTutor(String id) {
+    for (var item in listFavouriteTutor) {
+      if (item.secondId == id) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void manageListFavouriteTutor(String id) {
+    if (favouriteTutor(id)) {
+      listFavouriteTutor.removeWhere((element) => element.secondId == id);
+    } else {
+      listFavouriteTutor.add(FavouriteTutor(secondId: id));
+    }
+  }
+
+  void sortTutorList() {
+    listTutor.sort((a, b) => a.rating.compareTo(b.rating) < 0 ? 1 : -1);
+    listTutor.sort((a, b) => favouriteTutor(b.userId) ? 1 : -1);
+  }
+
   void renderUpComming() {
-    if (schedules.value.isNotEmpty) {
+    if (schedules.isNotEmpty) {
       int timeStart =
           schedules[0].scheduleDetailInfo?.scheduleInfo?.startTimestamp ?? 0;
       upComming.value = DateFormat("HH:mm ss").format(

@@ -2,30 +2,24 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:letutor/common/constant.dart';
 import 'package:letutor/conponent/information_teacher_component.dart';
 import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/database/service/user_api.dart';
-
+import 'package:letutor/model/router.dart';
+import 'package:number_paginator/number_paginator.dart';
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/tutor.dart';
-import 'package:letutor/screen/home%20screen/dash_board_list_controller.dart';
+import 'package:letutor/screen/home%20screen/tutor_controller.dart';
 import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
 
-class TutorScreen extends GetWidget<HomeScreenController> {
+class TutorScreen extends GetWidget<TutorController> {
   final List<String> _selectedItems = [];
-  final _tutor = TutorApi();
-  final _user = UserApi();
 
   RxList<Tutor> listTutor = <Tutor>[].obs;
 
   TutorScreen({super.key});
-
-  void initData() async {
-    final res = await _tutor.getAllTutorByPage();
-    listTutor.value =
-        (res['tutors']['rows'] as List).map((e) => Tutor.fromJson(e)).toList();
-  }
 
   void _showMultiSelect() async {
     // a list of selectable items
@@ -37,17 +31,38 @@ class TutorScreen extends GetWidget<HomeScreenController> {
     ];
   }
 
+  int _selectedIndex = 0;
+
+  void _onItemTapped(int index) {
+    if (index == 0) {
+      Get.offNamed(BottomNavigate.tutor, preventDuplicates: false);
+    }
+    if (index == 1) {
+      Get.offNamed(BottomNavigate.scheduel, preventDuplicates: false);
+    }
+    if (index == 2) {
+      Get.toNamed(BottomNavigate.history);
+    }
+    if (index == 3) {
+      Get.toNamed(BottomNavigate.courses);
+    }
+    if (index == 4) {
+      Get.toNamed(BottomNavigate.profile);
+    }
+
+    _selectedIndex = index;
+  }
+
   // Update UI
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ProfileController());
-    
-    
+    if (!Get.isRegistered<ProfileController>()) {
+      Get.put(ProfileController());
+    }
+
     double screenWidth = MediaQuery.of(context).size.width;
-
     double screenHeight = MediaQuery.of(context).size.height;
-
     DateTime selectedDate = DateTime.now();
 
     List<String> listChip = [
@@ -72,6 +87,44 @@ class TutorScreen extends GetWidget<HomeScreenController> {
         toolbarHeight: screenWidth * 0.05,
         title: appbar(context),
         backgroundColor: Colors.white,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Tutor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.calendar_month,
+            ),
+            label: 'Schedule',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.history,
+            ),
+            label: 'History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.school,
+            ),
+            label: 'Courses',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+            ),
+            label: 'Account',
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color.fromARGB(255, 9, 124, 255),
+        unselectedItemColor: const Color.fromARGB(255, 180, 180, 180),
+        onTap: _onItemTapped,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -272,13 +325,74 @@ class TutorScreen extends GetWidget<HomeScreenController> {
                 SizedBox(
                   height: screenHeight * 0.1,
                 ),
-                ...controller.listTutor.map(
-                  (element) => InformationTeacherComponent(
-                    tutor: element,
-                    controller: controller,
-                    countRating: element.rating,
+                Obx(() => controller.isLoading.value
+                    ? const Center(child: CircularProgressIndicator())
+                    : Column(children: [
+                        // controller.listFavouriteTutor != []
+                        //     ? Column(
+                        //         children: [
+                        //           ...controller.listFavouriteTutor.map(
+                        //             (element) {
+                        //               double tempRating;
+                        //               if (element.tutorInfo?.rating == null) {
+                        //                 tempRating = 0;
+                        //               } else {
+                        //                 tempRating = element.tutorInfo!.rating;
+                        //               }
+                        //               return InformationTeacherComponent(
+                        //                 tutor: element.tutorInfo,
+                        //                 controller: controller,
+                        //                 countRating: tempRating,
+                        //               );
+                        //             },
+                        //           )
+                        //         ],
+                        //       )
+                        //     : SizedBox(
+                        //         height: 0,
+                        //       ),
+                        ...controller.listTutor.map(
+                          (element) {
+                            return Column(
+                              children: [
+                                InformationTeacherComponent(
+                                  tutor: element,
+                                  controller: controller,
+                                  countRating: element.rating.toDouble(),
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                              ],
+                            );
+                          },
+                        )
+                      ])),
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: NumberPaginator(
+                        config: NumberPaginatorUIConfig(
+                          buttonShape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          mode: ContentDisplayMode.numbers,
+                        ),
+                        onPageChange: (value) {
+                          controller.pageSelected.value = value;
+                          controller.search();
+                        },
+                        numberPages: controller.totalPage.value,
+                        initialPage: controller.pageSelected.value,
+                      ),
+                    ),
                   ),
-                )
+                ),
               ]),
             ),
           ],

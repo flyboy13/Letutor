@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:letutor/control/app.dart';
+import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/model/router.dart';
 import 'package:letutor/provider/navigation_index.dart';
 import 'package:letutor/provider/setting.dart';
@@ -10,12 +11,13 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Get.put<App>(App()).init();
-  runApp(MyApp());
+  AppStorage appStorage = AppStorage();
+  await appStorage.init();
+  runApp(const MyApp());
 }
 
 class MyApp extends GetWidget<App> {
-  MyApp({super.key});
-  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+  const MyApp({super.key});
 
   @override
   Widget build(context) {
@@ -28,14 +30,17 @@ class MyApp extends GetWidget<App> {
             create: (_) => SettingProvider(),
           )
         ],
-        child: MaterialApp.router(
+        child: GetMaterialApp(
+          title: 'Letutor',
           theme: ThemeData(
             // enable Material 3
             useMaterial3: true,
             primarySwatch: Colors.indigo,
           ),
-          routerConfig: router,
           debugShowCheckedModeBanner: false,
+          getPages: Routes.pages,
+          initialRoute: '/signin',
+          useInheritedMediaQuery: true,
         ));
 
     // return LessonScheduleApp();

@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:get/get.dart';
 
 class ForgotScreen extends StatefulWidget {
   const ForgotScreen({super.key});
@@ -29,7 +29,7 @@ class ForgotScreenState extends State<ForgotScreen> {
       print(_passwordController.text);
       print("clicked SignUp");
       if (_emailController.text == 'letutor@gmail.com') {
-        context.go('/tutor');
+        Get.toNamed('/tutor');
       } else {
         setState(() {
           error = "Error: You type Email wrong";

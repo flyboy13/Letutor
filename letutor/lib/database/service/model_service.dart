@@ -16,9 +16,12 @@ abstract class ModelService {
   Future<dynamic> get(String path,
       {Map<String, dynamic>? params,
       JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response =
-        await AuthenApi.getDio().get(path, queryParameters: params);
-    return _handleResponse(response, responseType: responseType);
+    print("AuthenApi token: ${AuthenApi.accessToken}");
+    if (AuthenApi.accessToken != "") {
+      final response =
+          await AuthenApi.getDio().get(path, queryParameters: params);
+      return _handleResponse(response, responseType: responseType);
+    }
   }
 
   Future<dynamic> post(String path,

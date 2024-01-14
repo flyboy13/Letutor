@@ -70,6 +70,10 @@ class Tutor {
   });
 
   factory Tutor.fromJson(json) {
+    print(
+        "==============================Debug Tutor ===========================");
+    print(json['User']);
+
     return Tutor(
       rating: json['rating'] ?? 0,
       userId: json['userId'] ?? '',

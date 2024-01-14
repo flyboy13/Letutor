@@ -5,10 +5,10 @@ class CircleBox extends StatelessWidget {
   double size;
   Widget child;
   CircleBox({
-    Key? key,
+    super.key,
     required this.size,
     required this.child,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return SizedBox(

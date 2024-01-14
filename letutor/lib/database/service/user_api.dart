@@ -1,24 +1,34 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, unused_import
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
 import 'package:letutor/common/constant.dart';
+import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/model/user.dart';
-import 'package:letutor/screen/home%20screen/dash_board_list_controller.dart';
+import 'package:letutor/screen/home%20screen/tutor_controller.dart';
 import '../../provider/base_services.dart';
 
 class UserApi extends BaseService {
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
+  BuildContext? get context => null;
   Future<void> login({required String email, required String password}) async {
     final body = {"email": email, "password": password};
     final response = await post(API.login, data: body);
-    debugPrint(response.toString());
-    Get.put(TutorApi());
-    Get.put(UserApi());
-    Get.put(HomeScreenController());
     saveUser(response);
+
+    if (!Get.isRegistered<TutorApi>()) {
+      Get.put(TutorApi());
+    }
+    if (!Get.isRegistered<UserApi>()) {
+      Get.put(UserApi());
+    }
+
+    if (!Get.isRegistered<TutorController>()) {
+      Get.put(TutorController());
+    }
   }
 
   Future<void> signUp({required String email, required String password}) async {
@@ -74,8 +84,15 @@ class UserApi extends BaseService {
       'studySchedule': user.studySchedule,
       // 'testPreparations': user.testPreparations
     };
-    final response = await put(API.userInfor, data: body);
-    appController.userModel.value = User.fromJson(response);
+    try {
+      final response = await put(API.userInfor, data: body);
+      appController.userModel.value = User.fromJson(response);
+      ScaffoldMessenger.of(context!).showSnackBar(const SnackBar(
+        content: Center(child: Text('Update Avatar Successfull!')),
+      ));
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
 //

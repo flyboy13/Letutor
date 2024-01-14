@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/appbar.dart';
@@ -21,7 +22,7 @@ class SignUpScreenState extends State<SignUpScreen> {
   String error = "";
   final userApi = UserApi();
   void onSignUpSuccess() {
-    GoRouter.of(context).go('/signin');
+    Get.toNamed('/signin');
   }
 
   @override
@@ -272,7 +273,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                context.go('/signin');
+                               Get.toNamed('/signin');
                               },
                               child: Text(
                                 'Login',

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/calendar.dart';
+import 'package:letutor/model/router.dart';
 import 'package:letutor/screen/schedule screen/scheduel_items.dart';
 
 class ScheduelScreen extends StatefulWidget {
@@ -18,6 +21,27 @@ class ScheduelScreenState extends State<ScheduelScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
+    int selectedIndex = 1;
+
+    void onItemTapped(int index) {
+      if (index == 0) {
+        Get.offNamed(BottomNavigate.tutor, preventDuplicates: false);
+      }
+      if (index == 1) {
+        Get.offNamed(BottomNavigate.scheduel, preventDuplicates: false);
+      }
+      if (index == 2) {
+        Get.toNamed(BottomNavigate.history);
+      }
+      if (index == 3) {
+        Get.toNamed(BottomNavigate.courses);
+      }
+      if (index == 4) {
+        Get.toNamed(BottomNavigate.profile);
+      }
+
+      selectedIndex = index;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -26,6 +50,44 @@ class ScheduelScreenState extends State<ScheduelScreen> {
           children: [appbar(context)],
         ),
         backgroundColor: Colors.white,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Tutor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.calendar_month,
+            ),
+            label: 'Schedule',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.history,
+            ),
+            label: 'History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.school,
+            ),
+            label: 'Courses',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+            ),
+            label: 'Account',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: const Color.fromARGB(255, 9, 124, 255),
+        unselectedItemColor: const Color.fromARGB(255, 180, 180, 180),
+        onTap: onItemTapped,
       ),
       body: Center(
         child: SingleChildScrollView(

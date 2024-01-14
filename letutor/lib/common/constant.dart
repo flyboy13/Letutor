@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class API {
   //auth
   static const String login = 'auth/login';
@@ -8,8 +10,11 @@ class API {
   static const String listTutor = 'tutor/more?perPage=9&page=%i';
   static const String searchTutor = 'tutor/search';
   static const String scheduel = 'schedule';
-  static const String getTutor = 'tutor/%s';
+  static const String getTutor = 'tutor/%id';
   static const String reviewTutor = 'feedback/v2/%s?perPage=10&page=%i';
+  static const String addFavourite = 'user/manageFavoriteTutor';
+  static const String feedback = '/user/feedbackTutor';
+  static const String report = 'report';
 
   //scheduler
   static const String scheduelAll = 'booking/list/student';
@@ -20,6 +25,14 @@ class API {
   //user
   static const String userInfor = 'user/info';
   static const String changePassword = 'auth/change-password';
+}
+
+
+Size resolution(BuildContext context) {
+  Size size = MediaQuery.of(context).size;
+
+  // Return the size as a Size object
+  return size;
 }
 
 Map<String, String> learnTopics = {

@@ -1,8 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 
 class AppStorage {
-  late GetStorage box;
   static const sharedReference = "lettutor_storage";
+
   static const userInfor = "app_user_info";
   static const userToken = "user_token";
   // static const APP_THEME = "app_theme";
@@ -11,6 +11,8 @@ class AppStorage {
     await GetStorage.init(sharedReference);
     box = GetStorage(sharedReference);
   }
+
+  GetStorage box = GetStorage(sharedReference);
 
   Future<void> saveToken(String refreshToken) async {
     box.write(userToken, refreshToken);

@@ -1,9 +1,15 @@
+// ignore_for_file: unused_import
+
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:letutor/database/data/storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthenApi {
   var timeOut = 60000;
   static const log = true;
   static const accessToken = 'Authorization';
+  static AppStorage storage = AppStorage();
 
   // singleton
   static final AuthenApi instance = AuthenApi._internal();
@@ -17,18 +23,30 @@ class AuthenApi {
   late String baseUrl;
   late Map<String, dynamic> headers;
 
-  void init(String baseUrl, {String? accessToken}) {
+  Future<void> init(String baseUrl, {String? accessToken}) async {
     this.baseUrl = baseUrl;
-    headers = {
-      'Content-Type': 'application/json',
-    };
-    if (accessToken != null) setToken(accessToken);
+    storage.init();
+    String? getToken = await storage.getToken();
+    if (getToken != null) {
+      setToken(getToken);
+      // String? getToken = await storage.getToken();
+      headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $getToken'
+      };
+    } else {
+      headers = {
+        'Content-Type': 'application/json',
+      };
+    }
   }
 
-  void setToken(String token) {
-    // headers[accessToken] = "Bearer $token";
-    headers[accessToken] =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYjllN2RlYi0zMzgyLTQ4ZGItYjA3Yy05MGFjZjUyZjU0MWMiLCJpYXQiOjE3MDMzMDI1NjksImV4cCI6MTcwMzM4ODk2OSwidHlwZSI6ImFjY2VzcyJ9.OA9R3zRLTdJAEIzrbBJ8jVb_bmqm0W7iq2vcV6QVGmg";
+  Future<void> setToken(String token) async {
+    await storage.saveToken(token);
+
+    String? getToken = await storage.getToken();
+    headers[accessToken] = "Bearer $getToken";
+    // print(headers);
   }
 
   void clearToken() {
@@ -37,6 +55,7 @@ class AuthenApi {
 
   static Dio getDio() {
     var dio = Dio(instance.getDioBaseOption());
+
     return dio;
   }
 

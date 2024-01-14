@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
+
 import 'package:email_validator/email_validator.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/appbar.dart';
@@ -18,7 +19,7 @@ class SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordController = TextEditingController();
   String error = "";
   void onSignInSuccess() {
-    GoRouter.of(context).go('/tutor');
+    Get.offNamed('/tutor');
   }
 
   @override
@@ -46,10 +47,18 @@ class SignInScreenState extends State<SignInScreen> {
         //     error = "Error: You type Email or Password wrong";
         //   });
         // }
+        if (_emailController.text=="" || _passwordController.text == "")
+        {
+          error = "Please enter Email and Password";
+          
+        }else{
+
+        
 
         await userApi.login(
             email: _emailController.text, password: _passwordController.text);
         onSignInSuccess();
+        }
       } catch (e) {
         setState(() {
           error = "Error: You type Email or Password wrong";
@@ -290,7 +299,7 @@ class SignInScreenState extends State<SignInScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                                context.go('/signup');
+                               Get.toNamed('/signup');
                               },
                               child: Text(
                                 'Sign Up',

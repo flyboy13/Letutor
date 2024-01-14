@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:letutor/model/topic.dart';
 import 'package:letutor/model/date_time.dart';
+import 'package:letutor/model/wallet_info.dart';
 import 'course.dart';
 
 class User {
@@ -22,6 +23,10 @@ class User {
   List<Topic> learnTopics;
   List<Topic> testPreparations;
   List<Course> courses;
+  WalletInfo? walletInfo;
+  String getName() {
+    return name;
+  }
 
   User({
     this.id = '',
@@ -43,6 +48,7 @@ class User {
   });
 
   factory User.fromJson(json) {
+    if (json == null) return User(birthday: DateTime(2024));
     return User(
       id: json['id'] ?? "",
       email: json['email'] ?? "",
@@ -70,7 +76,7 @@ class User {
               .toList(),
       birthday: json['birthday'] != null
           ? DateFormat(time1).parse(json['birthday'])
-          : DateTime(1990),
+          : DateTime(2024),
       courses: json['courses'] == null
           ? []
           : (json['courses'] as List).map((e) => Course.fromJson(e)).toList(),

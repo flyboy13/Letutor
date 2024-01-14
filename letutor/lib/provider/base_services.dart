@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, unused_import
 import 'dart:convert';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:letutor/control/api_response.dart';
 import 'package:letutor/control/app.dart';
 import 'package:letutor/control/control_error_api.dart';
+import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/database/service/authen_api.dart';
 import 'package:letutor/model/user.dart';
 
@@ -80,9 +81,10 @@ abstract class BaseService {
     return jsonEncode(queryParams);
   }
 
-  void saveUser(response) {
+  Future<void> saveUser(response)  async {
     appController.userModel.value = User.fromJson(response['user']);
     AuthenApi.instance.setToken(response['tokens']['access']['token']);
+  
   }
 //
 // void saveLanguages(response) {
