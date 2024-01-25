@@ -83,8 +83,9 @@ class TutorDetailController extends BaseController {
           videoController.play();
         }
         
-        isLoadingInit.value = false;
+
       }
+      isLoadingInit.value = false;
     } catch (e) {
       print("Error of setup Data Tutor detail Controller: $e");
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:letutor/database/service/course_service.dart';
+import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/model/user.dart';
 import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/database/service/authen_api.dart';
@@ -8,7 +10,6 @@ import 'package:letutor/database/service/user_api.dart';
 enum AuthState { unauthorized, authorized }
 
 class App extends GetxController {
-  late Rx<Locale?> locale;
   late Rx<ThemeData?> themeData;
   final Rx<User?> userModel = User(birthday: DateTime(2023)).obs;
   final Rx<AuthState> authState = AuthState.unauthorized.obs;
@@ -23,6 +24,8 @@ class App extends GetxController {
 
   void setupApp() {
     Get.put(UserApi());
+    Get.put(TutorApi());
+    Get.put(CourseService());
   }
 
   initApi(String? accessToken) async {

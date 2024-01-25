@@ -45,6 +45,7 @@ class AuthenApi {
     await storage.saveToken(token);
 
     String? getToken = await storage.getToken();
+    print ("getToken: $getToken");
     headers[accessToken] = "Bearer $getToken";
     // print(headers);
   }

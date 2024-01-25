@@ -47,17 +47,17 @@ class SignInScreenState extends State<SignInScreen> {
         //     error = "Error: You type Email or Password wrong";
         //   });
         // }
-        if (_emailController.text=="" || _passwordController.text == "")
-        {
+        if (_emailController.text == "" || _passwordController.text == "") {
           error = "Please enter Email and Password";
-          
-        }else{
-
-        
-
-        await userApi.login(
-            email: _emailController.text, password: _passwordController.text);
-        onSignInSuccess();
+        } else {
+          var check = await userApi.login(
+              email: _emailController.text, password: _passwordController.text);
+          print("Check: $check");
+          if (check == true) {
+            onSignInSuccess();
+          } else {
+            error = "Error: You type Email or Password wrong";
+          }
         }
       } catch (e) {
         setState(() {
@@ -299,7 +299,7 @@ class SignInScreenState extends State<SignInScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                               Get.toNamed('/signup');
+                                Get.offNamed('/signup');
                               },
                               child: Text(
                                 'Sign Up',

@@ -2,10 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:letutor/common/constant.dart';
+import 'package:intl/intl.dart';
 import 'package:letutor/conponent/information_teacher_component.dart';
-import 'package:letutor/database/service/tutor_api.dart';
-import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/router.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:letutor/model/appbar.dart';
@@ -41,13 +39,13 @@ class TutorScreen extends GetWidget<TutorController> {
       Get.offNamed(BottomNavigate.scheduel, preventDuplicates: false);
     }
     if (index == 2) {
-      Get.toNamed(BottomNavigate.history);
+      Get.offNamed(BottomNavigate.history);
     }
     if (index == 3) {
-      Get.toNamed(BottomNavigate.courses);
+      Get.offNamed(BottomNavigate.courses);
     }
     if (index == 4) {
-      Get.toNamed(BottomNavigate.profile);
+      Get.offNamed(BottomNavigate.profile);
     }
 
     _selectedIndex = index;
@@ -74,7 +72,7 @@ class TutorScreen extends GetWidget<TutorController> {
       'MOVERS',
       'FLYERS',
       'PET',
-      'KET',
+      'KET',  
       'IELTS',
       'TOEFL',
       'TOEIC'
@@ -158,13 +156,15 @@ class TutorScreen extends GetWidget<TutorController> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Thu, 26 Oct 23 00:00 - 00:25",
+                          DateFormat('dd/MM/yyyy').format(DateTime.now()),
                           style: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255),
                               fontSize: screenWidth * 0.04),
                         ),
                         Text(
-                          "(starts in 01:36:14)",
+                          controller.upComming.value != ''
+                              ? '(còn ${controller.upComming.value})'
+                              : '',
                           style: TextStyle(
                               color: Color.fromARGB(255, 255, 235, 56),
                               fontSize: screenWidth * 0.04),
@@ -215,7 +215,9 @@ class TutorScreen extends GetWidget<TutorController> {
                       height: screenHeight * 0.02,
                     ),
                     Text(
-                      "Total lesson time is 509 hours 35 minutes",
+                      controller.upComming.value != ''
+                          ? '(còn ' + controller.upComming.value + ')'
+                          : '',
                       style: TextStyle(
                           color: Color.fromARGB(255, 255, 255, 255),
                           fontSize: screenWidth * 0.04),

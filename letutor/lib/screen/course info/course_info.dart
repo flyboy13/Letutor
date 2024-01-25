@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:letutor/model/appbar.dart';
+import 'package:letutor/model/router.dart';
 
 import 'package:letutor/screen/course%20info/card.dart';
 
@@ -15,6 +17,27 @@ class CourseInforState extends State<CourseInfor> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
+    int selectedIndex = 3;
+
+    void onItemTapped(int index) {
+      if (index == 0) {
+        Get.offNamed(BottomNavigate.tutor, preventDuplicates: false);
+      }
+      if (index == 1) {
+        Get.offNamed(BottomNavigate.scheduel, preventDuplicates: false);
+      }
+      if (index == 2) {
+        Get.offNamed(BottomNavigate.history);
+      }
+      if (index == 3) {
+        Get.offNamed(BottomNavigate.courses);
+      }
+      if (index == 4) {
+        Get.offNamed(BottomNavigate.profile);
+      }
+
+      selectedIndex = index;
+    }
 
     List<String> courseTitles = [
       "The Internet",
@@ -35,6 +58,44 @@ class CourseInforState extends State<CourseInfor> {
           children: [appbar(context)],
         ),
         backgroundColor: Colors.white,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Tutor',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.calendar_month,
+            ),
+            label: 'Schedule',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.history,
+            ),
+            label: 'History',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.school,
+            ),
+            label: 'Courses',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_circle,
+            ),
+            label: 'Account',
+          ),
+        ],
+        currentIndex: selectedIndex,
+        selectedItemColor: const Color.fromARGB(255, 9, 124, 255),
+        unselectedItemColor: const Color.fromARGB(255, 180, 180, 180),
+        onTap: onItemTapped,
       ),
       body: SingleChildScrollView(
         child: Column(

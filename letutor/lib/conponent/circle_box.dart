@@ -2,9 +2,9 @@
 import 'package:flutter/cupertino.dart';
 
 class CircleBox extends StatelessWidget {
-  double size;
-  Widget child;
-  CircleBox({
+  final double size;
+  final Widget child;
+  const CircleBox({
     super.key,
     required this.size,
     required this.child,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +11,8 @@ import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/favourite_tutor.dart';
 import 'package:letutor/model/schedule.dart';
+import 'package:letutor/model/title_string.dart';
 import 'package:letutor/model/tutor.dart';
-import 'package:letutor/screen/tutor%20detail/tutor_detail.dart';
 
 class TutorController extends BaseController {
   final _tutorService = Get.find<TutorApi>();
@@ -66,10 +68,10 @@ class TutorController extends BaseController {
     pageSelected = 0.obs;
     initData();
     getDataSchedule();
-
+ Timer.periodic(const Duration(seconds: 1), (Timer t) => renderUpComming());
     isLoading = false.obs;
 
-    // Timer.periodic(const Duration(seconds: 1), (Timer t) => renderUpComming());
+   
   }
 
   void initData() async {
@@ -93,16 +95,22 @@ class TutorController extends BaseController {
     sortTutorList();
   }
 
-  void search() async {
+ void search() async {
     try {
       final res = await _tutorService.getAllTutorBySearch(
+          page: pageSelected.value + 1,
           // nationality: nationality,
-          search: controllers['nameField']!.text,
-          specialties: [
-            // if (currentType.value != listType[0]) currentType.value,
-          ]);
+          search: controllers["nameField"]!.text,
+          // specialties: [
+          //   if (currentType.value != TitleString.all)
+          //     mapListType[currentType.value]!
+          // ]
+          );
+      int total = res['count'];
+      totalPage.value = (total ~/ 9 + 1);
       listTutor.value =
           (res['rows'] as List).map((e) => Tutor.fromJson(e)).toList();
+      update();
     } catch (e) {
       e.printError();
     }
@@ -177,13 +185,17 @@ class TutorController extends BaseController {
     listTutor.sort((a, b) => favouriteTutor(b.userId) ? 1 : -1);
   }
 
-  void renderUpComming() {
-    if (schedules.isNotEmpty) {
+    void renderUpComming() {
+      print ("Up schedules : ${schedules.value}");
+    if (schedules.value.isNotEmpty) {
       int timeStart =
           schedules[0].scheduleDetailInfo?.scheduleInfo?.startTimestamp ?? 0;
+          print ("Up comming value: ${upComming.value}");
       upComming.value = DateFormat("HH:mm ss").format(
           DateTime.fromMillisecondsSinceEpoch(
               timeStart - DateTime.now().millisecondsSinceEpoch));
     }
   }
+
+  
 }

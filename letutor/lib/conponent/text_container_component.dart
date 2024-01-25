@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 class TextContainerComponent extends StatelessWidget {
-  String title;
-  double? radius;
-  Color? color;
-  Color? borderColor;
-  Color? textColor;
+  final String title;
+  final double? radius;
+  final Color? color;
+  final Color? borderColor;
+  final Color? textColor;
 
-  TextContainerComponent({
+  const TextContainerComponent({
     super.key,
     required this.title,
     this.radius,

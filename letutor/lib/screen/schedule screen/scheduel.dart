@@ -31,13 +31,13 @@ class ScheduelScreenState extends State<ScheduelScreen> {
         Get.offNamed(BottomNavigate.scheduel, preventDuplicates: false);
       }
       if (index == 2) {
-        Get.toNamed(BottomNavigate.history);
+        Get.offNamed(BottomNavigate.history);
       }
       if (index == 3) {
-        Get.toNamed(BottomNavigate.courses);
+        Get.offNamed(BottomNavigate.courses);
       }
       if (index == 4) {
-        Get.toNamed(BottomNavigate.profile);
+        Get.offNamed(BottomNavigate.profile);
       }
 
       selectedIndex = index;

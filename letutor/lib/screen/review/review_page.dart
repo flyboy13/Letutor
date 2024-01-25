@@ -46,14 +46,14 @@ class ReviewPage extends GetWidget<ReviewController> {
                                     Text(
                                       e.firstInfo?.name ?? "No name",
                                       style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 20,
                                           fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(width: 5),
                                     Text(
                                       e.createdAt.toString(),
                                       style: const TextStyle(
-                                        fontSize: 3,
+                                        fontSize: 15,
                                       ),
                                     )
                                   ],
@@ -79,7 +79,7 @@ class ReviewPage extends GetWidget<ReviewController> {
                                   width: Get.width - 100,
                                   child: Text(
                                     e.content,
-                                    style: const TextStyle(fontSize: 13),
+                                    style: const TextStyle(fontSize: 25),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 4,
                                   ),

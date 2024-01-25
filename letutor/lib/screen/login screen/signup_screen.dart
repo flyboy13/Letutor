@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/appbar.dart';
 
@@ -273,7 +272,7 @@ class SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextButton(
                               onPressed: () {
-                               Get.toNamed('/signin');
+                                Get.offNamed('/signin');
                               },
                               child: Text(
                                 'Login',

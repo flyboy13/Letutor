@@ -29,10 +29,10 @@ class Review {
       content: json['content'] ?? '',
       createdAt: json['createdAt'] != null
           ? DateFormat(time).parse(json['createdAt'])
-          : DateTime(1990),
+          : DateTime(2024),
       updatedAt: json['updatedAt'] != null
           ? DateFormat(time).parse(json['updatedAt'])
-          : DateTime(1990),
+          : DateTime(2024),
       firstInfo: User.fromJson(json['firstInfo']),
     );
   }

@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:get/get_connect/http/src/response/response.dart';
+// ignore_for_file: depend_on_referenced_packages, avoid_print
 
 import 'package:get/get_connect/http/src/status/http_status.dart';
 

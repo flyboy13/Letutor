@@ -18,8 +18,13 @@ abstract class BaseService {
   Future<dynamic> get(String path,
       {Map<String, dynamic>? params,
       JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response =
-        await AuthenApi.getDio().get(path, queryParameters: params);
+    late var response;
+    try {
+      response = await AuthenApi.getDio().get(path, queryParameters: params);
+    } catch (e) {
+      print(e);
+      return;
+    }
     return _handleResponse(response, responseType: responseType);
   }
 
@@ -27,7 +32,13 @@ abstract class BaseService {
       {data,
       bool enableCache = false,
       JsonType responseType = JsonType.FULL_RESPONSE}) async {
-    final response = await AuthenApi.getDio().post(path, data: data);
+    late var response;
+    try {
+      response = await AuthenApi.getDio().post(path, data: data);
+    } catch (e) {
+      print(e);
+      return;
+    }
     return _handleResponse(response, responseType: responseType);
   }
 
@@ -51,7 +62,7 @@ abstract class BaseService {
 
   bool isSuccess(statusCode) => statusCode! >= 200 && statusCode! <= 299;
 
-  dynamic _handleResponse(dio.Response response,
+  dynamic _handleResponse(dio.Response response,  
       {JsonType responseType = JsonType.JSON_RESPONSE}) {
     if (isSuccess(response.statusCode)) {
       if (responseType == JsonType.JSON_RESPONSE) {
@@ -81,10 +92,9 @@ abstract class BaseService {
     return jsonEncode(queryParams);
   }
 
-  Future<void> saveUser(response)  async {
+  Future<void> saveUser(response) async {
     appController.userModel.value = User.fromJson(response['user']);
     AuthenApi.instance.setToken(response['tokens']['access']['token']);
-  
   }
 //
 // void saveLanguages(response) {

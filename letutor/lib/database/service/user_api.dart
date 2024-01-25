@@ -1,4 +1,5 @@
-// ignore_for_file: unused_local_variable, unused_import
+// ignore_for_file: unused_local_variable, unused_import, avoid_print
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,21 +15,35 @@ class UserApi extends BaseService {
   final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
 
   BuildContext? get context => null;
-  Future<void> login({required String email, required String password}) async {
+
+  Future<bool> login({required String email, required String password}) async {
     final body = {"email": email, "password": password};
-    final response = await post(API.login, data: body);
-    saveUser(response);
+    late var response;
+    try {
+      response = await post(API.login, data: body);
+    } catch (e) {
+      print("===========================");
+      print(e);
+      print("===========================");
+      return false;
+    }
 
-    if (!Get.isRegistered<TutorApi>()) {
-      Get.put(TutorApi());
-    }
-    if (!Get.isRegistered<UserApi>()) {
-      Get.put(UserApi());
-    }
+    // print("Respone: ${response.body}");
+    if (response.statusCode == 200) {
+      saveUser(response);
 
-    if (!Get.isRegistered<TutorController>()) {
-      Get.put(TutorController());
+      if (!Get.isRegistered<TutorApi>()) {
+        Get.put(TutorApi());
+      }
+      if (!Get.isRegistered<UserApi>()) {
+        Get.put(UserApi());
+      }
+
+      if (!Get.isRegistered<TutorController>()) {
+        Get.put(TutorController());
+      }
     }
+    return true;
   }
 
   Future<void> signUp({required String email, required String password}) async {

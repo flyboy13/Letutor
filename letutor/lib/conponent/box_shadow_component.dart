@@ -1,33 +1,31 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 
 class BoxShadowComponent extends StatelessWidget {
-  Widget child;
-  EdgeInsetsGeometry? padding;
-  BorderRadiusGeometry? borderRadius;
-  Color? borderColor;
-  double width;
+  final Widget child;
+  final EdgeInsetsGeometry? padding;
+  final BorderRadiusGeometry? borderRadius;
+  final Color? borderColor;
+  final double width;
 
-  Function()? onTap;
-  BoxShadowComponent({
-    Key? key,
+  final Function()? onTap;
+  const BoxShadowComponent({
+    super.key,
     this.padding,
     this.borderRadius,
     this.borderColor,
     this.onTap,
     required this.width,
     required this.child,
-  }) : super(key: key);
+  });
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
           width: width,
-          margin: EdgeInsets.symmetric(horizontal: 2),
-          padding: padding ?? EdgeInsets.only(bottom: 20),
+          margin: const EdgeInsets.symmetric(horizontal: 2),
+          padding: padding ?? const EdgeInsets.only(bottom: 20),
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
