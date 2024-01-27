@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:letutor/conponent/circle_box.dart';
 import 'package:letutor/conponent/image_network_component.dart';
+import 'package:letutor/model/appbar.dart';
 import 'package:letutor/screen/review/review_controller.dart';
 
 import 'package:number_paginator/number_paginator.dart';
@@ -13,7 +14,11 @@ class ReviewPage extends GetWidget<ReviewController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(56.0), // Set the height of the AppBar here
+        child: appbar(),
+      ),
       body: SingleChildScrollView(
         child: Obx(
           () => controller.isLoading.value

@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
-import 'package:letutor/screen/course%20info/courses_controller.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/bindings_interface.dart';
+
+import 'courses_controller.dart';
 
 class CoursesBinding extends Bindings {
   @override

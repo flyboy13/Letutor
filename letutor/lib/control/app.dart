@@ -10,9 +10,11 @@ import 'package:letutor/database/service/user_api.dart';
 enum AuthState { unauthorized, authorized }
 
 class App extends GetxController {
-  late Rx<ThemeData?> themeData;
+
   final Rx<User?> userModel = User(birthday: DateTime(2023)).obs;
   final Rx<AuthState> authState = AuthState.unauthorized.obs;
+
+  Rx<ValueNotifier<ThemeMode>> themeModeNotifier = ValueNotifier<ThemeMode>(ThemeMode.light).obs;
 
   init() async {
     await Future.wait([initStorage()]);
@@ -26,6 +28,12 @@ class App extends GetxController {
     Get.put(UserApi());
     Get.put(TutorApi());
     Get.put(CourseService());
+  }
+
+  void changeThemeMode(ThemeMode newThemeMode) {
+    themeModeNotifier = ValueNotifier<ThemeMode>(newThemeMode).obs;
+     update();
+    print ("Theme: $themeModeNotifier");
   }
 
   initApi(String? accessToken) async {

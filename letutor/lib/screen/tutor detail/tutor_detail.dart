@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:letutor/model/appbar.dart';
 import 'package:letutor/screen/tutor%20detail/component/tutor_detail_component.dart';
 import 'package:letutor/screen/tutor%20detail/component/tutor_information_component.dart';
 import 'package:letutor/screen/tutor%20detail/component/tutor_video_component.dart';
@@ -14,7 +15,11 @@ class TutorDetailScreen extends GetWidget<TutorDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: PreferredSize(
+        preferredSize:
+            const Size.fromHeight(56.0), // Set the height of the AppBar here
+        child: appbar(),
+      ),
       body: Center(
         child: Obx(
           () => SingleChildScrollView(
@@ -29,7 +34,6 @@ class TutorDetailScreen extends GetWidget<TutorDetailController> {
                           controller: controller,
                         ),
 
-                        
                         controller.checkUrl
                             ? TutorVideoComponent(controller: controller)
                             : const SizedBox(),

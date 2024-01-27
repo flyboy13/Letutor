@@ -5,12 +5,15 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:letutor/conponent/information_teacher_component.dart';
 import 'package:letutor/model/router.dart';
+import 'package:letutor/screen/meeting/video_meeting.dart';
 import 'package:number_paginator/number_paginator.dart';
 import 'package:letutor/model/appbar.dart';
-import 'package:letutor/model/list_chip.dart';
+
 import 'package:letutor/model/tutor.dart';
 import 'package:letutor/screen/home%20screen/tutor_controller.dart';
 import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
+
+import 'package:multi_select_flutter/multi_select_flutter.dart';
 
 class TutorScreen extends GetWidget<TutorController> {
   final List<String> _selectedItems = [];
@@ -18,16 +21,6 @@ class TutorScreen extends GetWidget<TutorController> {
   RxList<Tutor> listTutor = <Tutor>[].obs;
 
   TutorScreen({super.key});
-
-  void _showMultiSelect() async {
-    // a list of selectable items
-    // these items can be hard-coded or dynamically fetched from a database/API
-    final List<String> items = [
-      "Foreign Tutor",
-      "Vietnamese Tutor",
-      "Native English Tutor"
-    ];
-  }
 
   int _selectedIndex = 0;
 
@@ -63,28 +56,80 @@ class TutorScreen extends GetWidget<TutorController> {
     double screenHeight = MediaQuery.of(context).size.height;
     DateTime selectedDate = DateTime.now();
 
-    List<String> listChip = [
-      'All',
-      'English for kids',
-      'English for Business',
-      'Conversational',
-      'STARTERS',
-      'MOVERS',
-      'FLYERS',
-      'PET',
-      'KET',  
-      'IELTS',
-      'TOEFL',
-      'TOEIC'
+    // Map listChip = {
+
+    //   'English for kids': "english-for-kids",
+    //   'English for Business': "business-english",
+    //   'Conversational':"conversational-english",
+    //   'STARTERS': "starters",
+    //   'MOVERS': "movers",
+    //   'FLYERS': "flyers",
+    //   'PET': "pet",
+    //   'KET': "ket",
+    //   'IELTS':"ielts",
+    //   'TOEFL': "toefl",
+    //   'TOEIC': "toeic"
+    // };
+
+    // Widget listSpecialities = createListChip(listChip);
+    String name = "";
+    RxString selectedSpecialities = "".obs;
+
+    RxList selectNations = [].obs;
+    RxString spec = "".obs;
+
+    List nations = [
+      "Foreign Tutor",
+      "Vietnamese Tutor",
+      "Native English Tutor"
     ];
 
-    Widget listSpecialities = createListChip(listChip);
+    List<MultiSelectItem<String?>> items = nations
+        .map((nation) => MultiSelectItem<String?>(nation, nation))
+        .toList();
+
+    void search() async {
+      Map nationTemp = {};
+      print("nation: $selectNations");
+      if (selectNations.contains("Foreign Tutor")) {
+        nationTemp = {"isVietNamese": false};
+      }
+      if (selectNations.contains("Vietnamese Tutor")) {
+        nationTemp = {"isVietNamese": true};
+      }
+      if (selectNations.contains("Native English Tutor")) {
+        nationTemp = {"isNative": true};
+      }
+      if (selectNations.contains("Foreign Tutor") &
+          selectNations.contains("Vietnamese Tutor") &
+          selectNations.contains("Native English Tutor")) {
+        nationTemp = {};
+      }
+      try {
+        controller.body = {
+          "filters": {
+            "nationality": nationTemp,
+            "specialties": [selectedSpecialities.value],
+          },
+          "page": controller.pageSelected.value,
+          "perPage": 9,
+          "search": name
+        };
+
+        print("Controller.body = ${controller.body}");
+        controller.search();
+
+        // controller.update();
+      } catch (e) {
+        e.printError();
+      }
+    }
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: screenWidth * 0.05,
-        title: appbar(context),
-        backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(56.0), // Set the height of the AppBar here
+        child: appbar(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
@@ -162,11 +207,11 @@ class TutorScreen extends GetWidget<TutorController> {
                               fontSize: screenWidth * 0.04),
                         ),
                         Text(
-                          controller.upComming.value != ''
+                          controller.upComming.value != ""
                               ? '(còn ${controller.upComming.value})'
                               : '',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 255, 235, 56),
+                              color: Color.fromARGB(255, 255, 203, 61),
                               fontSize: screenWidth * 0.04),
                         ),
                         SizedBox(
@@ -174,11 +219,27 @@ class TutorScreen extends GetWidget<TutorController> {
                         ),
                       ],
                     ),
+                    Obx(
+                      () => Text(
+                        'Total time ${controller.totalTime.value ~/ 60} hours ${controller.totalTime.value % 60} minutes',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: screenHeight * 0.2,
                       child: ElevatedButton(
                         onPressed: () {
                           // Add your sign in logic here
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VideoMeeting(
+                                    studentMeetingLink: controller
+                                        .schedules[0].studentMeetingLink)),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           alignment: Alignment.center,
@@ -214,14 +275,6 @@ class TutorScreen extends GetWidget<TutorController> {
                     SizedBox(
                       height: screenHeight * 0.02,
                     ),
-                    Text(
-                      controller.upComming.value != ''
-                          ? '(còn ' + controller.upComming.value + ')'
-                          : '',
-                      style: TextStyle(
-                          color: Color.fromARGB(255, 255, 255, 255),
-                          fontSize: screenWidth * 0.04),
-                    ),
                     SizedBox(
                       height: screenHeight * 0.02,
                     ),
@@ -236,9 +289,22 @@ class TutorScreen extends GetWidget<TutorController> {
                       "Find a tutor",
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                        fontSize: screenWidth * 0.04,
+                          fontSize: screenWidth * 0.05,
+                          fontWeight: FontWeight.bold),
+                    )),
+                SizedBox(
+                  height: screenHeight * 0.02,
+                ),
+                Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      "Enter tutor name: ",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.045,
                       ),
                     )),
+
                 SizedBox(
                   height: screenHeight * 0.02,
                 ),
@@ -247,17 +313,17 @@ class TutorScreen extends GetWidget<TutorController> {
                   child: ConstrainedBox(
                     constraints: BoxConstraints(maxWidth: screenWidth * 0.47),
                     child: TextFormField(
-                      onChanged: (val) {},
+                      onChanged: (val) {
+                        name = val;
+                        print(name);
+                      },
                       decoration: InputDecoration(
                         hintText: 'Enter tutor name...',
-
                         fillColor: Colors.white,
-
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: const BorderSide(),
                         ),
-
                         //fillColor: Colors.green
                       ),
                       validator: (val) {
@@ -276,53 +342,147 @@ class TutorScreen extends GetWidget<TutorController> {
                   ),
                 ),
                 SizedBox(height: screenHeight * 0.01),
-                Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: ElevatedButton(
-                        onPressed: _showMultiSelect,
-                        child: const Text('Select tutor nationality'),
+                SizedBox(
+                  width: 500,
+                  child: MultiSelectChipField(
+                    items: items,
+                    title: Text(
+                      "Select tutor nationality",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    headerColor: const Color.fromARGB(255, 255, 255, 255)
+                        .withOpacity(0.1),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 255, 255, 255),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Wrap(
-                        children: _selectedItems
-                            .map((e) => Chip(
-                                  label: Text(e),
-                                ))
-                            .toList(),
-                      ),
-                    )
-                  ],
+                    selectedChipColor: Colors.blue.withOpacity(1),
+                    selectedTextStyle: TextStyle(color: Colors.blue[800]),
+                    onTap: (List<String?>? selectedItems) {
+                      // Handle selected items here if needed
+                      if (selectedItems != null) {
+                        selectNations.clear();
+                        for (String? select in selectedItems) {
+                          if (select != null) {
+                            // Perform actions based on selected values
+                            selectNations.add(select);
+                          }
+                        }
+                      }
+                      // Perform actions based on selected values
+                      print("Selected items: ${selectNations.value}");
+
+                      // For example, you can update another RxList with the selected values
+                      // selectedNations.assignAll(selectedValues);
+                    },
+                  ),
                 ),
+                const SizedBox(height: 8),
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Wrap(
+                //     children: _selectedItems
+                //         .map((e) => Chip(
+                //               label: Text(e),
+                //             ))
+                //         .toList(),
+                //   ),
+                // ),
                 SizedBox(
                   height: screenHeight * 0.03,
                 ),
-                listSpecialities,
-                SizedBox(
-                  height: screenHeight * 0.03,
-                ),
+                // listSpecialities,
+                // ,
                 Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(
-                      'Select available tutoring time:',
-                      style: TextStyle(fontSize: screenHeight * 0.02),
+                      "Select course: ",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.045,
+                      ),
                     )),
+
+                Obx(() => Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: controller.listChip.entries
+                          .map((e) => GestureDetector(
+                                onTap: () {
+                                  selectedSpecialities.value = e.value;
+
+                                  print(
+                                      "selectedSpec: ${selectedSpecialities.value}");
+                                  print(
+                                      "Status: ${selectedSpecialities.value == e.value}");
+                                },
+                                child: Chip(
+                                  label: Text(e.key),
+                                  labelStyle: TextStyle(
+                                    color: selectedSpecialities.value == e.value
+                                        ? Color.fromARGB(255, 18, 129, 255)
+                                        : Colors.black,
+                                    backgroundColor: selectedSpecialities
+                                                .value ==
+                                            e.value
+                                        ? Color.fromARGB(255, 255, 255, 255)
+                                        : Color.fromARGB(255, 255, 255, 255),
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                    )),
+
                 SizedBox(
-                  height: screenHeight * 0.02,
+                  height: screenHeight * 0.03,
                 ),
-                TextField(
-                  keyboardType: TextInputType.datetime,
-                  decoration: InputDecoration(
-                      labelText: 'Select a date',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      )),
-                  controller:
-                      TextEditingController(text: selectedDate.toString()),
+                // Align(
+                //     alignment: Alignment.bottomLeft,
+                //     child: Text(
+                //       'Select available tutoring time:',
+                //       style: TextStyle(fontSize: screenHeight * 0.02),
+                //     )),
+                // SizedBox(
+                //   height: screenHeight * 0.02,
+                // ),
+                // TextField(
+                //   keyboardType: TextInputType.datetime,
+                //   decoration: InputDecoration(
+                //       labelText: 'Select a date',
+                //       border: OutlineInputBorder(
+                //         borderRadius: BorderRadius.circular(10.0),
+                //       )),
+                //   controller:
+                //       TextEditingController(text: selectedDate.toString()),
+                // ),
+
+                SizedBox(
+                  height: 50.0,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      search();
+                    },
+                    child: Ink(
+                      decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xff374ABE), Color(0xff64B6FF)],
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                          ),
+                          borderRadius: BorderRadius.circular(30.0)),
+                      child: Container(
+                        constraints:
+                            BoxConstraints(maxWidth: 200.0, minHeight: 50.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Search",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: screenHeight * 0.1,
@@ -390,11 +550,12 @@ class TutorScreen extends GetWidget<TutorController> {
                           controller.search();
                         },
                         numberPages: controller.totalPage.value,
-                        initialPage: controller.pageSelected.value,
+                        initialPage: 0,
                       ),
                     ),
                   ),
-                ),
+                  // ),
+                )
               ]),
             ),
           ],

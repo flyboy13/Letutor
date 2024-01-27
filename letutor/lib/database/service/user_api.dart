@@ -22,14 +22,14 @@ class UserApi extends BaseService {
     try {
       response = await post(API.login, data: body);
     } catch (e) {
-      print("===========================");
+      print("===========Login user_api ================");
       print(e);
       print("===========================");
       return false;
     }
 
-    // print("Respone: ${response.body}");
-    if (response.statusCode == 200) {
+    print("Respone: ${response["tokens"]}");
+    if (response["tokens"] != null) {
       saveUser(response);
 
       if (!Get.isRegistered<TutorApi>()) {
@@ -110,6 +110,24 @@ class UserApi extends BaseService {
     }
   }
 
+  Future<dynamic> cancelSchedule(
+      {required String scheduleDetailId, required int i}) async {
+    final Map<String, dynamic> body = {
+      'cancelInfo': {'cancelReasonId': i},
+      'scheduleDetailIds': [scheduleDetailId]
+    };
+    print(
+        "===========================================================================================");
+    print("Body cancel: $body");
+    print(
+        "===========================================================================================");
+
+    return await delete("booking/schedule-detail", data: body);
+  }
+   Future<dynamic> getTotalTime() async {
+    final response = await get('call/total');
+    return response;
+  }
 //
 // Future<void> getlanguages() async {
 //   final response = await get(GET_LANGUAGES);

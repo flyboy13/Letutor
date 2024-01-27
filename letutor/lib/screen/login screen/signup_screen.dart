@@ -58,7 +58,11 @@ class SignUpScreenState extends State<SignUpScreen> {
     bool passwordVisible = false;
 
     return Scaffold(
-      appBar: AppBar(toolbarHeight: screenWidth * 0.05, title: appbar(context)),
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(56.0), // Set the height of the AppBar here
+        child: appbar(),
+      ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

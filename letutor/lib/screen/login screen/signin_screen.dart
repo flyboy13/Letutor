@@ -68,7 +68,40 @@ class SignInScreenState extends State<SignInScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(toolbarHeight: screenWidth * 0.05, title: appbar(context)),
+      appBar:
+          // AppBar(
+          //   toolbarHeight: screenWidth * 0.05,
+          //   title: appbar(),
+          //   backgroundColor: Colors.white,
+          // ),
+          //  AppBar(
+          //   title: const Text(
+          //     'Letutor',
+          //     style: TextStyle(fontWeight: FontWeight.bold),
+          //   ),
+          //   actions: [
+          //     Row(
+          //       children: [
+          //         Consumer(
+          //           builder: (context, ref, child) => Icon(
+          //             ref.watch(activeThemeProvider) == Themes.dark
+          //                 ? Icons.dark_mode
+          //                 : Icons.light_mode,
+          //           ),
+          //         ),
+          //         const SizedBox(width: 8),
+          //         const ThemeSwitch(),
+          //       ],
+          //     )
+          //   ],
+          // ),
+          PreferredSize(
+        preferredSize:
+            Size.fromHeight(56.0), // Set the height of the AppBar here
+        child: appbar(),
+      ),
+      //  AppBar(toolbarHeight: screenWidth * 0.05, title: appbar(context)),
+
       body: Center(
         child: SingleChildScrollView(
           child: Column(

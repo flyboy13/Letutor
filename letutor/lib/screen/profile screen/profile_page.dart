@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:letutor/conponent/circle_box.dart';
 import 'package:letutor/conponent/image_network_component.dart';
 import 'package:letutor/model/appbar.dart';
 import 'package:letutor/model/router.dart';
@@ -8,6 +9,7 @@ import 'package:letutor/screen/profile%20screen/components/birthday.dart';
 import 'package:letutor/screen/profile%20screen/components/contry.dart';
 import 'package:letutor/screen/profile%20screen/components/email.dart';
 import 'package:letutor/screen/profile%20screen/components/my_level.dart';
+import 'package:letutor/screen/profile%20screen/components/name%20copy.dart';
 import 'package:letutor/screen/profile%20screen/components/name.dart';
 import 'package:letutor/screen/profile%20screen/components/phone.dart';
 import 'package:letutor/screen/profile%20screen/components/profile_controller.dart';
@@ -51,54 +53,52 @@ class ProfileScreen extends GetWidget<ProfileController> {
       selectedIndex = index;
     }
 
-
-
     return Obx(
       () => Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          toolbarHeight: MediaQuery.of(context).size.width * 0.05,
-          title: appbar(context),
-          backgroundColor: Colors.white,
+        appBar: PreferredSize(
+          preferredSize:
+              const Size.fromHeight(56.0), // Set the height of the AppBar here
+          child: appbar(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: 'Tutor',
             ),
-            label: 'Tutor',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_month,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.calendar_month,
+              ),
+              label: 'Schedule',
             ),
-            label: 'Schedule',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.history,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.history,
+              ),
+              label: 'History',
             ),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.school,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.school,
+              ),
+              label: 'Courses',
             ),
-            label: 'Courses',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.account_circle,
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle,
+              ),
+              label: 'Account',
             ),
-            label: 'Account',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 9, 124, 255),
-        unselectedItemColor: const Color.fromARGB(255, 180, 180, 180),
-        onTap: onItemTapped,
-      ),
+          ],
+          currentIndex: selectedIndex,
+          selectedItemColor: const Color.fromARGB(255, 9, 124, 255),
+          unselectedItemColor: const Color.fromARGB(255, 180, 180, 180),
+          onTap: onItemTapped,
+        ),
         body: SingleChildScrollView(
           child: Center(
             child: Container(
@@ -108,11 +108,11 @@ class ProfileScreen extends GetWidget<ProfileController> {
                 children: [
                   Stack(
                     children: [
-                      Container(
-                        margin: const EdgeInsets.only(bottom: 10),
+                      SizedBox(
                         height: 100,
                         width: 100,
-                        child: CircleAvatar(
+                        child: CircleBox(
+                          size: 130,
                           child: ImageNetworkComponent(
                             url: controller.user.value.avatar,
                           ),
@@ -151,6 +151,9 @@ class ProfileScreen extends GetWidget<ProfileController> {
                       color: Colors.grey[800],
                       fontWeight: FontWeight.w500,
                     ),
+                  ),
+                  PhotoEdit(
+                    controller: controller.controllers['nameField'],
                   ),
                   NameEdit(
                     controller: controller.controllers['nameField'],
@@ -200,7 +203,9 @@ class ProfileScreen extends GetWidget<ProfileController> {
                     margin: const EdgeInsets.only(top: 20),
                     child: ElevatedButton(
                       onPressed: () {
-                        Get.off('/signin');
+                        Get.offNamed('/signin');
+                        // Get.off('/signin');
+                        print("Done");
                         ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Center(

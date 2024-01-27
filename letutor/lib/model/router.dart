@@ -7,16 +7,26 @@ import 'package:letutor/common/constant.dart';
 import 'package:letutor/database/data/storage.dart';
 import 'package:letutor/database/service/authen_api.dart';
 import 'package:letutor/database/service/tutor_api.dart';
-import 'package:letutor/screen/course%20info/course_info.dart';
+import 'package:letutor/screen/course_detail/course_detail.dart';
+import 'package:letutor/screen/course_detail/course_detail_binding.dart';
+
+import 'package:letutor/screen/courses/courses.dart';
+import 'package:letutor/screen/courses/courses_binding.dart';
 import 'package:letutor/screen/history%20screen/history_screen.dart';
+import 'package:letutor/screen/history/history_page.dart';
+import 'package:letutor/screen/history/history_page_binding.dart';
 import 'package:letutor/screen/home%20screen/main_page.dart';
 import 'package:letutor/screen/home%20screen/tutor_binding.dart';
 import 'package:letutor/screen/login%20screen/signin_screen.dart';
+import 'package:letutor/screen/pdf_view/pdf_binding.dart';
+import 'package:letutor/screen/pdf_view/pdf_view.dart';
 import 'package:letutor/screen/profile%20screen/components/profile_binding.dart';
 import 'package:letutor/screen/profile%20screen/profile_page.dart';
 import 'package:letutor/screen/review/review_binding.dart';
 import 'package:letutor/screen/review/review_page.dart';
 import 'package:letutor/screen/schedule%20screen/scheduel.dart';
+import 'package:letutor/screen/schedule/schedule.dart';
+import 'package:letutor/screen/schedule/schedule_binding.dart';
 import 'package:letutor/screen/tutor%20detail/component/tutor_detail_binding.dart';
 import 'package:letutor/screen/tutor%20detail/component/tutor_detail_component.dart';
 import 'package:letutor/screen/tutor%20detail/tutor_detail.dart';
@@ -88,22 +98,31 @@ class Routes {
     ),
     GetPage(
       name: "/courses",
-      page: () => const CourseInfor(),
-      // binding: CoursesBinding(),
+      page: () => const Courses(),
+      binding: CoursesBinding(),
     ),
     GetPage(
       name: '/schedule',
-      page: () => const ScheduelScreen(),
-      // binding: ScheduleBinding(),
+      page: () => const Schedule(),
+      binding: ScheduleBinding(),
     ),
     GetPage(
       name: '/history',
-      page: () => const HistoryScreen(),
-      // binding: HistoryPageBinding(),
+      page: () => const HistoryPage(),
+      binding: HistoryPageBinding(),
     ),
+    GetPage(
+        name: '/course_detail',
+        page: () => CourseDetail(),
+        binding: CourseDetailBinding()),
     GetPage(
         name: API.feedback,
         page: () => const ReviewPage(),
         binding: ReviewBinding()),
+    GetPage(
+      name: "/pdf-view",
+      page: () => const PdfView(),
+      binding: PdfBinding(),
+    ),
   ];
 }

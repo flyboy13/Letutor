@@ -27,6 +27,13 @@ class API {
   static const String changePassword = 'auth/change-password';
 }
 
+final Map<String, String> reasonCancelClassTitleMap = {
+  '1': 'Reschedule at another time',
+  '2': 'Busy at that time',
+  '3': 'Asked by the tutor',
+  '4': 'Other',
+};
+
 
 Size resolution(BuildContext context) {
   Size size = MediaQuery.of(context).size;

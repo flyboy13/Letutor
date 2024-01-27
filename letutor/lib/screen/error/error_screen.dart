@@ -15,8 +15,10 @@ class ErrorPageState extends State<ErrorPage> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          title: appbar(context),
+        appBar: PreferredSize(
+          preferredSize:
+              Size.fromHeight(56.0), // Set the height of the AppBar here
+          child: appbar(),
         ),
         body: Center(
           child: Column(children: [

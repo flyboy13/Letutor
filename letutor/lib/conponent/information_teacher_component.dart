@@ -137,7 +137,7 @@ class InformationTeacherComponent extends StatelessWidget {
                                 end: Alignment.bottomRight,
                                 colors: [
                                   Colors.blue,
-                                  Color.fromARGB(255, 255, 170, 174)
+                                  Color.fromARGB(255, 0, 74, 158)
                                 ],
                               ),
                               borderRadius: BorderRadius.circular(30),
@@ -187,7 +187,8 @@ class InformationTeacherComponent extends StatelessWidget {
         //     )),
 
         Obx(
-          () => Positioned(
+          () => 
+          Positioned(
             right: 30,
             top: 30,
             child: IconButton(

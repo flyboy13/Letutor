@@ -44,12 +44,10 @@ class ScheduelScreenState extends State<ScheduelScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: screenWidth * 0.05,
-        title: Wrap(
-          children: [appbar(context)],
-        ),
-        backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(56.0), // Set the height of the AppBar here
+        child: appbar(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[

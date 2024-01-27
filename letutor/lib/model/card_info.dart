@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:letutor/model/list_chip.dart';
 import 'package:letutor/model/rating_start.dart';
 import 'package:letutor/model/love_button.dart';
 // import 'package:flushbar/flushbar.dart';
@@ -46,12 +45,12 @@ class InforCardState extends State<InforCard> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
 
-    List<String> listChip = [
-      'IELTS',
-      'TOEFL',
-      'TOEIC',
-    ];
-    Widget listSpecialities = createListChip(listChip);
+    // Map listChip = {
+    //   'IELTS': "ielts",
+    //   'TOEFL': "toefl",
+    //   'TOEIC': "toeic",
+    // };
+    // Widget listSpecialities = createListChip(listChip);
 
     return Card(
       // color: const Color.fromARGB(255, 255, 255, 255),
@@ -104,7 +103,7 @@ class InforCardState extends State<InforCard> {
                 ),
               ],
             ),
-            Wrap(children: [listSpecialities]),
+            // Wrap(children: [listSpecialities]),
             SizedBox(
               height: height * 0.01,
             ),

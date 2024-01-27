@@ -11,13 +11,15 @@ import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/database/service/user_api.dart';
 import 'package:letutor/model/favourite_tutor.dart';
 import 'package:letutor/model/schedule.dart';
-import 'package:letutor/model/title_string.dart';
+
 import 'package:letutor/model/tutor.dart';
 
 class TutorController extends BaseController {
-  final _tutorService = Get.find<TutorApi>();
+  final tutorService = Get.find<TutorApi>();
   final _userService = Get.find<UserApi>();
   RxBool isLoading = false.obs;
+
+  late Map body;
 
   RxString currentType = 'All'.obs;
   RxList<String> valueContriesSelected = <String>[].obs;
@@ -28,7 +30,7 @@ class TutorController extends BaseController {
   RxInt totalTime = 0.obs;
   Rx<String> upComming = ''.obs;
 
-  RxInt pageSelected = 0.obs;
+  RxInt pageSelected = 1.obs;
   RxInt totalPage = 9.obs;
 
   final listType = [
@@ -40,6 +42,23 @@ class TutorController extends BaseController {
     'MOVERS',
     'FLYERS'
   ];
+
+  Map listChip = {
+    "All": "",
+    'English for kids': "english-for-kids",
+    'English for Business': "business-english",
+    'Conversational': "conversational-english",
+    'STARTERS': "starters",
+    'MOVERS': "movers",
+    'FLYERS': "flyers",
+    'PET': "pet",
+    'KET': "ket",
+    'IELTS': "ielts",
+    'TOEFL': "toefl",
+    'TOEIC': "toeic"
+  };
+
+  var checkBox = false;
   final Map<String, bool> nationality = {
     'isVietNamese': false,
     'isNative': false
@@ -65,17 +84,15 @@ class TutorController extends BaseController {
       Get.put(TutorApi());
     }
 
-    pageSelected = 0.obs;
+    pageSelected = 1.obs;
     initData();
     getDataSchedule();
- Timer.periodic(const Duration(seconds: 1), (Timer t) => renderUpComming());
+    Timer.periodic(const Duration(seconds: 1), (Timer t) => renderUpComming());
     isLoading = false.obs;
-
-   
   }
 
   void initData() async {
-    final res = await _tutorService.getAllTutorByPage();
+    final res = await tutorService.getAllTutorByPage();
     listTutor.value =
         (res['tutors']['rows'] as List).map((e) => Tutor.fromJson(e)).toList();
     listFavouriteTutor.value = (res['favoriteTutor'] as List).map((e) {
@@ -90,22 +107,14 @@ class TutorController extends BaseController {
     }).toList();
     int total = res['tutors']['count'];
     totalPage.value = (total ~/ 9 + 1);
-    // final resTotal = await _userService.getTotalTime();
-    // totalTime.value = resTotal['total'];
+    final resTotal = await _userService.getTotalTime();
+    totalTime.value = resTotal['total'];
     sortTutorList();
   }
 
- void search() async {
+  void search() async {
     try {
-      final res = await _tutorService.getAllTutorBySearch(
-          page: pageSelected.value + 1,
-          // nationality: nationality,
-          search: controllers["nameField"]!.text,
-          // specialties: [
-          //   if (currentType.value != TitleString.all)
-          //     mapListType[currentType.value]!
-          // ]
-          );
+      final res = await tutorService.getAllTutorBySearch(body);
       int total = res['count'];
       totalPage.value = (total ~/ 9 + 1);
       listTutor.value =
@@ -160,7 +169,7 @@ class TutorController extends BaseController {
   }
 
   void manageTeacherFavorite(String id) {
-    _tutorService.manageTeacherFavorite(id);
+    tutorService.manageTeacherFavorite(id);
   }
 
   bool favouriteTutor(String id) {
@@ -185,17 +194,14 @@ class TutorController extends BaseController {
     listTutor.sort((a, b) => favouriteTutor(b.userId) ? 1 : -1);
   }
 
-    void renderUpComming() {
-      print ("Up schedules : ${schedules.value}");
-    if (schedules.value.isNotEmpty) {
+  void renderUpComming() {
+ 
+    if (schedules.isNotEmpty) {
       int timeStart =
           schedules[0].scheduleDetailInfo?.scheduleInfo?.startTimestamp ?? 0;
-          print ("Up comming value: ${upComming.value}");
-      upComming.value = DateFormat("HH:mm ss").format(
+      upComming = DateFormat("HH:mm ss").format(
           DateTime.fromMillisecondsSinceEpoch(
-              timeStart - DateTime.now().millisecondsSinceEpoch));
+              timeStart - DateTime.now().millisecondsSinceEpoch)).obs;
     }
   }
-
-  
 }

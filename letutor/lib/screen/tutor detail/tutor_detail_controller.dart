@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_field
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +7,6 @@ import 'package:letutor/control/base_controller.dart';
 import 'package:letutor/database/service/tutor_api.dart';
 import 'package:letutor/model/schedule.dart';
 import 'package:letutor/model/tutor.dart';
-import 'package:letutor/database/service/model_service.dart';
 // import 'package:letutor/model/user.dart';
 import 'package:video_player/video_player.dart';
 import 'package:http/http.dart' as http;

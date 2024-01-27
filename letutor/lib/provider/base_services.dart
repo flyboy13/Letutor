@@ -36,7 +36,9 @@ abstract class BaseService {
     try {
       response = await AuthenApi.getDio().post(path, data: data);
     } catch (e) {
+      print("=======Post=================");
       print(e);
+      print("========================");
       return;
     }
     return _handleResponse(response, responseType: responseType);
@@ -62,7 +64,7 @@ abstract class BaseService {
 
   bool isSuccess(statusCode) => statusCode! >= 200 && statusCode! <= 299;
 
-  dynamic _handleResponse(dio.Response response,  
+  dynamic _handleResponse(dio.Response response,
       {JsonType responseType = JsonType.JSON_RESPONSE}) {
     if (isSuccess(response.statusCode)) {
       if (responseType == JsonType.JSON_RESPONSE) {
